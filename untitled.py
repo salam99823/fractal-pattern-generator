@@ -1,3 +1,4 @@
+"""
 # -*- coding: utf-8 -*-
 
 ################################################################################
@@ -7,44 +8,50 @@
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
-
+"""
 from PySide6.QtCore import (QCoreApplication, QMetaObject, QRect,
                             Qt)
-from PySide6.QtGui import (QAction)
+from PySide6.QtGui import (QAction, QColor)
 from PySide6.QtWidgets import (QDockWidget, QDoubleSpinBox, QFormLayout,
                                QGraphicsView, QGroupBox, QHBoxLayout, QLabel,
-                               QLineEdit, QListView, QMenu, QMenuBar, QPushButton, QSpinBox, QToolBar, QToolButton,
-                               QVBoxLayout,
-                               QWidget)
+                               QLineEdit, QMenu,
+                               QMenuBar, QPushButton, QSpinBox,
+                               QToolBar, QToolButton, QVBoxLayout, QWidget)
 
+from MWidgets.MList_Widgets.MColor_list_Widget import MColor_list_Widget
 from MWidgets.MList_Widgets.MText_list_Widget import MText_list_Widget
 
 
+# noinspection PyAttributeOutsideInit
 class Ui_MainWindow(object):
+    # noinspection PyUnresolvedReferences
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.resize(968, 748)
         MainWindow.setContextMenuPolicy(Qt.NoContextMenu)
         MainWindow.setAcceptDrops(False)
-        self.action = QAction(MainWindow)
-        self.action.setObjectName(u"action")
-        self.action_2 = QAction(MainWindow)
-        self.action_2.setObjectName(u"action_2")
-        self.action_3 = QAction(MainWindow)
-        self.action_3.setObjectName(u"action_3")
-        self.action_4 = QAction(MainWindow)
-        self.action_4.setObjectName(u"action_4")
-        self.action_6 = QAction(MainWindow)
-        self.action_6.setObjectName(u"action_6")
-        self.action_7 = QAction(MainWindow)
-        self.action_7.setObjectName(u"action_7")
-        self.action_8 = QAction(MainWindow)
-        self.action_8.setObjectName(u"action_8")
-        self.action_10 = QAction(MainWindow)
-        self.action_10.setObjectName(u"action_10")
-        self.action_Qt = QAction(MainWindow)
-        self.action_Qt.setObjectName(u"action_Qt")
+        self.action_open_file_ = QAction(MainWindow)
+        self.action_open_file_.setObjectName(u"action_open_file_")
+        self.action_recently_opened = QAction(MainWindow)
+        self.action_recently_opened.setObjectName(u"action_recently_opened")
+        self.action_save_file = QAction(MainWindow)
+        self.action_save_file.setObjectName(u"action_save_file")
+        self.action_save_file_as = QAction(MainWindow)
+        self.action_save_file_as.setObjectName(u"action_save_file_as")
+        self.action_save_image = QAction(MainWindow)
+        self.action_save_image.setObjectName(u"action_save_image")
+        self.action_escape = QAction(MainWindow)
+        self.action_escape.setObjectName(u"action_escape")
+        self.action_escape.setMenuRole(QAction.QuitRole)
+        self.action_about_Qt = QAction(MainWindow)
+        self.action_about_Qt.setObjectName(u"action_about_Qt")
+        self.action_about_Qt.setMenuRole(QAction.AboutQtRole)
+        self.action_open_file = QAction(MainWindow)
+        self.action_open_file.setObjectName(u"action_open_file")
+        self.action_open_file.setMenuRole(QAction.TextHeuristicRole)
+        self.action_new_file = QAction(MainWindow)
+        self.action_new_file.setObjectName(u"action_new_file")
         self.central_widget = QWidget(MainWindow)
         self.central_widget.setObjectName(u"central_widget")
         self.verticalLayout = QVBoxLayout(self.central_widget)
@@ -146,23 +153,27 @@ class Ui_MainWindow(object):
         
         self.groupBox = QGroupBox(self.dock_Widget_Contents)
         self.groupBox.setObjectName(u"groupBox")
-        self.verticalLayout_3 = QVBoxLayout(self.groupBox)
-        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.groupBox.setCheckable(True)
+        self._3 = QVBoxLayout(self.groupBox)
+        self._3.setObjectName(u"_3")
         self.rules_list = MText_list_Widget(self.groupBox)
         self.rules_list.setObjectName(u"rules_list")
+        self.rules_list.setContextMenuPolicy(Qt.CustomContextMenu)
         
-        self.verticalLayout_3.addWidget(self.rules_list)
+        self._3.addWidget(self.rules_list)
         
         self.verticalLayout_2.addWidget(self.groupBox)
         
         self.groupBox_2 = QGroupBox(self.dock_Widget_Contents)
         self.groupBox_2.setObjectName(u"groupBox_2")
-        self.verticalLayout_4 = QVBoxLayout(self.groupBox_2)
-        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
-        self.colors_list = QListView(self.groupBox_2)
+        self.groupBox_2.setCheckable(True)
+        self._2 = QVBoxLayout(self.groupBox_2)
+        self._2.setObjectName(u"_2")
+        self.colors_list = MColor_list_Widget(self.groupBox_2)
         self.colors_list.setObjectName(u"colors_list")
+        self.colors_list.setContextMenuPolicy(Qt.CustomContextMenu)
         
-        self.verticalLayout_4.addWidget(self.colors_list)
+        self._2.addWidget(self.colors_list)
         
         self.verticalLayout_2.addWidget(self.groupBox_2)
         
@@ -197,80 +208,110 @@ class Ui_MainWindow(object):
         
         self.menuBar.addAction(self.menu.menuAction())
         self.menuBar.addAction(self.menu_2.menuAction())
-        self.menu.addAction(self.action)
-        self.menu.addAction(self.action_4)
+        self.menu.addAction(self.action_new_file)
+        self.menu.addAction(self.action_open_file_)
+        self.menu.addAction(self.action_recently_opened)
         self.menu.addSeparator()
-        self.menu.addAction(self.action_6)
-        self.menu.addAction(self.action_7)
-        self.menu.addAction(self.action_8)
+        self.menu.addAction(self.action_save_file)
+        self.menu.addAction(self.action_save_file_as)
+        self.menu.addAction(self.action_save_image)
         self.menu.addSeparator()
-        self.menu.addAction(self.action_10)
-        self.menu_2.addAction(self.action_Qt)
-
+        self.menu.addAction(self.action_escape)
+        self.menu_2.addAction(self.action_about_Qt)
+        self.tool_Bar.addAction(self.action_open_file)
+        
         self.retranslateUi(MainWindow)
-
+        self.rules_list.customContextMenuRequested.connect(self.rules_list.show_menu)
+        self.groupBox.toggled.connect(self.rules_list.setVisible)
+        self.groupBox_2.toggled.connect(self.colors_list.setVisible)
+        self.colors_list.customContextMenuRequested.connect(self.colors_list.show_menu)
+        self.colors_list.add_color(QColor('#ffffff'))
         QMetaObject.connectSlotsByName(MainWindow)
+    
     # setupUi
     
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.action.setText(
-            QCoreApplication.translate("MainWindow", u"\u041e\u0442\u043a\u0440\u044b\u0442\u044c", None)
-            )
-        self.action_2.setText(
-            QCoreApplication.translate(
-                "MainWindow",
-                u"\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c \u043f\u0430\u0440\u0430\u043c\u0435\u0442\u0440\u0440\u044b",
-                None
+        self.action_open_file_.setText(
+                QCoreApplication.translate("MainWindow", u"\u041e\u0442\u043a\u0440\u044b\u0442\u044c", None)
+        )
+        self.action_recently_opened.setText(
+                QCoreApplication.translate(
+                        "MainWindow",
+                        u"\u041d\u0435\u0434\u0430\u0432\u043d\u043e \u043e\u0442\u043a\u0440\u044b\u0442\u044b\u0435",
+                        None
                 )
-            )
-        self.action_3.setText(
-            QCoreApplication.translate(
-                "MainWindow",
-                u"\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c \u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0435",
-                None
+        )
+        self.action_save_file.setText(
+                QCoreApplication.translate(
+                        "MainWindow", u"\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c", None
                 )
-            )
-        self.action_4.setText(
-            QCoreApplication.translate(
-                "MainWindow",
-                u"\u041d\u0435\u0434\u0430\u0432\u043d\u043e \u043e\u0442\u043a\u0440\u044b\u0442\u044b\u0435", None
+        )
+        self.action_save_file_as.setText(
+                QCoreApplication.translate(
+                        "MainWindow", u"\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c \u043a\u0430\u043a...",
+                        None
                 )
-            )
-        self.action_6.setText(
-            QCoreApplication.translate("MainWindow", u"\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c", None)
-            )
-        self.action_7.setText(
-            QCoreApplication.translate(
-                "MainWindow", u"\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c \u043a\u0430\u043a...", None
+        )
+        self.action_save_image.setText(
+                QCoreApplication.translate(
+                        "MainWindow",
+                        u"\u0421\u043e\u0445\u0440\u043d\u0438\u0442\u044c "
+                        u"\u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0435",
+                        None
                 )
-            )
-        self.action_8.setText(
-            QCoreApplication.translate(
-                "MainWindow",
-                u"\u0421\u043e\u0445\u0440\u043d\u0438\u0442\u044c \u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0435",
-                None
+        )
+        self.action_escape.setText(QCoreApplication.translate("MainWindow", u"\u0412\u044b\u0445\u043e\u0434", None))
+        self.action_about_Qt.setText(QCoreApplication.translate("MainWindow", u"\u041e Qt", None))
+        #if QT_CONFIG(tooltip)
+        self.action_open_file.setToolTip(
+                QCoreApplication.translate(
+                        "MainWindow", u"\u041e\u0442\u043a\u0440\u044b\u0442\u044c \u0444\u0430\u0439\u043b", None
                 )
-            )
-        self.action_10.setText(QCoreApplication.translate("MainWindow", u"\u0412\u044b\u0445\u043e\u0434", None))
-        self.action_Qt.setText(QCoreApplication.translate("MainWindow", u"\u041e Qt", None))
-        self.label_line_width.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
-        self.label_2.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
-        self.label_3.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
-        self.label_4.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
-        self.label_5.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
-        self.label_6.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
+        )
+        #endif // QT_CONFIG(tooltip)
+        self.action_new_file.setText(QCoreApplication.translate("MainWindow", u"\u041d\u043e\u0432\u044b\u0439", None))
+        self.label_line_width.setText(
+                QCoreApplication.translate("MainWindow", u"\u0422\u043e\u043b\u0449\u0438\u043d\u0430", None)
+        )
+        self.label.setText(
+                QCoreApplication.translate("MainWindow", u"\u0413\u043b\u0443\u0431\u0438\u043d\u0430", None)
+        )
+        self.label_2.setText(QCoreApplication.translate("MainWindow", u"\u0414\u043b\u0438\u043d\u043d\u0430", None))
+        self.label_3.setText(
+                QCoreApplication.translate(
+                        "MainWindow", u"\u0423\u0433\u043e\u043b \u043f\u043e\u0432\u043e\u0440\u043e\u0442\u0430", None
+                )
+        )
+        self.label_4.setText(
+                QCoreApplication.translate(
+                        "MainWindow",
+                        u"\u041e\u0442\u043a\u043b\u043e\u043d\u0435\u043d\u0438\u0435 "
+                        u"\u0434\u043b\u0438\u043d\u043d\u044b",
+                        None
+                )
+        )
+        self.label_5.setText(
+                QCoreApplication.translate(
+                        "MainWindow",
+                        u"\u041e\u0442\u043a\u043b\u043e\u043d\u0435\u043d\u0438\u0435 \u0443\u0433\u043b\u0430",
+                        None
+                )
+        )
+        self.label_6.setText(
+                QCoreApplication.translate("MainWindow", u"\u0410\u043a\u0441\u0438\u043e\u043c\u0430", None)
+        )
         self.text_editing.setText(QCoreApplication.translate("MainWindow", u"...", None))
-        self.groupBox.setTitle(QCoreApplication.translate("MainWindow", u"GroupBox", None))
-        self.groupBox_2.setTitle(QCoreApplication.translate("MainWindow", u"GroupBox", None))
+        self.groupBox.setTitle(
+                QCoreApplication.translate("MainWindow", u"\u041f\u0440\u0430\u0432\u0438\u043b\u0430", None)
+        )
+        self.groupBox_2.setTitle(QCoreApplication.translate("MainWindow", u"\u0426\u0432\u0435\u0442\u0430", None))
         self.start_button.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
         self.stop_button.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
         self.clear_button.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
         self.menu.setTitle(QCoreApplication.translate("MainWindow", u"\u0424\u0430\u0439\u043b", None))
         self.menu_2.setTitle(
-            QCoreApplication.translate("MainWindow", u"\u0421\u043f\u0440\u0430\u0432\u043a\u0430", None)
-            )
+                QCoreApplication.translate("MainWindow", u"\u0421\u043f\u0440\u0430\u0432\u043a\u0430", None)
+        )
         self.tool_Bar.setWindowTitle(QCoreApplication.translate("MainWindow", u"toolBar", None))
     # retranslateUi
-

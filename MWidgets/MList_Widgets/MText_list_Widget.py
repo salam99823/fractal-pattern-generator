@@ -30,7 +30,7 @@ class MText_list_Widget(Modified_list_widget):
         if isinstance(text, str):
             accepted = True
         elif text is None:
-            text, accepted = QInputDialog.getText(self.parent(), "Добавление", "", text = user_input_text)
+            text, accepted = QInputDialog.getMultiLineText(self.parent(), "Добавление", "", text = user_input_text)
         else:
             raise TypeError("The text must be a string")
         if accepted:
