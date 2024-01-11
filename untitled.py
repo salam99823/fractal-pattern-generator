@@ -44,7 +44,7 @@ class Ui_MainWindow(object):
         self.listWidget.setDragDropMode(MColor_list_Widget.DragDropMode.DragDrop)
         self.listWidget.setDefaultDropAction(Qt.MoveAction)
         self.listWidget.setAlternatingRowColors(True)
-        self.listWidget.setIconSize(QSize(30, 30))
+        self.listWidget.setIconSize(QSize(25, 25))
         self.listWidget.setMovement(QListView.Movement.Free)
         
         self.verticalLayout.addWidget(self.listWidget)

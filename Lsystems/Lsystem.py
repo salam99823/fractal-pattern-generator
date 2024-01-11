@@ -10,62 +10,41 @@ from typing import Generator, Iterable
 
 class LSystem(object):
     """
-    
     """
-    __rules: dict[str, str] = {}
+    __rules: tuple[tuple[str, str], ...] = ()
     __keywords: tuple[tuple[str, ...], ...] = ()
     
-    def __init__(self, arg1 = None, arg2 = None, **kwargs):
+    def __init__(
+            self,
+            rules: Iterable[str] | None = None,
+            keywords: Iterable[Iterable[str]] | None = None,
+    ):
         """
-        
-        :param arg1:
-        :param arg2:
-        :param kwargs:
+        :param rules:
+        :param keywords:
         """
-        rules = kwargs.get('rules')
-        keywords = kwargs.get('keywords')
-        lsystem = kwargs.get('other')
-        if isinstance(arg1, LSystem):
-            lsystem = arg1
-        elif arg1 and arg2:
-            keywords = arg2
-            rules = arg1
-        if lsystem and isinstance(lsystem, LSystem):
-            self.keywords = lsystem.keywords
-            self.rules = lsystem.rules
-        elif rules and keywords:
+        if keywords is not None:
             self.keywords = keywords
+        if rules is not None:
             self.rules = rules
     
     @property
-    def rules(self) -> dict[str, str]:
+    def rules(self) -> tuple[tuple[str, str], ...]:
         """
-        Get the rules of the LSystem.
-
-        :return: Dictionary of rules.
+        
         """
         return self.__rules
     
     @rules.setter
-    def rules(self, rules: Iterable[str] | dict[str, str] | str) -> None:
+    def rules(self, rules: Iterable[str]) -> None:
         """
-        Set the rules of the LSystem.
-
-        :param rules: Rules of the LSystem. Can be an iterable of strings, a dictionary of strings, or a single string.
+        
         """
-        if isinstance(rules, dict):
-            self.__rules = rules.copy()
-        elif isinstance(rules, str):
-            self.__rules.clear()
-            rules_list = self.multiplication(rules).split(maxsplit = 1)
-            if len(rules_list) == 2:
-                self.__rules[rules_list[0]] = rules_list[1]
-        elif isinstance(rules, Iterable):
-            self.__rules.clear()
+        if isinstance(rules, Iterable):
             for rule in rules:
-                rule_list = self.multiplication(rule).split(maxsplit = 1)
-                if len(rule_list) == 2:
-                    self.__rules[rule_list[0]] = rule_list[1]
+                rule = self.multiplication(rule).split(maxsplit = 1)
+                if len(rule) == 2:
+                    self.__rules += (tuple(rule),)
         else:
             raise TypeError("Invalid type for rules.")
     
@@ -79,11 +58,9 @@ class LSystem(object):
         return self.__keywords
     
     @keywords.setter
-    def keywords(self, keywords: Iterable[str] | Iterable[Iterable[str]]) -> None:
+    def keywords(self, keywords: Iterable[Iterable[str]]) -> None:
         """
         Set the keywords of the LSystem.
-
-        :param keywords: Keywords of the LSystem. Can be an iterable of strings or an iterable of iterables of strings.
         """
         if not isinstance(keywords, Iterable):
             raise TypeError("Invalid type for keywords. Must be an iterable.")
@@ -99,14 +76,15 @@ class LSystem(object):
         self.__keywords = tuple(temp_keywords)
     
     def generate_action_string(
-            self, string: str, number_of_iterations: int, my_memory_endless: bool = False
+            self,
+            string: str,
+            number_of_iterations: int,
     ) -> tuple[tuple[str, int]]:
         """
         Generate the action string based on the LSystem.
 
         :param string: Starting string.
         :param number_of_iterations: Number of iterations to perform.
-        :param my_memory_endless: Flag indicating whether the memory is endless.
         :return: List of tuples representing the action string.
         """
         
@@ -115,13 +93,8 @@ class LSystem(object):
             :param string_: some string
             :return:
             """
-            if not my_memory_endless:
-                for _key, _value in self.rules.items():
-                    factor = (_value.count(_key) / len(_key)) ** number_of_iterations
-                    if factor > 3_000_000:
-                        raise OverflowError("Memory limit exceeded.")
             for _ in range(number_of_iterations):
-                for _key, _value in self.rules.items():
+                for _key, _value in self.rules:
                     string_ = string_.replace(_key, _value)
             action_string_ = tuple(self.formatting(string_))
             cursor.execute(
