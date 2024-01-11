@@ -9,9 +9,7 @@
 ################################################################################
 
 from PySide6.QtCore import (QCoreApplication, QMetaObject, Qt)
-from PySide6.QtWidgets import (QVBoxLayout,
-                               QWidget)
-
+from PySide6.QtWidgets import (QPushButton, QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -24,14 +22,32 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName(u"centralwidget")
         self.verticalLayout = QVBoxLayout(self.centralwidget)
         self.verticalLayout.setObjectName(u"verticalLayout")
-        MainWindow.setCentralWidget(self.centralwidget)
+        self.pushButton = QPushButton(self.centralwidget)
+        self.pushButton.setObjectName(u"pushButton")
         
+        self.verticalLayout.addWidget(self.pushButton)
+        
+        self.pushButton_3 = QPushButton(self.centralwidget)
+        self.pushButton_3.setObjectName(u"pushButton_3")
+        
+        self.verticalLayout.addWidget(self.pushButton_3)
+        
+        self.pushButton_2 = QPushButton(self.centralwidget)
+        self.pushButton_2.setObjectName(u"pushButton_2")
+        
+        self.verticalLayout.addWidget(self.pushButton_2)
+
+        MainWindow.setCentralWidget(self.centralwidget)
+
         self.retranslateUi(MainWindow)
         
         QMetaObject.connectSlotsByName(MainWindow)
-    
     # setupUi
     
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
+        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
+        self.pushButton_3.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
+        self.pushButton_2.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
     # retranslateUi
+
