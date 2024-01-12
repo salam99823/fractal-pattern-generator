@@ -18,6 +18,4 @@ def main():
 
 if __name__ == '__main__':
     main()
-    val = hex(255)
-    print(val)
     
