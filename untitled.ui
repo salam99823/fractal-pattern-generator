@@ -131,6 +131,9 @@
           <property name="contextMenuPolicy">
            <enum>Qt::CustomContextMenu</enum>
           </property>
+          <property name="dragDropMode">
+           <enum>QAbstractItemView::InternalMove</enum>
+          </property>
          </widget>
         </item>
        </layout>
@@ -146,6 +149,9 @@
          <widget class="MColor_list_Widget" name="colors_list">
           <property name="contextMenuPolicy">
            <enum>Qt::CustomContextMenu</enum>
+          </property>
+          <property name="dragDropMode">
+           <enum>QAbstractItemView::InternalMove</enum>
           </property>
          </widget>
         </item>
@@ -185,13 +191,18 @@
      <height>22</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menu">
+   <widget class="QMenu" name="file_menu">
     <property name="title">
      <string>Файл</string>
     </property>
+    <widget class="QMenu" name="menu_3">
+     <property name="title">
+      <string>Недавно открытые</string>
+     </property>
+    </widget>
     <addaction name="action_new_file"/>
-    <addaction name="action_open_file_"/>
-    <addaction name="action_recently_opened"/>
+    <addaction name="action_open_file"/>
+    <addaction name="menu_3"/>
     <addaction name="separator"/>
     <addaction name="action_save_file"/>
     <addaction name="action_save_file_as"/>
@@ -199,14 +210,14 @@
     <addaction name="separator"/>
     <addaction name="action_escape"/>
    </widget>
-   <widget class="QMenu" name="menu_2">
+   <widget class="QMenu" name="about_menu">
     <property name="title">
      <string>Справка</string>
     </property>
     <addaction name="action_about_Qt"/>
    </widget>
-   <addaction name="menu"/>
-   <addaction name="menu_2"/>
+   <addaction name="file_menu"/>
+   <addaction name="about_menu"/>
   </widget>
   <widget class="QToolBar" name="tool_Bar">
    <property name="windowTitle">
@@ -218,16 +229,13 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="action_open_file"/>
+   <addaction name="action_new_file_2"/>
+   <addaction name="action_open_file_2"/>
+   <addaction name="action_save_file_2"/>
   </widget>
-  <action name="action_open_file_">
+  <action name="action_open_file">
    <property name="text">
     <string>Открыть</string>
-   </property>
-  </action>
-  <action name="action_recently_opened">
-   <property name="text">
-    <string>Недавно открытые</string>
    </property>
   </action>
   <action name="action_save_file">
@@ -261,7 +269,23 @@
     <enum>QAction::AboutQtRole</enum>
    </property>
   </action>
-  <action name="action_open_file">
+  <action name="action_new_file">
+   <property name="text">
+    <string>Новый</string>
+   </property>
+  </action>
+  <action name="action_new_file_2">
+   <property name="text">
+    <string>Новый файл</string>
+   </property>
+   <property name="toolTip">
+    <string>Новый файл</string>
+   </property>
+  </action>
+  <action name="action_open_file_2">
+   <property name="text">
+    <string>Открыть файл</string>
+   </property>
    <property name="toolTip">
     <string>Открыть файл</string>
    </property>
@@ -269,9 +293,12 @@
     <enum>QAction::TextHeuristicRole</enum>
    </property>
   </action>
-  <action name="action_new_file">
+  <action name="action_save_file_2">
    <property name="text">
-    <string>Новый</string>
+    <string>Сохранить</string>
+   </property>
+   <property name="toolTip">
+    <string>Сохранить</string>
    </property>
   </action>
  </widget>
