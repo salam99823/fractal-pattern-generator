@@ -28,6 +28,7 @@ class Ui_MainWindow(object):
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.resize(968, 748)
         MainWindow.setContextMenuPolicy(Qt.NoContextMenu)
+        MainWindow.setAcceptDrops(False)
         self.action_open_file = QAction(MainWindow)
         self.action_open_file.setObjectName(u"action_open_file")
         icon = QIcon()
@@ -57,13 +58,13 @@ class Ui_MainWindow(object):
         icon4 = QIcon()
         icon4.addFile(u":/icons/icons/icons8-logout-96.png", QSize(), QIcon.Normal, QIcon.Off)
         self.action_escape.setIcon(icon4)
-        self.action_escape.setMenuRole(QAction.QuitRole)
+        self.action_escape.setMenuRole(QAction.MenuRole.QuitRole)
         self.action_about_Qt = QAction(MainWindow)
         self.action_about_Qt.setObjectName(u"action_about_Qt")
         icon5 = QIcon()
         icon5.addFile(u":/icons/icons/Qt_logo_neon_2022.svg.png", QSize(), QIcon.Normal, QIcon.Off)
         self.action_about_Qt.setIcon(icon5)
-        self.action_about_Qt.setMenuRole(QAction.AboutQtRole)
+        self.action_about_Qt.setMenuRole(QAction.MenuRole.AboutQtRole)
         self.action_new_file = QAction(MainWindow)
         self.action_new_file.setObjectName(u"action_new_file")
         icon6 = QIcon()
@@ -75,7 +76,7 @@ class Ui_MainWindow(object):
         self.action_open_file_2 = QAction(MainWindow)
         self.action_open_file_2.setObjectName(u"action_open_file_2")
         self.action_open_file_2.setIcon(icon)
-        self.action_open_file_2.setMenuRole(QAction.TextHeuristicRole)
+        self.action_open_file_2.setMenuRole(QAction.MenuRole.TextHeuristicRole)
         self.action_save_file_2 = QAction(MainWindow)
         self.action_save_file_2.setObjectName(u"action_save_file_2")
         self.action_save_file_2.setIcon(icon1)
@@ -204,7 +205,7 @@ class Ui_MainWindow(object):
         self.rules_list = MText_list_Widget(self.groupBox)
         self.rules_list.setObjectName(u"rules_list")
         self.rules_list.setContextMenuPolicy(Qt.CustomContextMenu)
-        self.rules_list.setDragDropMode(QAbstractItemView.InternalMove)
+        self.rules_list.setDragDropMode(QAbstractItemView.DragDropMode.InternalMove)
         
         self._3.addWidget(self.rules_list)
         
@@ -217,7 +218,7 @@ class Ui_MainWindow(object):
         self.colors_list = MColor_list_Widget(self.groupBox_2)
         self.colors_list.setObjectName(u"colors_list")
         self.colors_list.setContextMenuPolicy(Qt.CustomContextMenu)
-        self.colors_list.setDragDropMode(QAbstractItemView.InternalMove)
+        self.colors_list.setDragDropMode(QAbstractItemView.DragDropMode.InternalMove)
         
         self._2.addWidget(self.colors_list)
         
@@ -287,8 +288,6 @@ class Ui_MainWindow(object):
         self.tool_Bar.addAction(self.action_save_file_2)
         
         self.retranslateUi(MainWindow)
-        self.rules_list.customContextMenuRequested.connect(self.rules_list.show_menu)
-        self.colors_list.customContextMenuRequested.connect(self.colors_list.show_menu)
         
         QMetaObject.connectSlotsByName(MainWindow)
     
@@ -301,8 +300,8 @@ class Ui_MainWindow(object):
         )
         self.action_save_file.setText(
                 QCoreApplication.translate(
-                        "MainWindow", u"\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c", None
-                )
+                    "MainWindow", u"\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c", None
+                    )
         )
         self.action_save_file_as.setText(
                 QCoreApplication.translate(
@@ -313,7 +312,8 @@ class Ui_MainWindow(object):
         self.action_save_image.setText(
                 QCoreApplication.translate(
                         "MainWindow",
-                        u"\u0421\u043e\u0445\u0440\u043d\u0438\u0442\u044c \u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0435",
+                        u"\u0421\u043e\u0445\u0440\u043d\u0438\u0442\u044c "
+                        u"\u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0435",
                         None
                 )
         )
@@ -322,14 +322,14 @@ class Ui_MainWindow(object):
         self.action_new_file.setText(QCoreApplication.translate("MainWindow", u"\u041d\u043e\u0432\u044b\u0439", None))
         self.action_new_file_2.setText(
                 QCoreApplication.translate(
-                        "MainWindow", u"\u041d\u043e\u0432\u044b\u0439 \u0444\u0430\u0439\u043b", None
-                )
+                    "MainWindow", u"\u041d\u043e\u0432\u044b\u0439 \u0444\u0430\u0439\u043b", None
+                    )
         )
         #if QT_CONFIG(tooltip)
         self.action_new_file_2.setToolTip(
                 QCoreApplication.translate(
-                        "MainWindow", u"\u041d\u043e\u0432\u044b\u0439 \u0444\u0430\u0439\u043b", None
-                )
+                    "MainWindow", u"\u041d\u043e\u0432\u044b\u0439 \u0444\u0430\u0439\u043b", None
+                    )
         )
         #endif // QT_CONFIG(tooltip)
         self.action_open_file_2.setText(
@@ -346,14 +346,14 @@ class Ui_MainWindow(object):
         #endif // QT_CONFIG(tooltip)
         self.action_save_file_2.setText(
                 QCoreApplication.translate(
-                        "MainWindow", u"\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c", None
-                )
+                    "MainWindow", u"\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c", None
+                    )
         )
         #if QT_CONFIG(tooltip)
         self.action_save_file_2.setToolTip(
                 QCoreApplication.translate(
-                        "MainWindow", u"\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c", None
-                )
+                    "MainWindow", u"\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c", None
+                    )
         )
         #endif // QT_CONFIG(tooltip)
         self.action_about_program.setText(
@@ -376,7 +376,8 @@ class Ui_MainWindow(object):
         self.label_4.setText(
                 QCoreApplication.translate(
                         "MainWindow",
-                        u"\u041e\u0442\u043a\u043b\u043e\u043d\u0435\u043d\u0438\u0435 \u0434\u043b\u0438\u043d\u043d\u044b",
+                        u"\u041e\u0442\u043a\u043b\u043e\u043d\u0435\u043d\u0438\u0435 "
+                        u"\u0434\u043b\u0438\u043d\u043d\u044b",
                         None
                 )
         )

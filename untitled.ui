@@ -438,38 +438,5 @@
  <resources>
   <include location="icons/resources.qrc"/>
  </resources>
- <connections>
-  <connection>
-   <sender>rules_list</sender>
-   <signal>customContextMenuRequested(QPoint)</signal>
-   <receiver>rules_list</receiver>
-   <slot>show_menu(QPoint)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>201</x>
-     <y>321</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>201</x>
-     <y>363</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>colors_list</sender>
-   <signal>customContextMenuRequested(QPoint)</signal>
-   <receiver>colors_list</receiver>
-   <slot>show_menu(QPoint)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>187</x>
-     <y>521</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>176</x>
-     <y>555</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>
