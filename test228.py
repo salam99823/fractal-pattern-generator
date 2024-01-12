@@ -1,10 +1,68 @@
-from PySide6.QtWidgets import QApplication, QMainWindow
+import sys
 
-from untitled import Ui_MainWindow
+from PySide6.QtWidgets import (
+    QApplication,
+    QCheckBox,
+    QComboBox,
+    QDateEdit,
+    QDateTimeEdit,
+    QDial,
+    QDoubleSpinBox,
+    QFontComboBox,
+    QLabel,
+    QLCDNumber,
+    QLineEdit,
+    QMainWindow,
+    QProgressBar,
+    QPushButton,
+    QRadioButton,
+    QSlider,
+    QSpinBox,
+    QTimeEdit,
+    QVBoxLayout,
+    QWidget,
+)
 
-if __name__ == '__main__':
-    app = QApplication()
-    win = QMainWindow()
-    Ui_MainWindow().setupUi(win)
-    win.show()
-    app.exec()
+sys.argv += ['-platform', 'windows:darkmode']
+
+
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        
+        self.setWindowTitle("Widgets App")
+        
+        layout = QVBoxLayout()
+        widgets = [
+            QCheckBox,
+            QComboBox,
+            QDateEdit,
+            QDateTimeEdit,
+            QDial,
+            QDoubleSpinBox,
+            QFontComboBox,
+            QLCDNumber,
+            QLabel,
+            QLineEdit,
+            QProgressBar,
+            QPushButton,
+            QRadioButton,
+            QSlider,
+            QSpinBox,
+            QTimeEdit,
+        ]
+        
+        for w in widgets:
+            layout.addWidget(w())
+        
+        widget = QWidget()
+        widget.setLayout(layout)
+        
+        self.setCentralWidget(widget)
+
+
+app = QApplication(sys.argv)
+app.setStyle('Fusion')
+window = MainWindow()
+window.show()
+app.exec()

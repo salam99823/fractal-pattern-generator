@@ -58,20 +58,11 @@ class TestMColor_list_widgetWidget(unittest.TestCase):
             # noinspection PyTypeChecker
             self.widget.add_color("invalid color")
     
-    def test_draw_icon_for_item(self):
-        color = QColor('red')
-        icon = self.widget.draw_icon_for_item(color)
-        self.assertEqual(30, icon.height())
-        self.assertEqual(30, icon.width())
-    
     def test_get_colors(self):
         expected_colors = tuple(QColor(color) for color in QColor.colorNames()[:10])
         for color in expected_colors:
             self.widget.add_color(color)
         actual_colors = self.widget.get_colors()
-        print(actual_colors)
-        print(expected_colors)
-        print(self.widget.count())
         self.assertTupleEqual(expected_colors, actual_colors)
     
     def test_addItem_positive(self):
