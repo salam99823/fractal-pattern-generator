@@ -1,8 +1,11 @@
+"""
+
+"""
 import sys
 
-from PySide6.QtGui import QIcon
-from PySide6.QtWidgets import QApplication, QMainWindow, QStyle
+from PySide6.QtWidgets import QApplication, QMainWindow
 
+import resources
 from untitled import Ui_MainWindow
 
 
@@ -10,13 +13,6 @@ class Main_window(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.action_open_file.setIcon(self.style().standardPixmap(QStyle.StandardPixmap.SP_DialogOpenButton))
-        self.action_open_file_2.setIcon(self.style().standardPixmap(QStyle.StandardPixmap.SP_DialogOpenButton))
-        self.action_new_file.setIcon(self.style().standardPixmap(QStyle.StandardPixmap.SP_FileIcon))
-        self.action_new_file_2.setIcon(self.style().standardPixmap(QStyle.StandardPixmap.SP_FileIcon))
-        QIcon
-        self.action_save_file_2.setIcon(self.style().standardPixmap(QStyle.StandardPixmap.SP_DialogSaveAllButton))
-        self.action_about_Qt.setIcon(self.style().standardPixmap(QStyle.StandardPixmap.SP_TitleBarMenuButton))
         self.file_menu.triggered.connect(print)
 
 
@@ -32,4 +28,8 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except Exception as e:
+        resources.qCleanupResources()
+        raise e

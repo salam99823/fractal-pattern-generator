@@ -27,6 +27,10 @@
    </layout>
   </widget>
   <widget class="QDockWidget" name="dock_Widget">
+   <property name="windowIcon">
+    <iconset>
+     <normaloff>:/icons/icons8-ящик-для-инструментов-240.png</normaloff>:/icons/icons8-ящик-для-инструментов-240.png</iconset>
+   </property>
    <property name="allowedAreas">
     <set>Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
    </property>
@@ -45,7 +49,11 @@
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QDoubleSpinBox" name="line_width"/>
+        <widget class="QDoubleSpinBox" name="line_width">
+         <property name="maximum">
+          <double>1000.000000000000000</double>
+         </property>
+        </widget>
        </item>
        <item row="1" column="0">
         <widget class="QLabel" name="label">
@@ -65,7 +73,11 @@
         </widget>
        </item>
        <item row="2" column="1">
-        <widget class="QDoubleSpinBox" name="line_length"/>
+        <widget class="QDoubleSpinBox" name="line_length">
+         <property name="maximum">
+          <double>10000.000000000000000</double>
+         </property>
+        </widget>
        </item>
        <item row="3" column="0">
         <widget class="QLabel" name="label_3">
@@ -75,7 +87,11 @@
         </widget>
        </item>
        <item row="3" column="1">
-        <widget class="QDoubleSpinBox" name="rotation_angle"/>
+        <widget class="QDoubleSpinBox" name="rotation_angle">
+         <property name="maximum">
+          <double>10000.000000000000000</double>
+         </property>
+        </widget>
        </item>
        <item row="4" column="0">
         <widget class="QLabel" name="label_4">
@@ -85,7 +101,11 @@
         </widget>
        </item>
        <item row="4" column="1">
-        <widget class="QDoubleSpinBox" name="length_deviation"/>
+        <widget class="QDoubleSpinBox" name="length_deviation">
+         <property name="maximum">
+          <double>10000.000000000000000</double>
+         </property>
+        </widget>
        </item>
        <item row="5" column="0">
         <widget class="QLabel" name="label_5">
@@ -95,7 +115,11 @@
         </widget>
        </item>
        <item row="5" column="1">
-        <widget class="QDoubleSpinBox" name="rotation_angle_deviation"/>
+        <widget class="QDoubleSpinBox" name="rotation_angle_deviation">
+         <property name="maximum">
+          <double>10000.000000000000000</double>
+         </property>
+        </widget>
        </item>
        <item row="6" column="0">
         <widget class="QLabel" name="label_6">
@@ -107,7 +131,14 @@
        <item row="6" column="1">
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
-          <widget class="QLineEdit" name="axiom"/>
+          <widget class="QLineEdit" name="axiom">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
          </item>
          <item>
           <widget class="QToolButton" name="text_editing">
@@ -163,6 +194,16 @@
        <property name="text">
         <string>Старт</string>
        </property>
+       <property name="icon">
+        <iconset resource="icons/resources.qrc">
+         <normaloff>:/icons/icons/icons8-start-96.png</normaloff>:/icons/icons/icons8-start-96.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
       </widget>
      </item>
      <item>
@@ -170,12 +211,32 @@
        <property name="text">
         <string>Стоп</string>
        </property>
+       <property name="icon">
+        <iconset resource="icons/resources.qrc">
+         <normaloff>:/icons/icons/icons8-stop-96.png</normaloff>:/icons/icons/icons8-stop-96.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="clear_button">
        <property name="text">
         <string>Очистить</string>
+       </property>
+       <property name="icon">
+        <iconset resource="icons/resources.qrc">
+         <normaloff>:/icons/icons/icons8-clean-96.png</normaloff>:/icons/icons/icons8-clean-96.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
        </property>
       </widget>
      </item>
@@ -199,6 +260,10 @@
      <property name="title">
       <string>Недавно открытые</string>
      </property>
+     <property name="icon">
+      <iconset resource="icons/resources.qrc">
+       <normaloff>:/icons/icons/icons8-history-folder-96.png</normaloff>:/icons/icons/icons8-history-folder-96.png</iconset>
+     </property>
     </widget>
     <addaction name="action_new_file"/>
     <addaction name="action_open_file"/>
@@ -215,6 +280,7 @@
      <string>Справка</string>
     </property>
     <addaction name="action_about_Qt"/>
+    <addaction name="action_about_program"/>
    </widget>
    <addaction name="file_menu"/>
    <addaction name="about_menu"/>
@@ -234,26 +300,46 @@
    <addaction name="action_save_file_2"/>
   </widget>
   <action name="action_open_file">
+   <property name="icon">
+    <iconset resource="icons/resources.qrc">
+     <normaloff>:/icons/icons/icons8-opened-folder-240.png</normaloff>:/icons/icons/icons8-opened-folder-240.png</iconset>
+   </property>
    <property name="text">
     <string>Открыть</string>
    </property>
   </action>
   <action name="action_save_file">
+   <property name="icon">
+    <iconset resource="icons/resources.qrc">
+     <normaloff>:/icons/icons/icons8-save-96.png</normaloff>:/icons/icons/icons8-save-96.png</iconset>
+   </property>
    <property name="text">
     <string>Сохранить</string>
    </property>
   </action>
   <action name="action_save_file_as">
+   <property name="icon">
+    <iconset resource="icons/resources.qrc">
+     <normaloff>:/icons/icons/icons8-save-as-96.png</normaloff>:/icons/icons/icons8-save-as-96.png</iconset>
+   </property>
    <property name="text">
     <string>Сохранить как...</string>
    </property>
   </action>
   <action name="action_save_image">
+   <property name="icon">
+    <iconset resource="icons/resources.qrc">
+     <normaloff>:/icons/icons/icons8-файл-изображения-240.png</normaloff>:/icons/icons/icons8-файл-изображения-240.png</iconset>
+   </property>
    <property name="text">
     <string>Сохрнить изображение</string>
    </property>
   </action>
   <action name="action_escape">
+   <property name="icon">
+    <iconset resource="icons/resources.qrc">
+     <normaloff>:/icons/icons/icons8-logout-96.png</normaloff>:/icons/icons/icons8-logout-96.png</iconset>
+   </property>
    <property name="text">
     <string>Выход</string>
    </property>
@@ -262,6 +348,10 @@
    </property>
   </action>
   <action name="action_about_Qt">
+   <property name="icon">
+    <iconset resource="icons/resources.qrc">
+     <normaloff>:/icons/icons/Qt_logo_neon_2022.svg.png</normaloff>:/icons/icons/Qt_logo_neon_2022.svg.png</iconset>
+   </property>
    <property name="text">
     <string>О Qt</string>
    </property>
@@ -270,11 +360,19 @@
    </property>
   </action>
   <action name="action_new_file">
+   <property name="icon">
+    <iconset resource="icons/resources.qrc">
+     <normaloff>:/icons/icons/icons8-файл-240.png</normaloff>:/icons/icons/icons8-файл-240.png</iconset>
+   </property>
    <property name="text">
     <string>Новый</string>
    </property>
   </action>
   <action name="action_new_file_2">
+   <property name="icon">
+    <iconset resource="icons/resources.qrc">
+     <normaloff>:/icons/icons/icons8-файл-240.png</normaloff>:/icons/icons/icons8-файл-240.png</iconset>
+   </property>
    <property name="text">
     <string>Новый файл</string>
    </property>
@@ -283,6 +381,10 @@
    </property>
   </action>
   <action name="action_open_file_2">
+   <property name="icon">
+    <iconset resource="icons/resources.qrc">
+     <normaloff>:/icons/icons/icons8-opened-folder-240.png</normaloff>:/icons/icons/icons8-opened-folder-240.png</iconset>
+   </property>
    <property name="text">
     <string>Открыть файл</string>
    </property>
@@ -294,11 +396,24 @@
    </property>
   </action>
   <action name="action_save_file_2">
+   <property name="icon">
+    <iconset resource="icons/resources.qrc">
+     <normaloff>:/icons/icons/icons8-save-96.png</normaloff>:/icons/icons/icons8-save-96.png</iconset>
+   </property>
    <property name="text">
     <string>Сохранить</string>
    </property>
    <property name="toolTip">
     <string>Сохранить</string>
+   </property>
+  </action>
+  <action name="action_about_program">
+   <property name="icon">
+    <iconset resource="icons/resources.qrc">
+     <normaloff>:/icons/icons/icons8-info-240.png</normaloff>:/icons/icons/icons8-info-240.png</iconset>
+   </property>
+   <property name="text">
+    <string>О программе</string>
    </property>
   </action>
  </widget>
@@ -320,7 +435,9 @@
    </slots>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="icons/resources.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>rules_list</sender>
