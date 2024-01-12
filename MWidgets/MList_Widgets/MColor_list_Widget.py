@@ -18,7 +18,6 @@ class MColorDialog(QColorDialog):
 
 
 class MColor_list_Widget(Modified_list_widget):
-    ColorRole = Qt.ItemDataRole.UserRole + 1
     
     def __init__(self, parent: QWidget | None = None):
         super().__init__(parent)
@@ -36,12 +35,11 @@ class MColor_list_Widget(Modified_list_widget):
         item = self.item(self.currentRow())
         if item is not None:
             color, accepted = MColorDialog(
-                    item.data(self.ColorRole), self.parent()
+                    item.text(), self.parent()
             ).get_color()
             if accepted:
                 item.setIcon(self.draw_icon_for_item(color))
-                item.setText(f"#{hex(color.rgb()).upper()[4:]}")
-                item.setData(self.ColorRole, color)
+                item.setText(color.name(QColor.NameFormat.HexRgb).upper())
     
     def addItem(self, item: QListWidgetItem | QColor | str = None):
         if item is None:
@@ -53,14 +51,6 @@ class MColor_list_Widget(Modified_list_widget):
     
     def add_color(self, color: QColor = None):
         """
-        If the color parameter is None then MColorDialog is called,
-        If the claim button is not pressed,
-        Nothing is added
-        otherwise, if the color is a QColor
-        then it is added by the self.additem method
-        and becomes current
-        otherwise
-        TypeError rises
         :raises TypeError:
         :param color:
         :return: None
@@ -74,9 +64,8 @@ class MColor_list_Widget(Modified_list_widget):
         if accepted:
             item = QListWidgetItem(
                     self.draw_icon_for_item(color),
-                    f"#{hex(color.rgb()).upper()[4:]}",
+                    color.name(QColor.NameFormat.HexRgb).upper(),
             )
-            item.setData(self.ColorRole, color)
             self.addItem(item)
     
     def draw_icon_for_item(self, color: QColor) -> QPixmap:
@@ -89,7 +78,7 @@ class MColor_list_Widget(Modified_list_widget):
         return icon
     
     def get_colors(self) -> tuple[QColor, ...]:
-        return tuple(item.data(self.ColorRole) for item in self.getitems())
+        return tuple(QColor(item.text()) for item in self.getitems())
     
     def getitems(self) -> tuple[QListWidgetItem, ...]:
         """

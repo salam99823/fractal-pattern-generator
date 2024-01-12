@@ -46,7 +46,7 @@ class MText_list_Widget(Modified_list_widget):
         """
         item = self.currentItem()
         if item is not None:
-            item_text, accepted = QInputDialog.getText(
+            item_text, accepted = QInputDialog.getMultiLineText(
                     self.parent(), "Изменение", "", text = item.text()
             )
             if accepted:

@@ -14,7 +14,7 @@ class MText_list_WidgetTests(unittest.TestCase):
             pass
         self.widget = MText_list_Widget()
     
-    @mock.patch.object(QInputDialog, "getText")
+    @mock.patch.object(QInputDialog, "getMultiLineText")
     def test_addItem_with_no_arguments(self, mock_gettext: mock.MagicMock):
         mock_gettext.return_value = ('Some item', True)
         self.widget.addItem()
@@ -45,7 +45,7 @@ class MText_list_WidgetTests(unittest.TestCase):
         self.widget.add_text("")
         self.assertEqual(1, self.widget.count())
     
-    @mock.patch.object(QInputDialog, "getText")
+    @mock.patch.object(QInputDialog, "getMultiLineText")
     def test_add_text_with_no_text(self, mock_gettext: mock.MagicMock):
         mock_gettext.return_value = ("Some item", True)
         self.widget.add_text()
@@ -58,7 +58,7 @@ class MText_list_WidgetTests(unittest.TestCase):
             # noinspection PyTypeChecker
             self.widget.add_text(123)
     
-    @mock.patch.object(QInputDialog, "getText")
+    @mock.patch.object(QInputDialog, "getMultiLineText")
     def test_edit_current_item_with_valid_text(self, mock_gettext: mock.MagicMock):
         mock_gettext.return_value = ("Edited item", True)
         self.widget.addItem("Item 1")

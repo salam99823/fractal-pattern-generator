@@ -30,11 +30,11 @@ class TestMColor_list_widgetWidget(unittest.TestCase):
     
     def test_edit_current_item_positive(self):
         item = QListWidgetItem()
-        item.setData(self.widget.ColorRole, QColor(Qt.GlobalColor.red))
+        item.setText(QColor(Qt.GlobalColor.red).name(QColor.NameFormat.HexRgb))
         self.widget.addItem(item)
         self.widget.edit_current_item()
         updated_item = self.widget.currentItem()
-        self.assertEqual("#FF0000", updated_item.text())
+        self.assertEqual(QColor(Qt.GlobalColor.red).name(QColor.NameFormat.HexRgb).upper(), updated_item.text())
         self.widget.clear()
     
     def test_edit_current_item_negative(self):
