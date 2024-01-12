@@ -161,21 +161,21 @@
      <item>
       <widget class="QPushButton" name="start_button">
        <property name="text">
-        <string>PushButton</string>
+        <string>Старт</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="stop_button">
        <property name="text">
-        <string>PushButton</string>
+        <string>Стоп</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="clear_button">
        <property name="text">
-        <string>PushButton</string>
+        <string>Очистить</string>
        </property>
       </widget>
      </item>

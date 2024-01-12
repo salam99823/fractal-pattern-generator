@@ -1,7 +1,7 @@
 import sys
 
-from PySide6.QtWidgets import QApplication, QMainWindow, QStyle, QCommonStyle
 from PySide6.QtGui import QIcon
+from PySide6.QtWidgets import QApplication, QMainWindow, QStyle
 
 from untitled import Ui_MainWindow
 
@@ -14,8 +14,8 @@ class Main_window(QMainWindow, Ui_MainWindow):
         self.action_open_file_2.setIcon(self.style().standardPixmap(QStyle.StandardPixmap.SP_DialogOpenButton))
         self.action_new_file.setIcon(self.style().standardPixmap(QStyle.StandardPixmap.SP_FileIcon))
         self.action_new_file_2.setIcon(self.style().standardPixmap(QStyle.StandardPixmap.SP_FileIcon))
-        
-        self.action_save_file_2.setIcon(self.style().standardPixmap(QStyle.StandardPixmap.SP_BrowserStop))
+        QIcon
+        self.action_save_file_2.setIcon(self.style().standardPixmap(QStyle.StandardPixmap.SP_DialogSaveAllButton))
         self.action_about_Qt.setIcon(self.style().standardPixmap(QStyle.StandardPixmap.SP_TitleBarMenuButton))
         self.file_menu.triggered.connect(print)
 
