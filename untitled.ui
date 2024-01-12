@@ -10,14 +10,15 @@
     <height>748</height>
    </rect>
   </property>
-  <property name="contextMenuPolicy">
-   <enum>Qt::NoContextMenu</enum>
-  </property>
-  <property name="acceptDrops">
-   <bool>false</bool>
-  </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Fractal-Pattern-Generator</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="icons/resources.qrc">
+    <normaloff>:/icons/icons/icons8-python-240.png</normaloff>:/icons/icons/icons8-python-240.png</iconset>
+  </property>
+  <property name="toolButtonStyle">
+   <enum>Qt::ToolButtonTextUnderIcon</enum>
   </property>
   <widget class="QWidget" name="central_widget">
    <layout class="QVBoxLayout" name="verticalLayout">

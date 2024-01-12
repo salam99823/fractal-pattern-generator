@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="icons">
+    <file>icons/icons8-python-240.png</file>
     <file>icons/icons8-history-folder-96.png</file>
     <file>icons/icons8-add-96.png</file>
     <file>icons/icons8-clean-96.png</file>

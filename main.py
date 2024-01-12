@@ -5,7 +5,7 @@ import sys
 
 from PySide6.QtWidgets import QApplication, QMainWindow
 
-import resources
+from icons import resources_rc
 from untitled import Ui_MainWindow
 
 
@@ -30,6 +30,5 @@ def main():
 if __name__ == '__main__':
     try:
         main()
-    except Exception as e:
-        resources.qCleanupResources()
-        raise e
+    finally:
+        resources_rc.qCleanupResources()
