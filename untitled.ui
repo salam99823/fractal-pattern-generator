@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+    <class>MainWindow</class>
+    <widget class="QMainWindow" name="MainWindow">
+        <property name="geometry">
+            <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>968</width>
+                <height>748</height>
+            </rect>
+        </property>
+        <property name="contextMenuPolicy">
+            <enum>Qt::NoContextMenu</enum>
+        </property>
+        <property name="acceptDrops">
+            <bool>false</bool>
+        </property>
+        <property name="windowTitle">
+            <string>MainWindow</string>
+        </property>
+        <widget class="QWidget" name="central_widget">
+            <layout class="QVBoxLayout" name="verticalLayout">
+                <item>
+                    <widget class="QGraphicsView" name="graphics_View"/>
+                </item>
+            </layout>
+        </widget>
+        <widget class="QDockWidget" name="dock_Widget">
+            <attribute name="dockWidgetArea">
+                <number>1</number>
+            </attribute>
+            <widget class="QWidget" name="dock_Widget_Contents">
+                <layout class="QVBoxLayout" name="verticalLayout_2">
+                    <item>
+                        <layout class="QFormLayout" name="form_layout">
+                            <item row="0" column="0">
+                                <widget class="QLabel" name="label_line_width">
+                                    <property name="text">
+                                        <string>Толщина</string>
+                                    </property>
+                                </widget>
+                            </item>
+                            <item row="0" column="1">
+                                <widget class="QDoubleSpinBox" name="line_width"/>
+                            </item>
+                            <item row="1" column="0">
+                                <widget class="QLabel" name="label">
+                                    <property name="text">
+                                        <string>Глубина</string>
+                                    </property>
+                                </widget>
+                            </item>
+                            <item row="1" column="1">
+                                <widget class="QSpinBox" name="number_of_iter"/>
+                            </item>
+                            <item row="2" column="0">
+                                <widget class="QLabel" name="label_2">
+                                    <property name="text">
+                                        <string>Длинна</string>
+                                    </property>
+                                </widget>
+                            </item>
+                            <item row="2" column="1">
+                                <widget class="QDoubleSpinBox" name="line_length"/>
+                            </item>
+                            <item row="3" column="0">
+                                <widget class="QLabel" name="label_3">
+                                    <property name="text">
+                                        <string>Угол поворота</string>
+                                    </property>
+                                </widget>
+                            </item>
+                            <item row="3" column="1">
+                                <widget class="QDoubleSpinBox" name="rotation_angle"/>
+                            </item>
+                            <item row="4" column="0">
+                                <widget class="QLabel" name="label_4">
+                                    <property name="text">
+                                        <string>Отклонение длинны</string>
+                                    </property>
+                                </widget>
+                            </item>
+                            <item row="4" column="1">
+                                <widget class="QDoubleSpinBox" name="length_deviation"/>
+                            </item>
+                            <item row="5" column="0">
+                                <widget class="QLabel" name="label_5">
+                                    <property name="text">
+                                        <string>Отклонение угла</string>
+                                    </property>
+                                </widget>
+                            </item>
+                            <item row="5" column="1">
+                                <widget class="QDoubleSpinBox" name="rotation_angle_deviation"/>
+                            </item>
+                            <item row="6" column="0">
+                                <widget class="QLabel" name="label_6">
+                                    <property name="text">
+                                        <string>Аксиома</string>
+                                    </property>
+                                </widget>
+                            </item>
+                            <item row="6" column="1">
+                                <layout class="QHBoxLayout" name="horizontalLayout">
+                                    <item>
+                                        <widget class="QLineEdit" name="axiom"/>
+                                    </item>
+                                    <item>
+                                        <widget class="QToolButton" name="text_editing">
+                                            <property name="text">
+                                                <string>...</string>
+                                            </property>
+                                        </widget>
+                                    </item>
+                                </layout>
+                            </item>
+                        </layout>
+                    </item>
+                    <item>
+                        <widget class="QGroupBox" name="groupBox">
+                            <property name="title">
+                                <string>Правила</string>
+                            </property>
+                            <property name="checkable">
+                                <bool>true</bool>
+                            </property>
+                            <layout class="QVBoxLayout" name="_3">
+                                <item>
+                                    <widget class="MText_list_Widget" name="rules_list">
+                                        <property name="contextMenuPolicy">
+                                            <enum>Qt::CustomContextMenu</enum>
+                                        </property>
+                                    </widget>
+                                </item>
+                            </layout>
+                        </widget>
+                    </item>
+                    <item>
+                        <widget class="QGroupBox" name="groupBox_2">
+                            <property name="title">
+                                <string>Цвета</string>
+                            </property>
+                            <property name="checkable">
+                                <bool>true</bool>
+                            </property>
+                            <layout class="QVBoxLayout" name="_2">
+                                <item>
+                                    <widget class="MColor_list_Widget" name="colors_list"/>
+                                </item>
+                            </layout>
+                        </widget>
+                    </item>
+                    <item>
+                        <widget class="QPushButton" name="start_button">
+                            <property name="text">
+                                <string>PushButton</string>
+                            </property>
+                        </widget>
+                    </item>
+                    <item>
+                        <widget class="QPushButton" name="stop_button">
+                            <property name="text">
+                                <string>PushButton</string>
+                            </property>
+                        </widget>
+                    </item>
+                    <item>
+                        <widget class="QPushButton" name="clear_button">
+                            <property name="text">
+                                <string>PushButton</string>
+                            </property>
+                        </widget>
+                    </item>
+                </layout>
+            </widget>
+        </widget>
+        <widget class="QMenuBar" name="menuBar">
+            <property name="geometry">
+                <rect>
+                    <x>0</x>
+                    <y>0</y>
+                    <width>968</width>
+                    <height>22</height>
+                </rect>
+            </property>
+            <widget class="QMenu" name="menu">
+                <property name="title">
+                    <string>Файл</string>
+                </property>
+                <addaction name="action_new_file"/>
+                <addaction name="action_open_file_"/>
+                <addaction name="action_recently_opened"/>
+                <addaction name="separator"/>
+                <addaction name="action_save_file"/>
+                <addaction name="action_save_file_as"/>
+                <addaction name="action_save_image"/>
+                <addaction name="separator"/>
+                <addaction name="action_escape"/>
+            </widget>
+            <widget class="QMenu" name="menu_2">
+                <property name="title">
+                    <string>Справка</string>
+                </property>
+                <addaction name="action_about_Qt"/>
+            </widget>
+            <addaction name="menu"/>
+            <addaction name="menu_2"/>
+        </widget>
+        <widget class="QToolBar" name="tool_Bar">
+            <property name="windowTitle">
+                <string>toolBar</string>
+            </property>
+            <attribute name="toolBarArea">
+                <enum>TopToolBarArea</enum>
+            </attribute>
+            <attribute name="toolBarBreak">
+                <bool>false</bool>
+            </attribute>
+            <addaction name="action_open_file"/>
+        </widget>
+        <action name="action_open_file_">
+            <property name="text">
+                <string>Открыть</string>
+            </property>
+        </action>
+        <action name="action_recently_opened">
+            <property name="text">
+                <string>Недавно открытые</string>
+            </property>
+        </action>
+        <action name="action_save_file">
+            <property name="text">
+                <string>Сохранить</string>
+            </property>
+        </action>
+        <action name="action_save_file_as">
+            <property name="text">
+                <string>Сохранить как...</string>
+            </property>
+        </action>
+        <action name="action_save_image">
+            <property name="text">
+                <string>Сохрнить изображение</string>
+            </property>
+        </action>
+        <action name="action_escape">
+            <property name="text">
+                <string>Выход</string>
+            </property>
+            <property name="menuRole">
+                <enum>QAction::QuitRole</enum>
+            </property>
+        </action>
+        <action name="action_about_Qt">
+            <property name="text">
+                <string>О Qt</string>
+            </property>
+            <property name="menuRole">
+                <enum>QAction::AboutQtRole</enum>
+            </property>
+        </action>
+        <action name="action_open_file">
+            <property name="toolTip">
+                <string>Открыть файл</string>
+            </property>
+            <property name="menuRole">
+                <enum>QAction::TextHeuristicRole</enum>
+            </property>
+        </action>
+        <action name="action_new_file">
+            <property name="text">
+                <string>Новый</string>
+            </property>
+        </action>
+    </widget>
+    <customwidgets>
+        <customwidget>
+            <class>MText_list_Widget</class>
+            <extends>QListWidget</extends>
+            <header>MWidgets.MList_Widgets.MText_list_Widget</header>
+            <slots>
+                <slot>show_menu(QPoint)</slot>
+            </slots>
+        </customwidget>
+        <customwidget>
+            <class>MColor_list_Widget</class>
+            <extends>QListWidget</extends>
+            <header>MWidgets.MList_Widgets.MColor_list_Widget</header>
+            <slots>
+                <slot>show_menu(QPoint)</slot>
+            </slots>
+        </customwidget>
+    </customwidgets>
+    <resources/>
+    <connections>
+        <connection>
+            <sender>rules_list</sender>
+            <signal>customContextMenuRequested(QPoint)</signal>
+            <receiver>rules_list</receiver>
+            <slot>show_menu(QPoint)</slot>
+            <hints>
+                <hint type="sourcelabel">
+                    <x>201</x>
+                    <y>321</y>
+                </hint>
+                <hint type="destinationlabel">
+                    <x>201</x>
+                    <y>363</y>
+                </hint>
+            </hints>
+        </connection>
+        <connection>
+            <sender>groupBox</sender>
+            <signal>toggled(bool)</signal>
+            <receiver>rules_list</receiver>
+            <slot>setVisible(bool)</slot>
+            <hints>
+                <hint type="sourcelabel">
+                    <x>124</x>
+                    <y>297</y>
+                </hint>
+                <hint type="destinationlabel">
+                    <x>150</x>
+                    <y>385</y>
+                </hint>
+            </hints>
+        </connection>
+        <connection>
+            <sender>groupBox_2</sender>
+            <signal>toggled(bool)</signal>
+            <receiver>colors_list</receiver>
+            <slot>setVisible(bool)</slot>
+            <hints>
+                <hint type="sourcelabel">
+                    <x>114</x>
+                    <y>482</y>
+                </hint>
+                <hint type="destinationlabel">
+                    <x>114</x>
+                    <y>524</y>
+                </hint>
+            </hints>
+        </connection>
+        <connection>
+            <sender>colors_list</sender>
+            <signal>customContextMenuRequested(QPoint)</signal>
+            <receiver>colors_list</receiver>
+            <slot>show_menu(QPoint)</slot>
+            <hints>
+                <hint type="sourcelabel">
+                    <x>187</x>
+                    <y>521</y>
+                </hint>
+                <hint type="destinationlabel">
+                    <x>176</x>
+                    <y>555</y>
+                </hint>
+            </hints>
+        </connection>
+    </connections>
+</ui>
