@@ -11,17 +11,6 @@ class Modified_list_widget(QListWidget):
     def __init__(self, parent: QWidget | None = None):
         super().__init__(parent)
     
-    @Slot(QPoint, name = 'show_menu')
-    def show_menu(self, position: QPoint):
-        menu = QMenu(self)
-        menu.addAction("Добавить", self.addItem)
-        menu.addAction("Изменить", self.edit_current_item)
-        menu.addAction("Вверх", self.raise_item)
-        menu.addAction("Вниз", self.omit_item)
-        menu.addAction("Удалить", self.take_current_item)
-        menu.addAction("Очистить", self.clear)
-        menu.exec(self.mapToGlobal(position))
-    
     def addItem(self, item: QListWidgetItem | str):
         item = QListWidgetItem(item)
         super().addItem(item)
