@@ -14,6 +14,7 @@ from PySide6.QtWidgets import (QDialogButtonBox,
                                QLabel, QPlainTextEdit, QVBoxLayout)
 
 
+# noinspection PyAttributeOutsideInit
 class Ui_multiline_dialog(object):
     def setupUi(self, multiline_dialog):
         if not multiline_dialog.objectName():
