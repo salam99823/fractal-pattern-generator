@@ -1,6 +1,3 @@
-def print_hi(name):
-    print(f'Hi, {name}')
+import MWidgets.uis.rc_resorses.rc_resources
 
-
-if __name__ == '__main__':
-    print_hi('Python')
+MWidgets.uis.rc_resorses.rc_resources.qInitResources()

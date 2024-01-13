@@ -3,12 +3,10 @@
 """
 import sys
 
-from PySide6.QtCore import QPoint, Slot
-from PySide6.QtGui import QIcon
-from PySide6.QtWidgets import QApplication, QMainWindow, QMenu
+from PySide6.QtWidgets import QApplication, QDialog, QMainWindow
 
-from icons import resources_rc
-from uis.mainwindow import Ui_MainWindow
+from MWidgets.uis.mainwindow import Ui_MainWindow
+from MWidgets.uis.rc_resorses import rc_resources
 
 
 class Main_window(QMainWindow, Ui_MainWindow):
@@ -16,20 +14,14 @@ class Main_window(QMainWindow, Ui_MainWindow):
         super().__init__()
         self.setupUi(self)
         self.action_about_Qt.triggered.connect(QApplication.aboutQt)
-        self.rules_list.customContextMenuRequested.connect(self.show_menu)
-        self.colors_list.customContextMenuRequested.connect(self.show_menu)
+        self.action_about_program.triggered.connect(self.tst)
+        self.rules_list.customContextMenuRequested.connect(self.rules_list.show_menu)
+        self.colors_list.customContextMenuRequested.connect(self.colors_list.show_menu)
     
-    @Slot(QPoint, name = 'show_menu')
-    def show_menu(self, position: QPoint):
-        menu = QMenu(self)
-        menu.addAction(QIcon(':/icons/icons/icons8-add-96.png'), "Добавить", self.sender().addItem)
-        menu.addAction(QIcon(':/icons/icons/icons8-edit-240.png'), "Изменить", self.sender().edit_current_item)
-        menu.addAction(QIcon(':/icons/icons/icons8-thick-arrow-pointing-up-96.png'), "Вверх", self.sender().raise_item)
-        menu.addAction(QIcon(':/icons/icons/icons8-down-96.png'), "Вниз", self.sender().omit_item)
-        menu.addAction(QIcon(':/icons/icons/icons8-close-96.png'), "Удалить", self.sender().take_current_item)
-        menu.addAction(QIcon(':/icons/icons/icons8-delete-240.png'), "Очистить", self.sender().clear)
-        menu.exec(self.sender().mapToGlobal(position))
-
+    def tst(self):
+        dial = QDialog(self)
+        
+        dial.exec()
 
 def main():
     app = QApplication(sys.argv)
@@ -46,4 +38,4 @@ if __name__ == '__main__':
     try:
         main()
     finally:
-        resources_rc.qCleanupResources()
+        rc_resources.qCleanupResources()

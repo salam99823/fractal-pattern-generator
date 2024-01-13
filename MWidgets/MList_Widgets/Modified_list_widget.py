@@ -1,4 +1,5 @@
 from PySide6.QtCore import QPoint, Slot
+from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import (
     QListWidget,
     QListWidgetItem,
@@ -10,6 +11,29 @@ from PySide6.QtWidgets import (
 class Modified_list_widget(QListWidget):
     def __init__(self, parent: QWidget | None = None):
         super().__init__(parent)
+        self.menu = QMenu(self)
+        self.menu.addAction(
+                QIcon(':/icons/icons/icons8-add-96.png'), "Добавить", self.addItem
+        )
+        self.menu.addAction(
+                QIcon(':/icons/icons/icons8-edit-240.png'), "Изменить", self.edit_current_item
+        )
+        self.menu.addAction(
+                QIcon(':/icons/icons/icons8-thick-arrow-pointing-up-96.png'), "Вверх", self.raise_item
+        )
+        self.menu.addAction(
+                QIcon(':/icons/icons/icons8-down-96.png'), "Вниз", self.omit_item
+        )
+        self.menu.addAction(
+                QIcon(':/icons/icons/icons8-close-96.png'), "Удалить", self.take_current_item
+        )
+        self.menu.addAction(
+                QIcon(':/icons/icons/icons8-delete-240.png'), "Очистить", self.clear
+        )
+    
+    @Slot(QPoint, name = 'show_menu')
+    def show_menu(self, position: QPoint):
+        self.menu.exec(self.mapToGlobal(position))
     
     def addItem(self, item: QListWidgetItem | str):
         item = QListWidgetItem(item)

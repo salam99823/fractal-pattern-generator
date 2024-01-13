@@ -42,7 +42,7 @@ class LSystem(object):
         """
         if isinstance(rules, Iterable):
             for rule in rules:
-                rule = self.multiplication(rule).split(maxsplit = 1)
+                rule = self.multiplication(rule).split('->', maxsplit = 1)
                 if len(rule) == 2:
                     self.__rules += (tuple(rule),)
         else:

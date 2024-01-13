@@ -1,6 +1,45 @@
-from PySide6.QtWidgets import QInputDialog, QListWidgetItem, QWidget
+from PySide6.QtCore import Qt
+from PySide6.QtGui import QIcon
+from PySide6.QtWidgets import QDialog, QDialogButtonBox, QListWidgetItem, QWidget
 
+from MWidgets.uis.multilinedialog import Ui_multiline_dialog
 from .Modified_list_widget import Modified_list_widget
+
+
+class Multiline_text_InputDialog(QDialog, Ui_multiline_dialog):
+    def __init__(
+            self,
+            parent: QWidget,
+            title: str,
+            label: str,
+            text: str,
+            icon: QIcon = None,
+            flag: Qt.WindowType = Qt.WindowType.Dialog,
+    ):
+        super().__init__(parent, flag)
+        self.setupUi(self)
+        self.buttonBox.button(
+                QDialogButtonBox.StandardButton.Ok
+        ).setIcon(
+                QIcon(':/icons/icons/icons8-ok-240.png')
+        )
+        self.buttonBox.button(
+                QDialogButtonBox.StandardButton.Cancel
+        ).setIcon(
+                QIcon(':/icons/icons/icons8-cancel-240.png')
+        )
+        self.setWindowTitle(title)
+        self.label.setText(label)
+        self.plainTextEdit.setPlainText(text)
+        if isinstance(icon, QIcon):
+            self.setWindowIcon(icon)
+    
+    def textValue(self):
+        return self.plainTextEdit.toPlainText()
+    
+    def getMultiLineText(self) -> tuple[str, bool]:
+        result = self.exec()
+        return self.textValue(), not not result
 
 
 class MText_list_Widget(Modified_list_widget):
@@ -30,7 +69,13 @@ class MText_list_Widget(Modified_list_widget):
         if isinstance(text, str):
             accepted = True
         elif text is None:
-            text, accepted = QInputDialog.getMultiLineText(self.parent(), "Добавление", "", text = user_input_text)
+            text, accepted = Multiline_text_InputDialog(
+                    self,
+                    'Добавление',
+                    'Введите текст',
+                    user_input_text,
+                    QIcon(':/icons/icons/icons8-add-96.png')
+            ).getMultiLineText()
         else:
             raise TypeError("The text must be a string")
         if accepted:
@@ -46,9 +91,13 @@ class MText_list_Widget(Modified_list_widget):
         """
         item = self.currentItem()
         if item is not None:
-            item_text, accepted = QInputDialog.getMultiLineText(
-                    self.parent(), "Изменение", "", text = item.text()
-            )
+            item_text, accepted = Multiline_text_InputDialog(
+                    self,
+                    'Изменение',
+                    'Введите текст',
+                    item.text(),
+                    QIcon(':/icons/icons/icons8-edit-240.png')
+            ).getMultiLineText()
             if accepted:
                 item.setText(item_text)
     

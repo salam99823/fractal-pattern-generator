@@ -1,1 +1,2 @@
 from .MList_Widgets.MColor_list_Widget import MColorDialog
+from .MList_Widgets.MText_list_Widget import Multiline_text_InputDialog

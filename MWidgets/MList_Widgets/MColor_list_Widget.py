@@ -1,4 +1,4 @@
-from PySide6.QtGui import QColor, QPainter, QPen, QPixmap, QRgba64, Qt
+from PySide6.QtGui import QColor, QIcon, QPainter, QPen, QPixmap, QRgba64, Qt
 from PySide6.QtWidgets import QColorDialog
 
 from .Modified_list_widget import Modified_list_widget, QListWidgetItem, QWidget
@@ -9,8 +9,14 @@ class MColorDialog(QColorDialog):
             self,
             initial: QColor | QRgba64 | Qt.GlobalColor | str | int = None,
             parent: QWidget | None = None,
+            icon: QIcon | QPixmap = None,
+            title: str = None,
     ):
         super().__init__(initial, parent)
+        if title is not None:
+            self.setWindowTitle(title)
+        if icon is not None:
+            self.setWindowIcon(icon)
     
     def get_color(self) -> tuple[QColor, bool]:
         result = bool(self.exec())
@@ -26,16 +32,15 @@ class MColor_list_Widget(Modified_list_widget):
     
     def edit_current_item(self):
         """
-        Only works with the current item, if it is not None,
-        calls MColorDialog with the color of the current item,
-        if the accept button is not clicked,
-        the color remains the same.
         :return: None
         """
         item = self.item(self.currentRow())
         if item is not None:
             color, accepted = MColorDialog(
-                    item.text(), self.parent()
+                    item.text(),
+                    self,
+                    QIcon(':/icons/icons/icons8-edit-240.png'),
+                    'Добавление',
             ).get_color()
             if accepted:
                 item.setIcon(self.draw_icon_for_item(color))
@@ -58,7 +63,11 @@ class MColor_list_Widget(Modified_list_widget):
         if isinstance(color, QColor):
             accepted = True
         elif color is None:
-            color, accepted = MColorDialog(parent = self).get_color()
+            color, accepted = MColorDialog(
+                    parent = self,
+                    icon = QIcon(':/icons/icons/icons8-add-96.png'),
+                    title = 'Изменение',
+            ).get_color()
         else:
             raise TypeError("The argument must be a QColor")
         if accepted:
