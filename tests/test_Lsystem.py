@@ -10,7 +10,7 @@ class TestLSystem(unittest.TestCase):
     
     def test_rules_setter(self):
         # Positive test case: setting rules as a dictionary
-        self.lsystem.rules = ("F FLFRRFLF",)
+        self.lsystem.rules = ("F->FLFRRFLF",)
         self.assertEqual((('F', 'FLFRRFLF'),), self.lsystem.rules)
         
         # Negative test case: setting rules with invalid type
@@ -29,7 +29,8 @@ class TestLSystem(unittest.TestCase):
     
     def test_generate_action_string(self):
         self.lsystem.keywords = (("F", "forward"), ("B", "back"))
-        self.lsystem.rules = ("F FLFRRFLF",)
+        self.lsystem.rules = ("F->FLFRRFLF",)
+        print(self.lsystem)
         # Positive test case: generating action string with string input
         result = self.lsystem.generate_action_string('F', 1)
         self.assertEqual(
