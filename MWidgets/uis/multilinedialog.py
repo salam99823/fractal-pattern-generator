@@ -18,7 +18,6 @@ class Ui_multiline_dialog(object):
     def setupUi(self, multiline_dialog):
         if not multiline_dialog.objectName():
             multiline_dialog.setObjectName(u"multiline_dialog")
-        multiline_dialog.resize(274, 262)
         self.vboxLayout = QVBoxLayout(multiline_dialog)
         self.vboxLayout.setObjectName(u"vboxLayout")
         self.label = QLabel(multiline_dialog)
