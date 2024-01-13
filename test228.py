@@ -1,29 +1,15 @@
 import sys
 
-from PySide6.QtWidgets import (
-    QApplication,
-    QCheckBox,
-    QComboBox,
-    QDateEdit,
-    QDateTimeEdit,
-    QDial,
-    QDoubleSpinBox,
-    QFontComboBox,
-    QLabel,
-    QLCDNumber,
-    QLineEdit,
-    QMainWindow,
-    QProgressBar,
-    QPushButton,
-    QRadioButton,
-    QSlider,
-    QSpinBox,
-    QTimeEdit,
-    QVBoxLayout,
-    QWidget,
-)
+from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QDateEdit, QDateTimeEdit, QDial, QDialogButtonBox,
+                               QDoubleSpinBox, QFontComboBox, QLabel, QLineEdit, QMainWindow, QPlainTextEdit,
+                               QProgressBar, QPushButton, QRadioButton, QSlider, QSpinBox, QTimeEdit, QVBoxLayout,
+                               QWidget)
 
-sys.argv += ['-platform', 'windows:darkmode']
+import MWidgets.uis.rc_resorses.rc_resources
+
+MWidgets.uis.rc_resorses.rc_resources.qInitResources()
+
+sys.argv += ['-platform', 'windows']
 
 
 class MainWindow(QMainWindow):
@@ -31,9 +17,29 @@ class MainWindow(QMainWindow):
         super().__init__()
         
         self.setWindowTitle("Widgets App")
-        
-        layout = QVBoxLayout()
+        self.setStyleSheet(
+                """
+QDialogButtonBox { dialogbuttonbox-buttons-have-icons: 1; }
+QPlainTextEdit {
+    border-width: 5px;
+    border-style: solid;
+    border-color: white;
+    border-radius: 10px;
+    bottom: 50px;
+    alternate-background-color: blue;
+    background-image: url(:/icons/icons/icons8-down-96.png);
+    background-repeat: repeat-;
+    background-position: center;
+    background-attachment: fixed;
+    background-origin: content;
+    background-clip: padding;
+}
+                """
+        )
+        widget = QWidget(self)
+        layout = QVBoxLayout(widget)
         widgets = [
+            QPushButton,
             QCheckBox,
             QComboBox,
             QDateEdit,
@@ -41,21 +47,23 @@ class MainWindow(QMainWindow):
             QDial,
             QDoubleSpinBox,
             QFontComboBox,
-            QLCDNumber,
-            QLabel,
             QLineEdit,
             QProgressBar,
-            QPushButton,
             QRadioButton,
             QSlider,
             QSpinBox,
             QTimeEdit,
+            QLabel
         ]
-        
+        TextEdit = QPlainTextEdit(widget)
+        TextEdit.setMinimumSize(300, 300)
+        layout.addWidget(TextEdit)
+        box = QDialogButtonBox()
+        box.setStandardButtons(QDialogButtonBox.StandardButton.LastButton)
+        layout.addWidget(box)
         for w in widgets:
             layout.addWidget(w())
         
-        widget = QWidget()
         widget.setLayout(layout)
         
         self.setCentralWidget(widget)

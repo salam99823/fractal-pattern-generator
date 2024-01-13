@@ -14,7 +14,7 @@
    <string>Fractal-Pattern-Generator</string>
   </property>
   <property name="windowIcon">
-      <iconset resource="icons/resources.qrc">
+      <iconset resource="rc_resorses/resources.qrc">
     <normaloff>:/icons/icons/icons8-python-240.png</normaloff>:/icons/icons/icons8-python-240.png</iconset>
   </property>
   <property name="toolButtonStyle">
@@ -28,12 +28,11 @@
    </layout>
   </widget>
   <widget class="QDockWidget" name="dock_Widget">
-   <property name="windowIcon">
-    <iconset>
-     <normaloff>:/icons/icons8-ящик-для-инструментов-240.png</normaloff>:/icons/icons8-ящик-для-инструментов-240.png</iconset>
-   </property>
    <property name="allowedAreas">
     <set>Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
+   </property>
+      <property name="windowTitle">
+          <string>Меню</string>
    </property>
    <attribute name="dockWidgetArea">
     <number>1</number>
@@ -133,9 +132,6 @@
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
           <widget class="QLineEdit" name="axiom">
-           <property name="text">
-            <string/>
-           </property>
            <property name="clearButtonEnabled">
             <bool>true</bool>
            </property>
@@ -146,6 +142,11 @@
            <property name="text">
             <string>...</string>
            </property>
+              <property name="icon">
+                  <iconset resource="rc_resorses/resources.qrc">
+                      <normaloff>:/icons/icons/icons8-edit-240.png</normaloff>:/icons/icons/icons8-edit-240.png
+                  </iconset>
+              </property>
           </widget>
          </item>
         </layout>
@@ -157,11 +158,14 @@
        <property name="title">
         <string>Правила</string>
        </property>
+          <property name="checkable">
+              <bool>true</bool>
+          </property>
        <layout class="QVBoxLayout" name="_3">
         <item>
          <widget class="MText_list_Widget" name="rules_list">
           <property name="contextMenuPolicy">
-           <enum>Qt::CustomContextMenu</enum>
+              <enum>Qt::ActionsContextMenu</enum>
           </property>
           <property name="dragDropMode">
            <enum>QAbstractItemView::InternalMove</enum>
@@ -176,11 +180,14 @@
        <property name="title">
         <string>Цвета</string>
        </property>
+          <property name="checkable">
+              <bool>true</bool>
+          </property>
        <layout class="QVBoxLayout" name="_2">
         <item>
          <widget class="MColor_list_Widget" name="colors_list">
           <property name="contextMenuPolicy">
-           <enum>Qt::CustomContextMenu</enum>
+              <enum>Qt::ActionsContextMenu</enum>
           </property>
           <property name="dragDropMode">
            <enum>QAbstractItemView::InternalMove</enum>
@@ -196,7 +203,7 @@
         <string>Старт</string>
        </property>
        <property name="icon">
-           <iconset resource="icons/resources.qrc">
+           <iconset resource="rc_resorses/resources.qrc">
          <normaloff>:/icons/icons/icons8-start-96.png</normaloff>:/icons/icons/icons8-start-96.png</iconset>
        </property>
        <property name="iconSize">
@@ -213,7 +220,7 @@
         <string>Стоп</string>
        </property>
        <property name="icon">
-           <iconset resource="icons/resources.qrc">
+           <iconset resource="rc_resorses/resources.qrc">
          <normaloff>:/icons/icons/icons8-stop-96.png</normaloff>:/icons/icons/icons8-stop-96.png</iconset>
        </property>
        <property name="iconSize">
@@ -230,7 +237,7 @@
         <string>Очистить</string>
        </property>
        <property name="icon">
-           <iconset resource="icons/resources.qrc">
+           <iconset resource="rc_resorses/resources.qrc">
          <normaloff>:/icons/icons/icons8-delete-240.png</normaloff>:/icons/icons/icons8-delete-240.png</iconset>
        </property>
        <property name="iconSize">
@@ -262,7 +269,7 @@
       <string>Недавно открытые</string>
      </property>
      <property name="icon">
-         <iconset resource="icons/resources.qrc">
+         <iconset resource="rc_resorses/resources.qrc">
        <normaloff>:/icons/icons/icons8-history-folder-96.png</normaloff>:/icons/icons/icons8-history-folder-96.png</iconset>
      </property>
     </widget>
@@ -302,7 +309,7 @@
   </widget>
   <action name="action_open_file">
    <property name="icon">
-       <iconset resource="icons/resources.qrc">
+       <iconset resource="rc_resorses/resources.qrc">
      <normaloff>:/icons/icons/icons8-opened-folder-240.png</normaloff>:/icons/icons/icons8-opened-folder-240.png</iconset>
    </property>
    <property name="text">
@@ -311,7 +318,7 @@
   </action>
   <action name="action_save_file">
    <property name="icon">
-       <iconset resource="icons/resources.qrc">
+       <iconset resource="rc_resorses/resources.qrc">
      <normaloff>:/icons/icons/icons8-save-96.png</normaloff>:/icons/icons/icons8-save-96.png</iconset>
    </property>
    <property name="text">
@@ -320,7 +327,7 @@
   </action>
   <action name="action_save_file_as">
    <property name="icon">
-       <iconset resource="icons/resources.qrc">
+       <iconset resource="rc_resorses/resources.qrc">
      <normaloff>:/icons/icons/icons8-save-as-96.png</normaloff>:/icons/icons/icons8-save-as-96.png</iconset>
    </property>
    <property name="text">
@@ -329,7 +336,7 @@
   </action>
   <action name="action_save_image">
    <property name="icon">
-       <iconset resource="icons/resources.qrc">
+       <iconset resource="rc_resorses/resources.qrc">
      <normaloff>:/icons/icons/icons8-файл-изображения-240.png</normaloff>:/icons/icons/icons8-файл-изображения-240.png</iconset>
    </property>
    <property name="text">
@@ -338,7 +345,7 @@
   </action>
   <action name="action_escape">
    <property name="icon">
-       <iconset resource="icons/resources.qrc">
+       <iconset resource="rc_resorses/resources.qrc">
      <normaloff>:/icons/icons/icons8-logout-96.png</normaloff>:/icons/icons/icons8-logout-96.png</iconset>
    </property>
    <property name="text">
@@ -350,7 +357,7 @@
   </action>
   <action name="action_about_Qt">
    <property name="icon">
-       <iconset resource="icons/resources.qrc">
+       <iconset resource="rc_resorses/resources.qrc">
      <normaloff>:/icons/icons/Qt_logo_neon_2022.svg.png</normaloff>:/icons/icons/Qt_logo_neon_2022.svg.png</iconset>
    </property>
    <property name="text">
@@ -362,7 +369,7 @@
   </action>
   <action name="action_new_file">
    <property name="icon">
-       <iconset resource="icons/resources.qrc">
+       <iconset resource="rc_resorses/resources.qrc">
      <normaloff>:/icons/icons/icons8-файл-240.png</normaloff>:/icons/icons/icons8-файл-240.png</iconset>
    </property>
    <property name="text">
@@ -371,7 +378,7 @@
   </action>
   <action name="action_new_file_2">
    <property name="icon">
-       <iconset resource="icons/resources.qrc">
+       <iconset resource="rc_resorses/resources.qrc">
      <normaloff>:/icons/icons/icons8-файл-240.png</normaloff>:/icons/icons/icons8-файл-240.png</iconset>
    </property>
    <property name="text">
@@ -383,7 +390,7 @@
   </action>
   <action name="action_open_file_2">
    <property name="icon">
-       <iconset resource="icons/resources.qrc">
+       <iconset resource="rc_resorses/resources.qrc">
      <normaloff>:/icons/icons/icons8-opened-folder-240.png</normaloff>:/icons/icons/icons8-opened-folder-240.png</iconset>
    </property>
    <property name="text">
@@ -398,7 +405,7 @@
   </action>
   <action name="action_save_file_2">
    <property name="icon">
-       <iconset resource="icons/resources.qrc">
+       <iconset resource="rc_resorses/resources.qrc">
      <normaloff>:/icons/icons/icons8-save-96.png</normaloff>:/icons/icons/icons8-save-96.png</iconset>
    </property>
    <property name="text">
@@ -410,7 +417,7 @@
   </action>
   <action name="action_about_program">
    <property name="icon">
-       <iconset resource="icons/resources.qrc">
+       <iconset resource="rc_resorses/resources.qrc">
      <normaloff>:/icons/icons/icons8-info-240.png</normaloff>:/icons/icons/icons8-info-240.png</iconset>
    </property>
    <property name="text">
@@ -437,7 +444,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-     <include location="icons/resources.qrc"/>
+     <include location="rc_resorses/resources.qrc"/>
  </resources>
  <connections/>
 </ui>
