@@ -19,7 +19,6 @@ class Main_window(QMainWindow):
     def __init__(self):
         super().__init__()
         self.Ui().setupUi(self)
-        print(self.actions())
     
     def tst(self):
         dial = QDialog(self)
