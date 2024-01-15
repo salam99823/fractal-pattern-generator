@@ -1,3 +1,3 @@
-import MWidgets.uis.rc_resorses.rc_resources
+import MWidgets.uis.resources_rc
 
-MWidgets.uis.rc_resorses.rc_resources.qInitResources()
+MWidgets.uis.resources_rc.qInitResources()

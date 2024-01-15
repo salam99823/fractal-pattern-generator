@@ -6,15 +6,14 @@ import sys
 from PySide6.QtWidgets import QApplication, QDialog, QMainWindow
 
 from MWidgets.uis.mainwindow import Ui_MainWindow
-from MWidgets.uis.rc_resorses import rc_resources
 
 
-class Main_window(QMainWindow):
+class MainWindow(QMainWindow):
     class Ui(Ui_MainWindow):
-        def setupUi(self, MainWindow):
-            super().setupUi(MainWindow)
+        def setupUi(self, main_window):
+            super().setupUi(main_window)
             self.action_about_Qt.triggered.connect(QApplication.aboutQt)
-            self.action_about_program.triggered.connect(MainWindow.tst)
+            self.action_about_program.triggered.connect(main_window.tst)
     
     def __init__(self):
         super().__init__()
@@ -29,14 +28,11 @@ class Main_window(QMainWindow):
 def main():
     app = QApplication(sys.argv)
     app.setStyle('fusion')
-    win = Main_window()
+    win = MainWindow()
     win.show()
     print(app.arguments())
     app.exec()
 
 
 if __name__ == '__main__':
-    try:
-        main()
-    finally:
-        rc_resources.qCleanupResources()
+    main()

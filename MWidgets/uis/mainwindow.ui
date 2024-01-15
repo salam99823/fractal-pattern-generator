@@ -6,19 +6,17 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>968</width>
-    <height>748</height>
+    <width>678</width>
+    <height>842</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Fractal-Pattern-Generator</string>
   </property>
   <property name="windowIcon">
-      <iconset resource="rc_resorses/resources.qrc">
-    <normaloff>:/icons/icons/icons8-python-240.png</normaloff>:/icons/icons/icons8-python-240.png</iconset>
-  </property>
-  <property name="toolButtonStyle">
-   <enum>Qt::ToolButtonTextUnderIcon</enum>
+   <iconset resource="resources.qrc">
+    <normaloff>:/FPGresources/iconsQt/Qt_logo_2022.png</normaloff>:/FPGresources/iconsQt/Qt_logo_2022.png
+   </iconset>
   </property>
   <widget class="QWidget" name="central_widget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -31,8 +29,8 @@
    <property name="allowedAreas">
     <set>Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
    </property>
-      <property name="windowTitle">
-          <string>Меню</string>
+   <property name="windowTitle">
+    <string>Меню</string>
    </property>
    <attribute name="dockWidgetArea">
     <number>1</number>
@@ -142,11 +140,6 @@
            <property name="text">
             <string>...</string>
            </property>
-              <property name="icon">
-                  <iconset resource="rc_resorses/resources.qrc">
-                      <normaloff>:/icons/icons/icons8-edit-240.png</normaloff>:/icons/icons/icons8-edit-240.png
-                  </iconset>
-              </property>
           </widget>
          </item>
         </layout>
@@ -158,14 +151,11 @@
        <property name="title">
         <string>Правила</string>
        </property>
-          <property name="checkable">
-              <bool>true</bool>
-          </property>
        <layout class="QVBoxLayout" name="_3">
         <item>
          <widget class="MText_list_Widget" name="rules_list">
           <property name="contextMenuPolicy">
-              <enum>Qt::ActionsContextMenu</enum>
+           <enum>Qt::ActionsContextMenu</enum>
           </property>
           <property name="dragDropMode">
            <enum>QAbstractItemView::InternalMove</enum>
@@ -180,14 +170,11 @@
        <property name="title">
         <string>Цвета</string>
        </property>
-          <property name="checkable">
-              <bool>true</bool>
-          </property>
        <layout class="QVBoxLayout" name="_2">
         <item>
          <widget class="MColor_list_Widget" name="colors_list">
           <property name="contextMenuPolicy">
-              <enum>Qt::ActionsContextMenu</enum>
+           <enum>Qt::ActionsContextMenu</enum>
           </property>
           <property name="dragDropMode">
            <enum>QAbstractItemView::InternalMove</enum>
@@ -203,8 +190,9 @@
         <string>Старт</string>
        </property>
        <property name="icon">
-           <iconset resource="rc_resorses/resources.qrc">
-         <normaloff>:/icons/icons/icons8-start-96.png</normaloff>:/icons/icons/icons8-start-96.png</iconset>
+        <iconset resource="resources.qrc">
+         <normaloff>:/FPGresources/icons48/icons8-start.png</normaloff>:/FPGresources/icons48/icons8-start.png
+        </iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -220,8 +208,9 @@
         <string>Стоп</string>
        </property>
        <property name="icon">
-           <iconset resource="rc_resorses/resources.qrc">
-         <normaloff>:/icons/icons/icons8-stop-96.png</normaloff>:/icons/icons/icons8-stop-96.png</iconset>
+        <iconset resource="resources.qrc">
+         <normaloff>:/FPGresources/icons48/icons8-stop.png</normaloff>:/FPGresources/icons48/icons8-stop.png
+        </iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -237,8 +226,9 @@
         <string>Очистить</string>
        </property>
        <property name="icon">
-           <iconset resource="rc_resorses/resources.qrc">
-         <normaloff>:/icons/icons/icons8-delete-240.png</normaloff>:/icons/icons/icons8-delete-240.png</iconset>
+        <iconset resource="resources.qrc">
+         <normaloff>:/FPGresources/icons48/icons8-clean.png</normaloff>:/FPGresources/icons48/icons8-clean.png
+        </iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -256,7 +246,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>968</width>
+     <width>678</width>
      <height>22</height>
     </rect>
    </property>
@@ -269,8 +259,10 @@
       <string>Недавно открытые</string>
      </property>
      <property name="icon">
-         <iconset resource="rc_resorses/resources.qrc">
-       <normaloff>:/icons/icons/icons8-history-folder-96.png</normaloff>:/icons/icons/icons8-history-folder-96.png</iconset>
+      <iconset resource="resources.qrc">
+       <normaloff>:/FPGresources/icons96/icons8-history-folder.png</normaloff>
+       :/FPGresources/icons96/icons8-history-folder.png
+      </iconset>
      </property>
     </widget>
     <addaction name="action_new_file"/>
@@ -293,9 +285,9 @@
    <addaction name="file_menu"/>
    <addaction name="about_menu"/>
   </widget>
-  <widget class="QToolBar" name="tool_Bar">
+  <widget class="QToolBar" name="file_tools">
    <property name="windowTitle">
-    <string>toolBar</string>
+    <string>file_tools</string>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
@@ -307,10 +299,57 @@
    <addaction name="action_open_file_2"/>
    <addaction name="action_save_file_2"/>
   </widget>
+  <widget class="QToolBar" name="canvas_tools">
+   <property name="windowTitle">
+    <string>canvas_tools</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="action_zoom_in"/>
+   <addaction name="action_zoom_out"/>
+   <addaction name="action_reset_zoom_to_actual_size"/>
+  </widget>
+  <action name="action_zoom_in">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/FPGresources/icons48/icons8-zoom-in.png</normaloff>:/FPGresources/icons48/icons8-zoom-in.png
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Приблизить</string>
+   </property>
+  </action>
+  <action name="action_zoom_out">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/FPGresources/icons48/icons8-zoom-out.png</normaloff>:/FPGresources/icons48/icons8-zoom-out.png
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Отдалить</string>
+   </property>
+  </action>
+  <action name="action_reset_zoom_to_actual_size">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/FPGresources/icons48/icons8-zoom-to-actual-size.png</normaloff>
+     :/FPGresources/icons48/icons8-zoom-to-actual-size.png
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Масштабирование до фактического размера</string>
+   </property>
+  </action>
   <action name="action_open_file">
    <property name="icon">
-       <iconset resource="rc_resorses/resources.qrc">
-     <normaloff>:/icons/icons/icons8-opened-folder-240.png</normaloff>:/icons/icons/icons8-opened-folder-240.png</iconset>
+    <iconset resource="resources.qrc">
+     <normaloff>:/FPGresources/icons48/icons8-opened-folder.png</normaloff>
+     :/FPGresources/icons48/icons8-opened-folder.png
+    </iconset>
    </property>
    <property name="text">
     <string>Открыть</string>
@@ -318,8 +357,9 @@
   </action>
   <action name="action_save_file">
    <property name="icon">
-       <iconset resource="rc_resorses/resources.qrc">
-     <normaloff>:/icons/icons/icons8-save-96.png</normaloff>:/icons/icons/icons8-save-96.png</iconset>
+    <iconset resource="resources.qrc">
+     <normaloff>:/FPGresources/icons48/icons8-save-as.png</normaloff>:/FPGresources/icons48/icons8-save-as.png
+    </iconset>
    </property>
    <property name="text">
     <string>Сохранить</string>
@@ -327,8 +367,9 @@
   </action>
   <action name="action_save_file_as">
    <property name="icon">
-       <iconset resource="rc_resorses/resources.qrc">
-     <normaloff>:/icons/icons/icons8-save-as-96.png</normaloff>:/icons/icons/icons8-save-as-96.png</iconset>
+    <iconset resource="resources.qrc">
+     <normaloff>:/FPGresources/icons48/icons8-save-as.png</normaloff>:/FPGresources/icons48/icons8-save-as.png
+    </iconset>
    </property>
    <property name="text">
     <string>Сохранить как...</string>
@@ -336,8 +377,9 @@
   </action>
   <action name="action_save_image">
    <property name="icon">
-       <iconset resource="rc_resorses/resources.qrc">
-     <normaloff>:/icons/icons/icons8-файл-изображения-240.png</normaloff>:/icons/icons/icons8-файл-изображения-240.png</iconset>
+    <iconset resource="resources.qrc">
+     <normaloff>:/FPGresources/icons48/icons8-image.png</normaloff>:/FPGresources/icons48/icons8-image.png
+    </iconset>
    </property>
    <property name="text">
     <string>Сохрнить изображение</string>
@@ -345,8 +387,9 @@
   </action>
   <action name="action_escape">
    <property name="icon">
-       <iconset resource="rc_resorses/resources.qrc">
-     <normaloff>:/icons/icons/icons8-logout-96.png</normaloff>:/icons/icons/icons8-logout-96.png</iconset>
+    <iconset resource="resources.qrc">
+     <normaloff>:/FPGresources/icons48/icons8-logout.png</normaloff>:/FPGresources/icons48/icons8-logout.png
+    </iconset>
    </property>
    <property name="text">
     <string>Выход</string>
@@ -357,8 +400,9 @@
   </action>
   <action name="action_about_Qt">
    <property name="icon">
-       <iconset resource="rc_resorses/resources.qrc">
-     <normaloff>:/icons/icons/Qt_logo_neon_2022.svg.png</normaloff>:/icons/icons/Qt_logo_neon_2022.svg.png</iconset>
+    <iconset resource="resources.qrc">
+     <normaloff>:/FPGresources/iconsQt/Qt_logo_2022.png</normaloff>:/FPGresources/iconsQt/Qt_logo_2022.png
+    </iconset>
    </property>
    <property name="text">
     <string>О Qt</string>
@@ -369,8 +413,9 @@
   </action>
   <action name="action_new_file">
    <property name="icon">
-       <iconset resource="rc_resorses/resources.qrc">
-     <normaloff>:/icons/icons/icons8-файл-240.png</normaloff>:/icons/icons/icons8-файл-240.png</iconset>
+    <iconset resource="resources.qrc">
+     <normaloff>:/FPGresources/icons48/icons8-add-file.png</normaloff>:/FPGresources/icons48/icons8-add-file.png
+    </iconset>
    </property>
    <property name="text">
     <string>Новый</string>
@@ -378,8 +423,9 @@
   </action>
   <action name="action_new_file_2">
    <property name="icon">
-       <iconset resource="rc_resorses/resources.qrc">
-     <normaloff>:/icons/icons/icons8-файл-240.png</normaloff>:/icons/icons/icons8-файл-240.png</iconset>
+    <iconset resource="resources.qrc">
+     <normaloff>:/FPGresources/icons48/icons8-add-file.png</normaloff>:/FPGresources/icons48/icons8-add-file.png
+    </iconset>
    </property>
    <property name="text">
     <string>Новый файл</string>
@@ -390,8 +436,10 @@
   </action>
   <action name="action_open_file_2">
    <property name="icon">
-       <iconset resource="rc_resorses/resources.qrc">
-     <normaloff>:/icons/icons/icons8-opened-folder-240.png</normaloff>:/icons/icons/icons8-opened-folder-240.png</iconset>
+    <iconset resource="resources.qrc">
+     <normaloff>:/FPGresources/icons240/icons8-opened-folder-240.png</normaloff>
+     :/FPGresources/icons240/icons8-opened-folder-240.png
+    </iconset>
    </property>
    <property name="text">
     <string>Открыть файл</string>
@@ -405,8 +453,9 @@
   </action>
   <action name="action_save_file_2">
    <property name="icon">
-       <iconset resource="rc_resorses/resources.qrc">
-     <normaloff>:/icons/icons/icons8-save-96.png</normaloff>:/icons/icons/icons8-save-96.png</iconset>
+    <iconset resource="resources.qrc">
+     <normaloff>:/FPGresources/icons48/icons8-save.png</normaloff>:/FPGresources/icons48/icons8-save.png
+    </iconset>
    </property>
    <property name="text">
     <string>Сохранить</string>
@@ -417,8 +466,9 @@
   </action>
   <action name="action_about_program">
    <property name="icon">
-       <iconset resource="rc_resorses/resources.qrc">
-     <normaloff>:/icons/icons/icons8-info-240.png</normaloff>:/icons/icons/icons8-info-240.png</iconset>
+    <iconset resource="resources.qrc">
+     <normaloff>:/FPGresources/icons48/icons8-info.png</normaloff>:/FPGresources/icons48/icons8-info.png
+    </iconset>
    </property>
    <property name="text">
     <string>О программе</string>
@@ -430,21 +480,15 @@
    <class>MText_list_Widget</class>
    <extends>QListWidget</extends>
    <header>MWidgets.MList_Widgets.MText_list_Widget</header>
-   <slots>
-    <slot>show_menu(QPoint)</slot>
-   </slots>
   </customwidget>
   <customwidget>
    <class>MColor_list_Widget</class>
    <extends>QListWidget</extends>
    <header>MWidgets.MList_Widgets.MColor_list_Widget</header>
-   <slots>
-    <slot>show_menu(QPoint)</slot>
-   </slots>
   </customwidget>
  </customwidgets>
  <resources>
-     <include location="rc_resorses/resources.qrc"/>
+  <include location="resources.qrc"/>
  </resources>
  <connections/>
 </ui>

@@ -1,13 +1,12 @@
 import sys
 
+import MWidgets.resources.resources_rc
 from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QDateEdit, QDateTimeEdit, QDial, QDialogButtonBox,
                                QDoubleSpinBox, QFontComboBox, QLabel, QLineEdit, QMainWindow, QPlainTextEdit,
                                QProgressBar, QPushButton, QRadioButton, QSlider, QSpinBox, QTimeEdit, QVBoxLayout,
                                QWidget)
 
-import MWidgets.uis.rc_resorses.rc_resources
-
-MWidgets.uis.rc_resorses.rc_resources.qInitResources()
+MWidgets.uis.resources_rc.qInitResources()
 
 sys.argv += ['-platform', 'windows']
 
