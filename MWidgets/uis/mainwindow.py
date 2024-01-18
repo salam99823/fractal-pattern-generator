@@ -1,4 +1,3 @@
-"""
 # -*- coding: utf-8 -*-
 
 ################################################################################
@@ -8,7 +7,7 @@
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
-"""
+
 from PySide6.QtCore import (QCoreApplication, QMetaObject, QRect,
                             QSize, Qt)
 from PySide6.QtGui import (QAction, QIcon)
@@ -26,9 +25,8 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(678, 842)
         icon = QIcon()
-        icon.addFile(u":/FPGresources/iconsQt/Qt_logo_2022.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u":/FPGresources/icons240/icons8-python.png", QSize(), QIcon.Normal, QIcon.Off)
         MainWindow.setWindowIcon(icon)
         self.action_zoom_in = QAction(MainWindow)
         self.action_zoom_in.setObjectName(u"action_zoom_in")
@@ -71,32 +69,34 @@ class Ui_MainWindow(object):
         self.action_escape.setMenuRole(QAction.QuitRole)
         self.action_about_Qt = QAction(MainWindow)
         self.action_about_Qt.setObjectName(u"action_about_Qt")
-        self.action_about_Qt.setIcon(icon)
+        icon8 = QIcon()
+        icon8.addFile(u":/FPGresources/iconsQt/Qt_logo_2022.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.action_about_Qt.setIcon(icon8)
         self.action_about_Qt.setMenuRole(QAction.AboutQtRole)
         self.action_new_file = QAction(MainWindow)
         self.action_new_file.setObjectName(u"action_new_file")
-        icon8 = QIcon()
-        icon8.addFile(u":/FPGresources/icons48/icons8-add-file.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.action_new_file.setIcon(icon8)
+        icon9 = QIcon()
+        icon9.addFile(u":/FPGresources/icons48/icons8-add-file.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.action_new_file.setIcon(icon9)
         self.action_new_file_2 = QAction(MainWindow)
         self.action_new_file_2.setObjectName(u"action_new_file_2")
-        self.action_new_file_2.setIcon(icon8)
+        self.action_new_file_2.setIcon(icon9)
         self.action_open_file_2 = QAction(MainWindow)
         self.action_open_file_2.setObjectName(u"action_open_file_2")
-        icon9 = QIcon()
-        icon9.addFile(u":/FPGresources/icons240/icons8-opened-folder-240.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.action_open_file_2.setIcon(icon9)
+        icon10 = QIcon()
+        icon10.addFile(u":/FPGresources/icons240/icons8-opened-folder-240.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.action_open_file_2.setIcon(icon10)
         self.action_open_file_2.setMenuRole(QAction.TextHeuristicRole)
         self.action_save_file_2 = QAction(MainWindow)
         self.action_save_file_2.setObjectName(u"action_save_file_2")
-        icon10 = QIcon()
-        icon10.addFile(u":/FPGresources/icons48/icons8-save.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.action_save_file_2.setIcon(icon10)
+        icon11 = QIcon()
+        icon11.addFile(u":/FPGresources/icons48/icons8-save.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.action_save_file_2.setIcon(icon11)
         self.action_about_program = QAction(MainWindow)
         self.action_about_program.setObjectName(u"action_about_program")
-        icon11 = QIcon()
-        icon11.addFile(u":/FPGresources/icons48/icons8-info.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.action_about_program.setIcon(icon11)
+        icon12 = QIcon()
+        icon12.addFile(u":/FPGresources/icons48/icons8-info.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.action_about_program.setIcon(icon12)
         self.central_widget = QWidget(MainWindow)
         self.central_widget.setObjectName(u"central_widget")
         self.verticalLayout = QVBoxLayout(self.central_widget)
@@ -231,27 +231,27 @@ class Ui_MainWindow(object):
         
         self.start_button = QPushButton(self.dock_Widget_Contents)
         self.start_button.setObjectName(u"start_button")
-        icon12 = QIcon()
-        icon12.addFile(u":/FPGresources/icons48/icons8-start.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.start_button.setIcon(icon12)
+        icon13 = QIcon()
+        icon13.addFile(u":/FPGresources/icons48/icons8-start.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.start_button.setIcon(icon13)
         self.start_button.setIconSize(QSize(24, 24))
         
         self.verticalLayout_2.addWidget(self.start_button)
         
         self.stop_button = QPushButton(self.dock_Widget_Contents)
         self.stop_button.setObjectName(u"stop_button")
-        icon13 = QIcon()
-        icon13.addFile(u":/FPGresources/icons48/icons8-stop.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.stop_button.setIcon(icon13)
+        icon14 = QIcon()
+        icon14.addFile(u":/FPGresources/icons48/icons8-stop.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.stop_button.setIcon(icon14)
         self.stop_button.setIconSize(QSize(24, 24))
         
         self.verticalLayout_2.addWidget(self.stop_button)
         
         self.clear_button = QPushButton(self.dock_Widget_Contents)
         self.clear_button.setObjectName(u"clear_button")
-        icon14 = QIcon()
-        icon14.addFile(u":/FPGresources/icons48/icons8-clean.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.clear_button.setIcon(icon14)
+        icon15 = QIcon()
+        icon15.addFile(u":/FPGresources/icons48/icons8-clean.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.clear_button.setIcon(icon15)
         self.clear_button.setIconSize(QSize(24, 24))
         
         self.verticalLayout_2.addWidget(self.clear_button)
@@ -260,14 +260,14 @@ class Ui_MainWindow(object):
         MainWindow.addDockWidget(Qt.LeftDockWidgetArea, self.dock_Widget)
         self.menuBar = QMenuBar(MainWindow)
         self.menuBar.setObjectName(u"menuBar")
-        self.menuBar.setGeometry(QRect(0, 0, 678, 22))
+        self.menuBar.setGeometry(QRect(0, 0, 580, 22))
         self.file_menu = QMenu(self.menuBar)
         self.file_menu.setObjectName(u"file_menu")
         self.menu_3 = QMenu(self.file_menu)
         self.menu_3.setObjectName(u"menu_3")
-        icon15 = QIcon()
-        icon15.addFile(u":/FPGresources/icons96/icons8-history-folder.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.menu_3.setIcon(icon15)
+        icon16 = QIcon()
+        icon16.addFile(u":/FPGresources/icons96/icons8-history-folder.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.menu_3.setIcon(icon16)
         self.about_menu = QMenu(self.menuBar)
         self.about_menu.setObjectName(u"about_menu")
         MainWindow.setMenuBar(self.menuBar)
@@ -326,8 +326,8 @@ class Ui_MainWindow(object):
         )
         self.action_save_file.setText(
                 QCoreApplication.translate(
-                        "MainWindow", u"\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c", None
-                )
+                    "MainWindow", u"\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c", None
+                    )
         )
         self.action_save_file_as.setText(
                 QCoreApplication.translate(
@@ -347,14 +347,14 @@ class Ui_MainWindow(object):
         self.action_new_file.setText(QCoreApplication.translate("MainWindow", u"\u041d\u043e\u0432\u044b\u0439", None))
         self.action_new_file_2.setText(
                 QCoreApplication.translate(
-                        "MainWindow", u"\u041d\u043e\u0432\u044b\u0439 \u0444\u0430\u0439\u043b", None
-                )
+                    "MainWindow", u"\u041d\u043e\u0432\u044b\u0439 \u0444\u0430\u0439\u043b", None
+                    )
         )
         #if QT_CONFIG(tooltip)
         self.action_new_file_2.setToolTip(
                 QCoreApplication.translate(
-                        "MainWindow", u"\u041d\u043e\u0432\u044b\u0439 \u0444\u0430\u0439\u043b", None
-                )
+                    "MainWindow", u"\u041d\u043e\u0432\u044b\u0439 \u0444\u0430\u0439\u043b", None
+                    )
         )
         #endif // QT_CONFIG(tooltip)
         self.action_open_file_2.setText(
@@ -371,14 +371,14 @@ class Ui_MainWindow(object):
         #endif // QT_CONFIG(tooltip)
         self.action_save_file_2.setText(
                 QCoreApplication.translate(
-                        "MainWindow", u"\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c", None
-                )
+                    "MainWindow", u"\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c", None
+                    )
         )
         #if QT_CONFIG(tooltip)
         self.action_save_file_2.setToolTip(
                 QCoreApplication.translate(
-                        "MainWindow", u"\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c", None
-                )
+                    "MainWindow", u"\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c", None
+                    )
         )
         #endif // QT_CONFIG(tooltip)
         self.action_about_program.setText(

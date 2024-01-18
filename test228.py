@@ -1,13 +1,12 @@
 import sys
 
-from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QDateEdit, QDateTimeEdit, QDial, QDialogButtonBox,
-                               QDoubleSpinBox, QFontComboBox, QLabel, QLineEdit, QMainWindow, QPlainTextEdit,
+from PySide6.QtGui import Qt
+from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QDateEdit, QDateTimeEdit, QDial, QDoubleSpinBox,
+                               QFontComboBox, QLabel, QLineEdit, QMainWindow, QPlainTextEdit,
                                QProgressBar, QPushButton, QRadioButton, QSlider, QSpinBox, QTimeEdit, QVBoxLayout,
                                QWidget)
 
-import MWidgets.uis.resources_rc
-
-MWidgets.uis.resources_rc.qInitResources()
+from MWidgets.MList_Widgets.MColor_list_Widget import MColor_list_Widget
 
 sys.argv += ['-platform', 'windows']
 
@@ -58,8 +57,8 @@ QPlainTextEdit {
         TextEdit = QPlainTextEdit(widget)
         TextEdit.setMinimumSize(300, 300)
         layout.addWidget(TextEdit)
-        box = QDialogButtonBox()
-        box.setStandardButtons(QDialogButtonBox.StandardButton.LastButton)
+        box = MColor_list_Widget()
+        box.setContextMenuPolicy(Qt.ContextMenuPolicy.ActionsContextMenu)
         layout.addWidget(box)
         for w in widgets:
             layout.addWidget(w())

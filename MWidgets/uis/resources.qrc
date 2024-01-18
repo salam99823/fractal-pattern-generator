@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="FPGresources">
+        <file>icons240/icons8-python.png</file>
         <file>icons240/icons8-opened-folder-240.png</file>
         <file>icons96/icons8-(square)close.png</file>
         <file>icons96/icons8-(X)close.png</file>

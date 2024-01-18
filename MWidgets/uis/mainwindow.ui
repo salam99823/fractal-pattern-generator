@@ -2,20 +2,12 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>678</width>
-    <height>842</height>
-   </rect>
-  </property>
   <property name="windowTitle">
    <string>Fractal-Pattern-Generator</string>
   </property>
   <property name="windowIcon">
    <iconset resource="resources.qrc">
-    <normaloff>:/FPGresources/iconsQt/Qt_logo_2022.png</normaloff>:/FPGresources/iconsQt/Qt_logo_2022.png
+       <normaloff>:/FPGresources/icons240/icons8-python.png</normaloff>:/FPGresources/icons240/icons8-python.png
    </iconset>
   </property>
   <widget class="QWidget" name="central_widget">
@@ -191,7 +183,7 @@
        </property>
        <property name="icon">
         <iconset resource="resources.qrc">
-         <normaloff>:/FPGresources/icons48/icons8-start.png</normaloff>:/FPGresources/icons48/icons8-start.png
+            <normaloff>:/FPGresources/icons48/icons8-start.png</normaloff>:/FPGresources/icons48/icons8-start.png
         </iconset>
        </property>
        <property name="iconSize">
@@ -209,7 +201,7 @@
        </property>
        <property name="icon">
         <iconset resource="resources.qrc">
-         <normaloff>:/FPGresources/icons48/icons8-stop.png</normaloff>:/FPGresources/icons48/icons8-stop.png
+            <normaloff>:/FPGresources/icons48/icons8-stop.png</normaloff>:/FPGresources/icons48/icons8-stop.png
         </iconset>
        </property>
        <property name="iconSize">
@@ -227,7 +219,7 @@
        </property>
        <property name="icon">
         <iconset resource="resources.qrc">
-         <normaloff>:/FPGresources/icons48/icons8-clean.png</normaloff>:/FPGresources/icons48/icons8-clean.png
+            <normaloff>:/FPGresources/icons48/icons8-clean.png</normaloff>:/FPGresources/icons48/icons8-clean.png
         </iconset>
        </property>
        <property name="iconSize">
@@ -246,7 +238,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>678</width>
+        <width>580</width>
      <height>22</height>
     </rect>
    </property>
@@ -260,8 +252,8 @@
      </property>
      <property name="icon">
       <iconset resource="resources.qrc">
-       <normaloff>:/FPGresources/icons96/icons8-history-folder.png</normaloff>
-       :/FPGresources/icons96/icons8-history-folder.png
+          <normaloff>:/FPGresources/icons96/icons8-history-folder.png</normaloff>
+          :/FPGresources/icons96/icons8-history-folder.png
       </iconset>
      </property>
     </widget>
@@ -316,7 +308,7 @@
   <action name="action_zoom_in">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/FPGresources/icons48/icons8-zoom-in.png</normaloff>:/FPGresources/icons48/icons8-zoom-in.png
+        <normaloff>:/FPGresources/icons48/icons8-zoom-in.png</normaloff>:/FPGresources/icons48/icons8-zoom-in.png
     </iconset>
    </property>
    <property name="text">
@@ -326,7 +318,7 @@
   <action name="action_zoom_out">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/FPGresources/icons48/icons8-zoom-out.png</normaloff>:/FPGresources/icons48/icons8-zoom-out.png
+        <normaloff>:/FPGresources/icons48/icons8-zoom-out.png</normaloff>:/FPGresources/icons48/icons8-zoom-out.png
     </iconset>
    </property>
    <property name="text">
@@ -336,8 +328,8 @@
   <action name="action_reset_zoom_to_actual_size">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/FPGresources/icons48/icons8-zoom-to-actual-size.png</normaloff>
-     :/FPGresources/icons48/icons8-zoom-to-actual-size.png
+        <normaloff>:/FPGresources/icons48/icons8-zoom-to-actual-size.png</normaloff>
+        :/FPGresources/icons48/icons8-zoom-to-actual-size.png
     </iconset>
    </property>
    <property name="text">
@@ -347,8 +339,8 @@
   <action name="action_open_file">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/FPGresources/icons48/icons8-opened-folder.png</normaloff>
-     :/FPGresources/icons48/icons8-opened-folder.png
+        <normaloff>:/FPGresources/icons48/icons8-opened-folder.png</normaloff>
+        :/FPGresources/icons48/icons8-opened-folder.png
     </iconset>
    </property>
    <property name="text">
@@ -358,7 +350,7 @@
   <action name="action_save_file">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/FPGresources/icons48/icons8-save-as.png</normaloff>:/FPGresources/icons48/icons8-save-as.png
+        <normaloff>:/FPGresources/icons48/icons8-save-as.png</normaloff>:/FPGresources/icons48/icons8-save-as.png
     </iconset>
    </property>
    <property name="text">
@@ -368,7 +360,7 @@
   <action name="action_save_file_as">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/FPGresources/icons48/icons8-save-as.png</normaloff>:/FPGresources/icons48/icons8-save-as.png
+        <normaloff>:/FPGresources/icons48/icons8-save-as.png</normaloff>:/FPGresources/icons48/icons8-save-as.png
     </iconset>
    </property>
    <property name="text">
@@ -378,7 +370,7 @@
   <action name="action_save_image">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/FPGresources/icons48/icons8-image.png</normaloff>:/FPGresources/icons48/icons8-image.png
+        <normaloff>:/FPGresources/icons48/icons8-image.png</normaloff>:/FPGresources/icons48/icons8-image.png
     </iconset>
    </property>
    <property name="text">
@@ -388,7 +380,7 @@
   <action name="action_escape">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/FPGresources/icons48/icons8-logout.png</normaloff>:/FPGresources/icons48/icons8-logout.png
+        <normaloff>:/FPGresources/icons48/icons8-logout.png</normaloff>:/FPGresources/icons48/icons8-logout.png
     </iconset>
    </property>
    <property name="text">
@@ -401,7 +393,7 @@
   <action name="action_about_Qt">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/FPGresources/iconsQt/Qt_logo_2022.png</normaloff>:/FPGresources/iconsQt/Qt_logo_2022.png
+        <normaloff>:/FPGresources/iconsQt/Qt_logo_2022.png</normaloff>:/FPGresources/iconsQt/Qt_logo_2022.png
     </iconset>
    </property>
    <property name="text">
@@ -414,7 +406,7 @@
   <action name="action_new_file">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/FPGresources/icons48/icons8-add-file.png</normaloff>:/FPGresources/icons48/icons8-add-file.png
+        <normaloff>:/FPGresources/icons48/icons8-add-file.png</normaloff>:/FPGresources/icons48/icons8-add-file.png
     </iconset>
    </property>
    <property name="text">
@@ -424,7 +416,7 @@
   <action name="action_new_file_2">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/FPGresources/icons48/icons8-add-file.png</normaloff>:/FPGresources/icons48/icons8-add-file.png
+        <normaloff>:/FPGresources/icons48/icons8-add-file.png</normaloff>:/FPGresources/icons48/icons8-add-file.png
     </iconset>
    </property>
    <property name="text">
@@ -437,8 +429,8 @@
   <action name="action_open_file_2">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/FPGresources/icons240/icons8-opened-folder-240.png</normaloff>
-     :/FPGresources/icons240/icons8-opened-folder-240.png
+        <normaloff>:/FPGresources/icons240/icons8-opened-folder-240.png</normaloff>
+        :/FPGresources/icons240/icons8-opened-folder-240.png
     </iconset>
    </property>
    <property name="text">
@@ -454,7 +446,7 @@
   <action name="action_save_file_2">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/FPGresources/icons48/icons8-save.png</normaloff>:/FPGresources/icons48/icons8-save.png
+        <normaloff>:/FPGresources/icons48/icons8-save.png</normaloff>:/FPGresources/icons48/icons8-save.png
     </iconset>
    </property>
    <property name="text">
@@ -467,7 +459,7 @@
   <action name="action_about_program">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/FPGresources/icons48/icons8-info.png</normaloff>:/FPGresources/icons48/icons8-info.png
+        <normaloff>:/FPGresources/icons48/icons8-info.png</normaloff>:/FPGresources/icons48/icons8-info.png
     </iconset>
    </property>
    <property name="text">

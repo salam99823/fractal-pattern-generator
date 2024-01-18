@@ -10,22 +10,22 @@ class Modified_list_widget(QListWidget):
     def __init__(self, parent: QWidget | None = None):
         super().__init__(parent)
         self.addAction(
-                QIcon(':/icons/icons/icons8-add-96.png'), "Добавить", self.addItem
+                QIcon(':/FPGresources/icons96/icons8-add.png'), "Добавить", self.addItem
         )
         self.addAction(
-                QIcon(':/icons/icons/icons8-edit-240.png'), "Изменить", self.edit_current_item
+                QIcon(':/FPGresources/icons96/icons8-edit.png'), "Изменить", self.edit_current_item
         )
         self.addAction(
-                QIcon(':/icons/icons/icons8-thick-arrow-pointing-up-96.png'), "Вверх", self.raise_item
+                QIcon(':/FPGresources/icons96/icons8-thick-arrow-pointing-up.png'), "Вверх", self.raise_item
         )
         self.addAction(
-                QIcon(':/icons/icons/icons8-down-96.png'), "Вниз", self.omit_item
+                QIcon(':/FPGresources/icons96/icons8-thick-arrow-pointing-down.png'), "Вниз", self.omit_item
         )
         self.addAction(
-                QIcon(':/icons/icons/icons8-close-96.png'), "Удалить", self.take_current_item
+                QIcon(':/FPGresources/icons96/icons8-eraser-tool.png'), "Удалить", self.take_current_item
         )
         self.addAction(
-                QIcon(':/icons/icons/icons8-delete-240.png'), "Очистить", self.clear
+                QIcon(':/FPGresources/icons96/icons8-delete.png'), "Очистить", self.clear
         )
     
     def addItem(self, item: QListWidgetItem | str):
