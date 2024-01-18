@@ -1,26 +1,7 @@
-from PySide6.QtGui import QColor, QIcon, QPainter, QPen, QPixmap, QRgba64, Qt
+from PySide6.QtGui import QColor, QIcon, QPainter, QPen, QPixmap
 from PySide6.QtWidgets import QColorDialog
 
 from .Modified_list_widget import Modified_list_widget, QListWidgetItem, QWidget
-
-
-class MColorDialog(QColorDialog):
-    def __init__(
-            self,
-            initial: QColor | QRgba64 | Qt.GlobalColor | str | int = None,
-            parent: QWidget | None = None,
-            icon: QIcon | QPixmap = None,
-            title: str = None,
-    ):
-        super().__init__(initial, parent)
-        if title is not None:
-            self.setWindowTitle(title)
-        if icon is not None:
-            self.setWindowIcon(icon)
-    
-    def get_color(self) -> tuple[QColor, bool]:
-        result = bool(self.exec())
-        return self.selectedColor(), result
 
 
 class MColor_list_Widget(Modified_list_widget):
@@ -36,12 +17,11 @@ class MColor_list_Widget(Modified_list_widget):
         """
         item = self.item(self.currentRow())
         if item is not None:
-            color, accepted = MColorDialog(
-                    item.text(),
-                    self,
-                    QIcon(':/icons/icons/icons8-edit-240.png'),
-                    'Добавление',
-            ).get_color()
+            dialog = QColorDialog(item.text(), self)
+            dialog.setWindowIcon(QIcon(':/FPGresources/icons96/icons8-edit.png'))
+            dialog.setWindowTitle('Изменение')
+            accepted = dialog.exec()
+            color = dialog.selectedColor()
             if accepted:
                 item.setIcon(self.draw_icon_for_item(color))
                 item.setText(color.name(QColor.NameFormat.HexRgb).upper())
@@ -63,11 +43,11 @@ class MColor_list_Widget(Modified_list_widget):
         if isinstance(color, QColor):
             accepted = True
         elif color is None:
-            color, accepted = MColorDialog(
-                    parent = self,
-                    icon = QIcon(':/icons/icons/icons8-add-96.png'),
-                    title = 'Изменение',
-            ).get_color()
+            dialog = QColorDialog(self)
+            dialog.setWindowIcon(QIcon(':/FPGresources/icons96/icons8-add.png'))
+            dialog.setWindowTitle('Добавление')
+            accepted = dialog.exec()
+            color = dialog.selectedColor()
         else:
             raise TypeError("The argument must be a QColor")
         if accepted:

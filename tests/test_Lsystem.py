@@ -30,7 +30,6 @@ class TestLSystem(unittest.TestCase):
     def test_generate_action_string(self):
         self.lsystem.keywords = (("F", "forward"), ("B", "back"))
         self.lsystem.rules = ("F->FLFRRFLF",)
-        print(self.lsystem)
         # Positive test case: generating action string with string input
         result = self.lsystem.generate_action_string('F', 1)
         self.assertEqual(

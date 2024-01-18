@@ -3,21 +3,7 @@ import unittest
 from PySide6.QtGui import QColor, Qt
 from PySide6.QtWidgets import QApplication, QListWidgetItem
 
-from MWidgets.MList_Widgets.MColor_list_Widget import MColor_list_Widget, MColorDialog
-
-
-class TestMColorDialog(unittest.TestCase):
-    def setUp(self):
-        try:
-            QApplication()
-        except RuntimeError:
-            pass
-    
-    def test_get_color_positive(self):
-        dialog = MColorDialog(QColor(Qt.GlobalColor.red))
-        color, accepted = dialog.get_color()
-        self.assertEqual(QColor(Qt.GlobalColor.red), color)
-        self.assertTrue(accepted)
+from MWidgets.MList_Widgets.MColor_list_Widget import MColor_list_Widget
 
 
 class TestMColor_list_widgetWidget(unittest.TestCase):

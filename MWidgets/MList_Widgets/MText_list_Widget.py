@@ -21,12 +21,12 @@ class Multiline_text_InputDialog(QDialog, Ui_multiline_dialog):
         self.buttonBox.button(
                 QDialogButtonBox.StandardButton.Ok
         ).setIcon(
-                QIcon(':/icons/icons/icons8-ok-240.png')
+                QIcon(':/FPGresources/icons96/icons8-ok.png')
         )
         self.buttonBox.button(
                 QDialogButtonBox.StandardButton.Cancel
         ).setIcon(
-                QIcon(':/icons/icons/icons8-cancel-240.png')
+                QIcon(':/FPGresources/icons96/icons8-cancel.png')
         )
         self.setWindowTitle(title)
         self.label.setText(label)
@@ -74,7 +74,7 @@ class MText_list_Widget(Modified_list_widget):
                     'Добавление',
                     'Введите текст',
                     user_input_text,
-                    QIcon(':/icons/icons/icons8-add-96.png')
+                    QIcon(':/FPGresources/icons96/icons8-add.png')
             ).getMultiLineText()
         else:
             raise TypeError("The text must be a string")
@@ -96,7 +96,7 @@ class MText_list_Widget(Modified_list_widget):
                     'Изменение',
                     'Введите текст',
                     item.text(),
-                    QIcon(':/icons/icons/icons8-edit-240.png')
+                    QIcon(':/FPGresources/icons96/icons8-edit.png')
             ).getMultiLineText()
             if accepted:
                 item.setText(item_text)

@@ -1,8 +1,7 @@
 """
 
 """
-import pickle
-from json import dumps
+from json import dumps, loads
 from re import escape, finditer, sub
 from sqlite3 import connect as sql_connect
 from typing import Generator, Iterable
@@ -88,7 +87,7 @@ class LSystem(object):
         :return: List of tuples representing the action string.
         """
         
-        def generate(string_: str):
+        def generate(string_: str) -> tuple:
             """
             :param string_: some string
             :return:
@@ -102,7 +101,7 @@ class LSystem(object):
                     INSERT INTO conclusions (rule_id, Keywords_array_id, axiom_id, n_iter, conclusion)
                     VALUES (?, ?, ?, ?, ?)
                     """,
-                    (*temp, number_of_iterations, pickle.dumps(action_string_))
+                    (*temp, number_of_iterations, dumps(action_string_))
             )
             return action_string_
         
@@ -186,7 +185,7 @@ class LSystem(object):
                 action_string = generate(string)
             else:
                 cursor.execute('SELECT conclusion FROM conclusions WHERE conclusion_id = ?', [result[0]])
-                action_string = pickle.loads(cursor.fetchone()[0])
+                action_string = tuple(map(tuple, loads(cursor.fetchone()[0])))
             
             return action_string
     
@@ -224,7 +223,7 @@ class LSystem(object):
                     string
             )
         result = (
-            (match.group(1), int(match.group(2))) for match in finditer(
+            (match.group('keyword'), int(match.group('quantity'))) for match in finditer(
                 r"(?P<keyword>\S+)\((?P<quantity>\d+)\)",
                 string, )
         )
@@ -252,4 +251,4 @@ class LSystem(object):
         return argument
     
     def __repr__(self):
-        return f"{self.__class__.__name__}{self.rules, self.keywords}"
+        return f"{self.__class__.__module__}.{self.__class__.__name__}{self.rules, self.keywords}"
