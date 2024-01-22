@@ -1,75 +1,22 @@
-import sys
+import math
 
-from PySide6.QtGui import Qt
-from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QDateEdit, QDateTimeEdit, QDial, QDoubleSpinBox,
-                               QFontComboBox, QLabel, QLineEdit, QMainWindow, QPlainTextEdit,
-                               QProgressBar, QPushButton, QRadioButton, QSlider, QSpinBox, QTimeEdit, QVBoxLayout,
-                               QWidget)
+import numpy
 
-from MWidgets.MList_Widgets.MColor_list_Widget import MColor_list_Widget
-
-sys.argv += ['-platform', 'windows']
-
-
-class MainWindow(QMainWindow):
-    def __init__(self):
-        super().__init__()
-        
-        self.setWindowTitle("Widgets App")
-        self.setStyleSheet(
-                """
-QDialogButtonBox { dialogbuttonbox-buttons-have-icons: 1; }
-QPlainTextEdit {
-    border-width: 5px;
-    border-style: solid;
-    border-color: white;
-    border-radius: 10px;
-    bottom: 50px;
-    alternate-background-color: blue;
-    background-image: url(:/icons/icons/icons8-down-96.png);
-    background-repeat: repeat-;
-    background-position: center;
-    background-attachment: fixed;
-    background-origin: content;
-    background-clip: padding;
-}
-                """
-        )
-        widget = QWidget(self)
-        layout = QVBoxLayout(widget)
-        widgets = [
-            QPushButton,
-            QCheckBox,
-            QComboBox,
-            QDateEdit,
-            QDateTimeEdit,
-            QDial,
-            QDoubleSpinBox,
-            QFontComboBox,
-            QLineEdit,
-            QProgressBar,
-            QRadioButton,
-            QSlider,
-            QSpinBox,
-            QTimeEdit,
-            QLabel
-        ]
-        TextEdit = QPlainTextEdit(widget)
-        TextEdit.setMinimumSize(300, 300)
-        layout.addWidget(TextEdit)
-        box = MColor_list_Widget()
-        box.setContextMenuPolicy(Qt.ContextMenuPolicy.ActionsContextMenu)
-        layout.addWidget(box)
-        for w in widgets:
-            layout.addWidget(w())
-        
-        widget.setLayout(layout)
-        
-        self.setCentralWidget(widget)
-
-
-app = QApplication(sys.argv)
-app.setStyle('Fusion')
-window = MainWindow()
-window.show()
-app.exec()
+arr = numpy.arange(10, 260, 10)
+side = int(math.sqrt(arr.size))
+arr.shape = (side, side)
+matr = []
+pos = numpy.array((0, 0))
+for g in range(math.ceil(arr.shape[0] / 2)):
+    for i in arr:
+        matr.append(i)
+    for i in arr[-1][1:]:
+        matr.append(i)
+    for i in arr[::-1][1:]:
+        matr.append(i[-1])
+    for j in arr[0][::-1][1:][:-1]:
+        print(j)
+        matr.append(j)
+print([10, 50, 90, 130, 140, 150, 160, 120, 80, 40, 30, 20, 60, 100, 110, 70])
+print(matr)
+print(arr)

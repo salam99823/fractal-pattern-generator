@@ -5,7 +5,11 @@ import sys
 
 from PySide6.QtWidgets import QApplication, QDialog, QMainWindow
 
+from MWidgets.uis.aboutFPG import Ui_Dialog
 from MWidgets.uis.mainwindow import Ui_MainWindow
+
+
+# import argparse
 
 
 class MainWindow(QMainWindow):
@@ -14,6 +18,7 @@ class MainWindow(QMainWindow):
             super().setupUi(main_window)
             self.action_about_Qt.triggered.connect(QApplication.aboutQt)
             self.action_about_program.triggered.connect(main_window.tst)
+            # self.start_button.clicked.connect(print)
     
     def __init__(self):
         super().__init__()
@@ -21,7 +26,8 @@ class MainWindow(QMainWindow):
     
     def tst(self):
         dial = QDialog(self)
-        dial.setLayout()
+        Ui_Dialog().setupUi(dial)
+        
         dial.exec()
 
 
@@ -30,7 +36,6 @@ def main():
     app.setStyle('fusion')
     win = MainWindow()
     win.show()
-    print(app.arguments())
     app.exec()
 
 
