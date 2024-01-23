@@ -3,7 +3,7 @@ import unittest
 from PySide6.QtGui import QColor, Qt
 from PySide6.QtWidgets import QApplication, QListWidgetItem
 
-from MWidgets.MList_Widgets.MColor_list_Widget import MColor_list_Widget
+from MWidgets.MColor_list_Widget import MColor_list_Widget
 
 
 class TestMColor_list_widgetWidget(unittest.TestCase):

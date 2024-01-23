@@ -3,7 +3,7 @@ from unittest import mock
 
 from PySide6.QtWidgets import QApplication, QListWidgetItem
 
-from MWidgets.MList_Widgets.MText_list_Widget import MText_list_Widget, Multiline_text_InputDialog
+from MWidgets.MText_list_Widget import MText_list_Widget, Multiline_text_InputDialog
 
 
 class MText_list_WidgetTests(unittest.TestCase):

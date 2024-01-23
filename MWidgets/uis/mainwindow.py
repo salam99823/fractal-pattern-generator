@@ -17,8 +17,8 @@ from PySide6.QtWidgets import (QAbstractItemView, QDockWidget, QDoubleSpinBox,
                                QVBoxLayout,
                                QWidget)
 
-from MWidgets.MList_Widgets.MColor_list_Widget import MColor_list_Widget
-from MWidgets.MList_Widgets.MText_list_Widget import MText_list_Widget
+from MWidgets.MColor_list_Widget import MColor_list_Widget
+from MWidgets.MText_list_Widget import MText_list_Widget
 
 
 class Ui_MainWindow(object):

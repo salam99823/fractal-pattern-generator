@@ -2,7 +2,7 @@ import unittest
 
 from PySide6.QtWidgets import QApplication, QListWidgetItem
 
-from MWidgets.MList_Widgets.Modified_list_widget import Modified_list_widget
+from MWidgets.Modified_list_widget import Modified_list_widget
 
 
 class TestModifiedListWidget(unittest.TestCase):
