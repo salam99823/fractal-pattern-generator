@@ -1,1 +1,1 @@
-print()
+import rust_lib
