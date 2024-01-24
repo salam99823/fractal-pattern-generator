@@ -1,15 +1,13 @@
 """
 
 """
+import argparse
 import sys
 
 from PySide6.QtWidgets import QApplication, QDialog, QMainWindow
 
 from MWidgets.resources.aboutFPG import Ui_Dialog
 from MWidgets.resources.mainwindow import Ui_MainWindow
-
-
-# import argparse
 
 
 class MainWindow(QMainWindow):
@@ -32,7 +30,11 @@ class MainWindow(QMainWindow):
 
 
 def main():
-    app = QApplication(sys.argv)
+    parser_ = argparse.ArgumentParser()
+    parser_.add_argument('-f', '--file', type = argparse.FileType(encoding = 'utf-8'))
+    args = parser_.parse_args()
+    print(args)
+    app = QApplication([sys.argv[0]])
     app.setStyle('fusion')
     win = MainWindow()
     win.show()
