@@ -5,8 +5,8 @@ import sys
 
 from PySide6.QtWidgets import QApplication, QDialog, QMainWindow
 
-from MWidgets.uis.aboutFPG import Ui_Dialog
-from MWidgets.uis.mainwindow import Ui_MainWindow
+from MWidgets.resources.aboutFPG import Ui_Dialog
+from MWidgets.resources.mainwindow import Ui_MainWindow
 
 
 # import argparse

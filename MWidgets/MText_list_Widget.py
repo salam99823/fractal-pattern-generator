@@ -2,7 +2,7 @@ from PySide6.QtCore import Qt
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QDialog, QDialogButtonBox, QListWidgetItem, QWidget
 
-from MWidgets.uis.multilinedialog import Ui_multiline_dialog
+from MWidgets.resources.multilinedialog import Ui_multiline_dialog
 from .Modified_list_widget import Modified_list_widget
 
 

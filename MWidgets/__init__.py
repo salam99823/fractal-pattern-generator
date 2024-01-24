@@ -1,2 +1,2 @@
 from MWidgets.MText_list_Widget import Multiline_text_InputDialog
-from MWidgets.uis import resources_rc
+from MWidgets.resources import resources_rc
