@@ -1,3 +1,4 @@
+use std::collections::HashMap;
 use pyo3::prelude::*;
 
 struct Point {
@@ -40,42 +41,43 @@ fn _move(quantity: f64, line: &mut Line) -> Vec<f64> {
     return result;
 }
 
+
 #[pyfunction]
-fn generate_lines(commands: Vec<(String, f64)>,
-                  command_dict: Vec<String>,
+fn generate_lines(_actions: Vec<(String, f64)>,
+                  command_dict: HashMap<String, String>,
                   angle_of_rotation: f64) -> PyResult<Vec<Vec<f64>>> {
-    let mut result: Vec<Vec<f64>> = Vec::new();
+    let mut result: Vec<Vec<f64>> = Vec::with_capacity(_actions.iter()
+        .filter(|x| x.0 == String::from("F")).count()
+    );
     let mut line = Line {
         start_point: Point { x_coordinate: 0.0, y_coordinate: 0.0 },
         length: 100.0,
         angle: 0.0,
     };
-    let _forward = command_dict.get(0).unwrap_or(&String::from("")).to_string();
-    let _back = command_dict.get(1).unwrap_or(&String::from("")).to_string();
-    let _move_forward = command_dict.get(2).unwrap_or(&String::from("")).to_string();
-    let _move_back = command_dict.get(3).unwrap_or(&String::from("")).to_string();
-    let _right = command_dict.get(4).unwrap_or(&String::from("")).to_string();
-    let _left = command_dict.get(5).unwrap_or(&String::from("")).to_string();
-    for (command, quantity) in commands {
-        match command {
-            _forward => {
-                result.push(_move(quantity, &mut line)); // Draw Forward
+    for (_action, quantity) in _actions {
+        match command_dict.get(&_action) {
+            Some(act) => match act.as_str() {
+                "DrawForward" => {
+                    result.push(_move(quantity, &mut line)); // Draw Forward
+                }
+                "DrawBack" => {
+                    result.push(_move(quantity * -1., &mut line)); // Draw Back
+                }
+                "MoveForward" => {
+                    _move(quantity, &mut line);
+                }
+                "MoveBack" => {
+                    _move(quantity * -1., &mut line);
+                }
+                "TurnRight" => {
+                    line.angle += angle_of_rotation * quantity; // Right
+                }
+                "TurnLeft" => {
+                    line.angle -= angle_of_rotation * quantity; // Left
+                }
+                _ => {}
             }
-            _back => {
-                result.push(_move(quantity * -1., &mut line)); // Draw Back
-            }
-            _move_forward => {
-                _move(quantity, &mut line);
-            }
-            _move_back => {
-                _move(quantity * -1., &mut line);
-            }
-            _right => {
-                line.angle += angle_of_rotation * quantity; // Right
-            }
-            _left => {
-                line.angle -= angle_of_rotation * quantity; // Left
-            }
+            None => {}
         }
     }
     return Ok(result);
