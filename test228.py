@@ -31,3 +31,4 @@ if __name__ == '__main__':
             60
     )
     print(time.monotonic() - start)
+    print(array(res))
