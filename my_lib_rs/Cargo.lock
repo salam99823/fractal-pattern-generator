@@ -49,19 +49,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "lsystem2"
+version = "0.1.0"
+dependencies = [
+ "pyo3",
+]
+
+[[package]]
 name = "memoffset"
 version = "0.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5a634b1c61a95585bd15607c6ab0c4e5b226e695ff2800ba0cdccddf208c406c"
 dependencies = [
  "autocfg",
-]
-
-[[package]]
-name = "my_lib_rs"
-version = "0.1.0"
-dependencies = [
- "pyo3",
 ]
 
 [[package]]

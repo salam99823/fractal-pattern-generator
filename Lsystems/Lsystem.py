@@ -166,11 +166,7 @@ class LSystem(object):
                     conclusions.Keywords_array_id,
                     conclusions.axiom_id,
                     n_iter
-                    FROM conclusions
-                    JOIN rules, keywords, axioms
-                    ON conclusions.rule_id = rules.rule_id AND
-                    conclusions.Keywords_array_id = keywords.Keywords_array_id AND
-                    conclusions.axiom_id = axioms.axiom_id
+                    FROM conclusions JOIN rules, keywords, axioms
                     WHERE rule = ? AND
                     Keywords_array = ? AND
                     axiom = ? AND
