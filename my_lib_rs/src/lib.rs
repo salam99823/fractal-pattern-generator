@@ -39,14 +39,14 @@ impl Line {
     }
 }
 
-
 #[pyfunction]
 fn generate_lines(_actions: Vec<(String, f64)>,
                   command_dict: HashMap<String, String>,
                   angle_of_rotation: f64) -> PyResult<Vec<Vec<f64>>> {
-    let mut vector: Vec<Vec<f64>> = Vec::with_capacity(_actions.iter()
-        .filter(|x| x.0 == *"F").count()
-    );
+    let size = _actions.iter().filter(
+        |(command, _)| command_dict.get(command) == Some(&String::from("DrawForward")) || command_dict.get(command) == Some(&String::from("DrawBack"))
+    ).count();
+    let mut vector: Vec<Vec<f64>> = Vec::with_capacity(size);
     println!("{:?}", command_dict);
     let mut line = Line {
         start_point: Point { x_coordinate: 0.0, y_coordinate: 0.0 },
@@ -57,10 +57,10 @@ fn generate_lines(_actions: Vec<(String, f64)>,
         if let Some(act) = command_dict.get(&_action) {
             match act.as_str() {
                 "DrawForward" => {
-                    vector.push(line._move(quantity)); // Draw Forward
+                    vector.push(line._move(quantity));
                 }
                 "DrawBack" => {
-                    vector.push(line._move(quantity * -1.)); // Draw Back
+                    vector.push(line._move(quantity * -1.));
                 }
                 "MoveForward" => {
                     line._move(quantity);
@@ -69,10 +69,10 @@ fn generate_lines(_actions: Vec<(String, f64)>,
                     line._move(quantity * -1.);
                 }
                 "TurnRight" => {
-                    line.angle += angle_of_rotation * quantity; // Right
+                    line.angle += angle_of_rotation * quantity;
                 }
                 "TurnLeft" => {
-                    line.angle -= angle_of_rotation * quantity; // Left
+                    line.angle -= angle_of_rotation * quantity;
                 }
                 _ => {}
             }
@@ -84,7 +84,7 @@ fn generate_lines(_actions: Vec<(String, f64)>,
 
 /// A Python module implemented in Rust.
 #[pymodule]
-fn _cpu_bound_functions(_py: Python, m: &PyModule) -> PyResult<()> {
+fn cpuboundfunctions(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(generate_lines, m)?)?;
     Ok(())
 }
