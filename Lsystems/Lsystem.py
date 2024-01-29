@@ -2,24 +2,24 @@
 
 """
 from json import dumps, loads
-from re import escape, finditer, sub
+from re import T, escape, finditer, sub
 from sqlite3 import connect as sql_connect
 from typing import Generator, Iterable
 
+from numpy import integer
+
 
 class LSystem(object):
-    """
-    """
     __rules: tuple[tuple[str, str], ...] = ()
     __keywords: tuple[tuple[str, ...], ...] = ()
     
     def __init__(
             self,
-            rules: Iterable[str] | None = None,
+            rules: Iterable[tuple[str, str]] | None = None,
             keywords: Iterable[Iterable[str]] | None = None,
     ):
         """
-        :param rules:
+        :param rules: 
         :param keywords:
         """
         if keywords is not None:
@@ -30,22 +30,27 @@ class LSystem(object):
     @property
     def rules(self) -> tuple[tuple[str, str], ...]:
         """
-        
+        Get the rules of the LSystem.
+
+        :return: Tuple of rules.
         """
         return self.__rules
     
     @rules.setter
-    def rules(self, rules: Iterable[str]) -> None:
+    def rules(self, rules: Iterable[tuple[str, str]]) -> None:
         """
-        
+        Set the rules of the LSystem.
         """
-        if isinstance(rules, Iterable):
-            for rule in rules:
-                rule = self.multiplication(rule).split('->', maxsplit = 1)
-                if len(rule) == 2:
-                    self.__rules += (tuple(rule),)
-        else:
-            raise TypeError("Invalid type for rules.")
+        if not isinstance(rules, Iterable):
+            raise TypeError("Invalid type for rules. Must be an iterable.")
+        for key_, value_ in rules:
+            if not isinstance(key_, str) or not isinstance(value_, str):
+                raise TypeError("Invalid type for rules. Must be an iterable of tuples of strings.")
+            key_: str = self.multiplication(key_)
+            value_: str = self.multiplication(value_)
+            rule = (key_, value_)
+            if len(rule) == 2:
+                self.__rules += (rule,)
     
     @property
     def keywords(self) -> tuple[tuple[str, ...], ...]:
@@ -65,20 +70,16 @@ class LSystem(object):
             raise TypeError("Invalid type for keywords. Must be an iterable.")
         temp_keywords = []
         for keyword in keywords:
-            if isinstance(keyword, str):
-                if keyword:
-                    temp_keywords.append((keyword,))
-            elif isinstance(keyword, Iterable):
-                temp_keywords.append(tuple(sorted(keyword, key = len)))
-            else:
-                raise TypeError("Invalid type for keywords. Must be an iterable of strings or iterables of strings.")
+            if not isinstance(keyword, Iterable) or not all(isinstance(_, str) for _ in keyword):
+                raise TypeError("Invalid type for keywords. Must be an iterable of iterables of strings.")
+            temp_keywords.append(tuple(sorted(keyword, key = len)))
         self.__keywords = tuple(temp_keywords)
     
     def generate_action_string(
             self,
             string: str,
             number_of_iterations: int,
-    ) -> tuple[tuple[str, int]]:
+    ) -> tuple[tuple[str, int], ...]:
         """
         Generate the action string based on the LSystem.
 
@@ -87,7 +88,7 @@ class LSystem(object):
         :return: List of tuples representing the action string.
         """
         
-        def generate(string_: str) -> tuple:
+        def generate(string_: str) -> tuple[tuple[str, int], ...]:
             """
             :param string_: some string
             :return:
@@ -107,10 +108,10 @@ class LSystem(object):
         
         def insert_into_tables(table: str, column: str, value: str) -> int:
             """
-            :param table:
-            :param column:
-            :param value:
-            :return:
+            :param table: the table to insert
+            :param column: the column to insert
+            :param value: the value to insert
+            :return: the id of the inserted row
             """
             cursor.execute(f"SELECT {column}_id FROM {table} WHERE {column} = ?", (value,))
             if not cursor.fetchone():
@@ -181,7 +182,9 @@ class LSystem(object):
                 action_string = generate(string)
             else:
                 cursor.execute('SELECT conclusion FROM conclusions WHERE conclusion_id = ?', [result[0]])
-                action_string = tuple(map(tuple, loads(cursor.fetchone()[0])))
+                action_string: tuple[tuple[str, int], ...] = tuple(
+                        (string_, integer_) for string_, integer_ in loads(cursor.fetchone()[0]) if isinstance(string_, str) and isinstance(integer_, int)
+                )
             
             return action_string
     

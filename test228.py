@@ -2,7 +2,7 @@ import time
 
 from numpy import array
 
-import lsystem2
+import my_lib_rs as lsystem2
 from Lsystems.Lsystem import LSystem
 from enum import StrEnum
 
@@ -17,10 +17,10 @@ class Actions(StrEnum):
 
 
 if __name__ == '__main__':
-    lsys = LSystem(("F->FLFRRFLF",), ["F", "B", "Mf", "Mb", 'R', 'L'])
+    lsys = LSystem((("F", "FLFRRFLF"),), ["F", "B", "Mf", "Mb", 'R', 'L'])
     act = lsys.generate_action_string('FLLFLLF', 9)
     start = time.monotonic()
-    res = lsystem2.generate_lines(
+    res = lsystem2.generate_lines(  # type: ignore
             act,
             {
                 "F": Actions.DrawForward,

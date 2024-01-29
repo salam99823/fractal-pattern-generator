@@ -3,7 +3,7 @@ requires = ["maturin>=1.4,<2.0"]
 build-backend = "maturin"
 
 [project]
-name = "my_lib_rs"
+name = "_cpu_bound_functions"
 requires-python = ">=3.8"
 classifiers = [
     "Programming Language :: Rust",

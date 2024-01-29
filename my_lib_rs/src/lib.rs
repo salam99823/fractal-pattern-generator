@@ -1,5 +1,5 @@
-use std::collections::HashMap;
 use pyo3::prelude::*;
+use std::collections::HashMap;
 
 struct Point {
     x_coordinate: f64,
@@ -84,7 +84,7 @@ fn generate_lines(_actions: Vec<(String, f64)>,
 
 /// A Python module implemented in Rust.
 #[pymodule]
-fn lsystem2(_py: Python, m: &PyModule) -> PyResult<()> {
+fn _cpu_bound_functions(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(generate_lines, m)?)?;
     Ok(())
 }
