@@ -2,11 +2,9 @@
 
 """
 from json import dumps, loads
-from re import T, escape, finditer, sub
+from re import escape, finditer, sub
 from sqlite3 import connect as sql_connect
-from typing import Generator, Iterable
-
-from numpy import integer
+from typing import Iterable, Generator
 
 
 class LSystem(object):
@@ -99,9 +97,9 @@ class LSystem(object):
             action_string_ = tuple(self.formatting(string_))
             cursor.execute(
                     """
-                    INSERT INTO conclusions (rule_id, Keywords_array_id, axiom_id, n_iter, conclusion)
-                    VALUES (?, ?, ?, ?, ?)
-                    """,
+                        INSERT INTO conclusions (rule_id, Keywords_array_id, axiom_id, n_iter, conclusion)
+                        VALUES (?, ?, ?, ?, ?)
+                        """,
                     (*temp, number_of_iterations, dumps(action_string_))
             )
             return action_string_
@@ -123,31 +121,31 @@ class LSystem(object):
             cursor = connection.cursor()
             cursor.executescript(
                     """
-                    CREATE TABLE IF NOT EXISTS rules (
-                        rule_id INTEGER NOT NULL UNIQUE,
-                        rule TEXT UNIQUE,
-                        PRIMARY KEY("rule_id" AUTOINCREMENT)
-                    );
-                    CREATE TABLE IF NOT EXISTS axioms (
-                        axiom_id INTEGER NOT NULL UNIQUE,
-                        axiom TEXT NOT NULL UNIQUE,
-                        PRIMARY KEY("axiom_id" AUTOINCREMENT)
-                    );
-                    CREATE TABLE IF NOT EXISTS conclusions (
-                        conclusion_id INTEGER NOT NULL UNIQUE,
-                        rule_id INTEGER NOT NULL,
-                        Keywords_array_id INTEGER NOT NULL,
-                        axiom_id INTEGER NOT NULL,
-                        n_iter INTEGER NOT NULL DEFAULT 1,
-                        conclusion BLOB NOT NULL,
-                        PRIMARY KEY("conclusion_id" AUTOINCREMENT)
-                    );
-                    CREATE TABLE IF NOT EXISTS keywords (
-                        Keywords_array_id INTEGER NOT NULL UNIQUE,
-                        Keywords_array TEXT UNIQUE,
-                        PRIMARY KEY("Keywords_array_id" AUTOINCREMENT)
-                    )
-                    """
+                        CREATE TABLE IF NOT EXISTS rules (
+                            rule_id INTEGER NOT NULL UNIQUE,
+                            rule TEXT UNIQUE,
+                            PRIMARY KEY("rule_id" AUTOINCREMENT)
+                        );
+                        CREATE TABLE IF NOT EXISTS axioms (
+                            axiom_id INTEGER NOT NULL UNIQUE,
+                            axiom TEXT NOT NULL UNIQUE,
+                            PRIMARY KEY("axiom_id" AUTOINCREMENT)
+                        );
+                        CREATE TABLE IF NOT EXISTS conclusions (
+                            conclusion_id INTEGER NOT NULL UNIQUE,
+                            rule_id INTEGER NOT NULL,
+                            Keywords_array_id INTEGER NOT NULL,
+                            axiom_id INTEGER NOT NULL,
+                            n_iter INTEGER NOT NULL DEFAULT 1,
+                            conclusion BLOB NOT NULL,
+                            PRIMARY KEY("conclusion_id" AUTOINCREMENT)
+                        );
+                        CREATE TABLE IF NOT EXISTS keywords (
+                            Keywords_array_id INTEGER NOT NULL UNIQUE,
+                            Keywords_array TEXT UNIQUE,
+                            PRIMARY KEY("Keywords_array_id" AUTOINCREMENT)
+                        )
+                        """
             )
             
             rules = dumps(self.rules)
@@ -162,17 +160,17 @@ class LSystem(object):
             
             cursor.execute(
                     """
-                    SELECT conclusion_id,
-                    conclusions.rule_id,
-                    conclusions.Keywords_array_id,
-                    conclusions.axiom_id,
-                    n_iter
-                    FROM conclusions JOIN rules, keywords, axioms
-                    WHERE rule = ? AND
-                    Keywords_array = ? AND
-                    axiom = ? AND
-                    n_iter = ?
-                    """,
+                        SELECT conclusion_id,
+                        conclusions.rule_id,
+                        conclusions.Keywords_array_id,
+                        conclusions.axiom_id,
+                        n_iter
+                        FROM conclusions JOIN rules, keywords, axioms
+                        WHERE rule = ? AND
+                        Keywords_array = ? AND
+                        axiom = ? AND
+                        n_iter = ?
+                        """,
                     (rules, keywords, string, number_of_iterations)
             )
             
@@ -183,7 +181,8 @@ class LSystem(object):
             else:
                 cursor.execute('SELECT conclusion FROM conclusions WHERE conclusion_id = ?', [result[0]])
                 action_string: tuple[tuple[str, int], ...] = tuple(
-                        (string_, integer_) for string_, integer_ in loads(cursor.fetchone()[0]) if isinstance(string_, str) and isinstance(integer_, int)
+                        (string_, integer_) for string_, integer_ in loads(cursor.fetchone()[0]) if
+                        isinstance(string_, str) and isinstance(integer_, int)
                 )
             
             return action_string
@@ -197,11 +196,11 @@ class LSystem(object):
             cursor = connection.cursor()
             cursor.executescript(
                     """
-                    DROP TABLE IF EXISTS rules;
-                    DROP TABLE IF EXISTS axioms;
-                    DROP TABLE IF EXISTS conclusions;
-                    DROP TABLE IF EXISTS keywords;
-                    """
+                        DROP TABLE IF EXISTS rules;
+                        DROP TABLE IF EXISTS axioms;
+                        DROP TABLE IF EXISTS conclusions;
+                        DROP TABLE IF EXISTS keywords;
+                        """
             )
     
     def formatting(self, string: str) -> Generator[tuple[str, int], None, None]:
