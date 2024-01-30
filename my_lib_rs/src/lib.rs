@@ -40,13 +40,24 @@ impl Line {
 }
 
 #[pyfunction]
+fn recurse_multiplier(string: String, rules: Vec<(String, String)>, number_of_iters: usize) -> String {
+    for _ in 0..number_of_iters {
+        for (key, value) in rules.iter() {
+            string = string.replace(key, value);
+        };
+    };
+}
+
+#[pyfunction]
 fn generate_lines(_actions: Vec<(String, f64)>,
                   command_dict: HashMap<String, String>,
                   angle_of_rotation: f64) -> PyResult<Vec<Vec<f64>>> {
     let size = _actions.iter().filter(
-        |(command, _)| command_dict.get(command) == Some(&String::from("DrawForward")) || command_dict.get(command) == Some(&String::from("DrawBack"))
+        |(command, _)|
+        command_dict.get(command) == Some(&String::from("DrawForward")) ||
+        command_dict.get(command) == Some(&String::from("DrawBack"))
     ).count();
-    println!("{}", size);
+    println!("{}", &size);
     let mut vector: Vec<Vec<f64>> = Vec::with_capacity(size);
     let mut line = Line {
         start_point: Point { x_coordinate: 0.0, y_coordinate: 0.0 },

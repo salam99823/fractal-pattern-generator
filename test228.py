@@ -2,7 +2,7 @@ import time
 
 from numpy import array
 
-import cpuboundfunctions as lsystem2
+import cpuboundfunctions
 from Lsystems.Lsystem import LSystem
 from enum import StrEnum
 
@@ -18,9 +18,10 @@ class Actions(StrEnum):
 
 if __name__ == '__main__':
     lsys = LSystem((("F", "FLFRRFLF"),), ["F", "B", "Mf", "Mb", 'R', 'L'])
-    act = lsys.generate_action_string('FLLFLLF', 9)
+    act = cpuboundfunctions
+    lsys.formatting
     start = time.monotonic()
-    res = lsystem2.generate_lines(  # type: ignore
+    res = cpuboundfunctions.generate_lines(  # type: ignore
             act,
             {
                 "F": Actions.DrawForward,
@@ -31,4 +32,4 @@ if __name__ == '__main__':
             60
     )
     print(time.monotonic() - start)
-    print(len(res))
+    print(array(res), len(res))
