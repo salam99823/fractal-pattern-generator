@@ -46,8 +46,8 @@ fn generate_lines(_actions: Vec<(String, f64)>,
     let size = _actions.iter().filter(
         |(command, _)| command_dict.get(command) == Some(&String::from("DrawForward")) || command_dict.get(command) == Some(&String::from("DrawBack"))
     ).count();
+    println!("{}", size);
     let mut vector: Vec<Vec<f64>> = Vec::with_capacity(size);
-    println!("{:?}", command_dict);
     let mut line = Line {
         start_point: Point { x_coordinate: 0.0, y_coordinate: 0.0 },
         length: 100.0,

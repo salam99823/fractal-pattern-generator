@@ -2,7 +2,7 @@ import time
 
 from numpy import array
 
-import my_lib_rs as lsystem2
+import cpuboundfunctions as lsystem2
 from Lsystems.Lsystem import LSystem
 from enum import StrEnum
 
@@ -31,4 +31,4 @@ if __name__ == '__main__':
             60
     )
     print(time.monotonic() - start)
-    print(array(res))
+    print(len(res))
