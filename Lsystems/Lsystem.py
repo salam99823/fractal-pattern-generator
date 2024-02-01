@@ -1,10 +1,8 @@
 """
 
 """
-from json import dumps, loads
 from re import escape, finditer, sub
-from sqlite3 import connect as sql_connect
-from typing import Iterable, Generator
+from typing import Iterable, Iterator, Sequence
 
 
 class LSystem(object):
@@ -39,16 +37,12 @@ class LSystem(object):
         """
         Set the rules of the LSystem.
         """
-        if not isinstance(rules, Iterable):
-            raise TypeError("Invalid type for rules. Must be an iterable.")
-        for key_, value_ in rules:
-            if not isinstance(key_, str) or not isinstance(value_, str):
-                raise TypeError("Invalid type for rules. Must be an iterable of tuples of strings.")
-            key_: str = self.multiplication(key_)
-            value_: str = self.multiplication(value_)
-            rule = (key_, value_)
-            if len(rule) == 2:
-                self.__rules += (rule,)
+        if not isinstance(rules, Iterable) or not all(
+                isinstance(_key, str) and isinstance(_value, str) for _key, _value in rules
+        ):
+            raise TypeError("Invalid type for rules. Must be an iterable of tuples of strings.")
+        for _key, _value in rules:
+            self.__rules += ((self.multiplication(_key), self.multiplication(_value)),)
     
     @property
     def keywords(self) -> tuple[tuple[str, ...], ...]:
@@ -60,18 +54,15 @@ class LSystem(object):
         return self.__keywords
     
     @keywords.setter
-    def keywords(self, keywords: Iterable[Iterable[str]]) -> None:
+    def keywords(self, keywords: Iterable[Sequence[str]]) -> None:
         """
         Set the keywords of the LSystem.
         """
-        if not isinstance(keywords, Iterable):
-            raise TypeError("Invalid type for keywords. Must be an iterable.")
-        temp_keywords = []
-        for keyword in keywords:
-            if not isinstance(keyword, Iterable) or not all(isinstance(_, str) for _ in keyword):
-                raise TypeError("Invalid type for keywords. Must be an iterable of iterables of strings.")
-            temp_keywords.append(tuple(sorted(keyword, key = len)))
-        self.__keywords = tuple(temp_keywords)
+        if not isinstance(keywords, Iterable) or not all(
+                isinstance(keyword, Iterable) and (isinstance(_, str) for _ in keyword) for keyword in keywords
+        ):
+            raise TypeError("Invalid type for keywords. Must be an iterable of iterables of strings.")
+        self.__keywords = tuple(tuple(sorted(keyword, key = len)) for keyword in keywords)
     
     def generate_action_string(
             self,
@@ -83,132 +74,20 @@ class LSystem(object):
 
         :param string: Starting string.
         :param number_of_iterations: Number of iterations to perform.
-        :return: List of tuples representing the action string.
+        :return:
         """
-        
-        def generate(string_: str) -> tuple[tuple[str, int], ...]:
-            """
-            :param string_: some string
-            :return:
-            """
-            for _ in range(number_of_iterations):
-                for _key, _value in self.rules:
-                    string_ = string_.replace(_key, _value)
-            action_string_ = tuple(self.formatting(string_))
-            cursor.execute(
-                    """
-                        INSERT INTO conclusions (rule_id, Keywords_array_id, axiom_id, n_iter, conclusion)
-                        VALUES (?, ?, ?, ?, ?)
-                        """,
-                    (*temp, number_of_iterations, dumps(action_string_))
-            )
-            return action_string_
-        
-        def insert_into_tables(table: str, column: str, value: str) -> int:
-            """
-            :param table: the table to insert
-            :param column: the column to insert
-            :param value: the value to insert
-            :return: the id of the inserted row
-            """
-            cursor.execute(f"SELECT {column}_id FROM {table} WHERE {column} = ?", (value,))
-            if not cursor.fetchone():
-                cursor.execute(f"INSERT INTO {table} ({column}) VALUES (?)", (value,))
-            cursor.execute(f"SELECT {column}_id FROM {table} WHERE {column} = ?", (value,))
-            return cursor.fetchone()[0]
-        
-        with sql_connect("../Lsystem_outs.db") as connection:
-            cursor = connection.cursor()
-            cursor.executescript(
-                    """
-                        CREATE TABLE IF NOT EXISTS rules (
-                            rule_id INTEGER NOT NULL UNIQUE,
-                            rule TEXT UNIQUE,
-                            PRIMARY KEY("rule_id" AUTOINCREMENT)
-                        );
-                        CREATE TABLE IF NOT EXISTS axioms (
-                            axiom_id INTEGER NOT NULL UNIQUE,
-                            axiom TEXT NOT NULL UNIQUE,
-                            PRIMARY KEY("axiom_id" AUTOINCREMENT)
-                        );
-                        CREATE TABLE IF NOT EXISTS conclusions (
-                            conclusion_id INTEGER NOT NULL UNIQUE,
-                            rule_id INTEGER NOT NULL,
-                            Keywords_array_id INTEGER NOT NULL,
-                            axiom_id INTEGER NOT NULL,
-                            n_iter INTEGER NOT NULL DEFAULT 1,
-                            conclusion BLOB NOT NULL,
-                            PRIMARY KEY("conclusion_id" AUTOINCREMENT)
-                        );
-                        CREATE TABLE IF NOT EXISTS keywords (
-                            Keywords_array_id INTEGER NOT NULL UNIQUE,
-                            Keywords_array TEXT UNIQUE,
-                            PRIMARY KEY("Keywords_array_id" AUTOINCREMENT)
-                        )
-                        """
-            )
-            
-            rules = dumps(self.rules)
-            keywords = dumps(self.keywords)
-            
-            string = self.multiplication(string)
-            temp = (
-                insert_into_tables("rules", "rule", rules),
-                insert_into_tables("keywords", "Keywords_array", keywords),
-                insert_into_tables("axioms", "axiom", string)
-            )
-            
-            cursor.execute(
-                    """
-                        SELECT conclusion_id,
-                        conclusions.rule_id,
-                        conclusions.Keywords_array_id,
-                        conclusions.axiom_id,
-                        n_iter
-                        FROM conclusions JOIN rules, keywords, axioms
-                        WHERE rule = ? AND
-                        Keywords_array = ? AND
-                        axiom = ? AND
-                        n_iter = ?
-                        """,
-                    (rules, keywords, string, number_of_iterations)
-            )
-            
-            result = cursor.fetchone()
-            
-            if not result:
-                action_string = generate(string)
-            else:
-                cursor.execute('SELECT conclusion FROM conclusions WHERE conclusion_id = ?', [result[0]])
-                action_string: tuple[tuple[str, int], ...] = tuple(
-                        (string_, integer_) for string_, integer_ in loads(cursor.fetchone()[0]) if
-                        isinstance(string_, str) and isinstance(integer_, int)
-                )
-            
-            return action_string
+        for _ in range(number_of_iterations):
+            for _key, _value in self.rules:
+                string = string.replace(_key, _value)
+        action_string = tuple(self.formatting(string))
+        return action_string
     
-    @staticmethod
-    def clear_database():
-        """
-        Clear the LSystem database.
-        """
-        with sql_connect("../Lsystem_outs.db") as connection:
-            cursor = connection.cursor()
-            cursor.executescript(
-                    """
-                        DROP TABLE IF EXISTS rules;
-                        DROP TABLE IF EXISTS axioms;
-                        DROP TABLE IF EXISTS conclusions;
-                        DROP TABLE IF EXISTS keywords;
-                        """
-            )
-    
-    def formatting(self, string: str) -> Generator[tuple[str, int], None, None]:
+    def formatting(self, string: str) -> Iterator[tuple[str, int]]:
         """
         Format the string by replacing keywords and adding quantity information.
 
         :param string: Input string.
-        :return: Generator of tuples representing the formatted string.
+        :return: Iterator of tuples containing the formatted string and its quantity.
         """
         if not isinstance(string, str):
             raise TypeError('argument "string" must be a string')

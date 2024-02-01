@@ -21,20 +21,20 @@ impl Line {
                 self.length * self.angle.to_radians().sin(),
         }
     }
-    fn to_vector(&self) -> Vec<f64> {
-        let vector = vec![
+    fn to_tuple(&self) -> (f64, f64, f64, f64) {
+        (
             self.start_point.x_coordinate,
             self.start_point.y_coordinate,
             self.end_point().x_coordinate,
             self.end_point().y_coordinate,
-        ];
-        vector
+        )
     }
-    fn _move(&mut self, quantity: usize) -> Vec<f64> {
-        self.length *= quantity;
-        let result = self.to_vector();
+    fn _move(&mut self, quantity: isize) -> (f64, f64, f64, f64) {
+        let save = self.length;
+        self.length *= quantity as f64;
+        let result = self.to_tuple();
         self.start_point = self.end_point();
-        self.length = 100.0;
+        self.length = save;
         result
     }
 }
@@ -48,7 +48,7 @@ fn is_draw_command(command: &String, command_dict: &HashMap<String, String>) -> 
     }
 }
 
-fn count_draw_commands(commands: &Vec<(String, usize)>,
+fn count_draw_commands(commands: &Vec<(String, isize)>,
                        command_dict: &HashMap<String, String>,
 ) -> usize {
     let mut count = 0;
@@ -56,69 +56,16 @@ fn count_draw_commands(commands: &Vec<(String, usize)>,
         |(command, _)|
             is_draw_command(command, command_dict)
     ) {
-        count += quantity
+        count += quantity.abs() as usize;
     }
     count
 }
 
-fn count_draw_commands_(commands: &Vec<String>, command_dict: &HashMap<String, String>) -> usize {
-    commands.iter().filter(
-        |command|
-            is_draw_command(command, command_dict)
-    ).count()
-}
-
 #[pyfunction]
-fn recurse_generate_lines(string: Vec<String>,
-                          rules: Vec<(Vec<String>, Vec<String>)>,
-                          number_of_iters: u32,
-                          command_dict: HashMap<String, String>,
-                          angle_of_rotation: f64,
-) -> PyResult<Vec<Vec<f64>>> {
-    let mut size = 0;
-    for (key, value) in rules.iter() {
-        size += (count_draw_commands_(value, &command_dict) /
-            count_draw_commands_(key, &command_dict)).pow(number_of_iters) *
-            count_draw_commands_(&string, &command_dict);
-    }
-    let mut vector: Vec<Vec<f64>> = Vec::with_capacity(size);
-    fn generate_lines(vector: &mut Vec<Vec<f64>>,
-                      string: Vec<String>,
-                      rules: Vec<(Vec<String>, Vec<String>)>,
-                      number_of_iters: u32,
-                      command_dict: HashMap<String, String>,
-                      angle_of_rotation: f64) -> Vec<Vec<f6>> {
-        for act in string.iter() {
-            if is_draw_command(act, &command_dict) {
-                let mut line = Line {
-                    start_point: Point {
-                        x_coordinate: 0.0,
-                        y_coordinate: 0.0,
-                    },
-                    length: 100.0,
-                    angle: angle_of_rotation,
-                };
-                for (key, value) in rules.iter() {
-                    if is_draw_command(act, &command_dict) {
-                        for _ in 0..(count_draw_commands_(value, &command_dict) /
-                            count_draw_commands_(key, &command_dict)).pow(number_of_iters) *
-                            count_draw_commands_(&string, &command_dict) {
-                            vector.push(line._move(1));
-                        }
-                    }
-                }
-            }
-        }
-    }
-    Ok(vector)
-}
-
-#[pyfunction]
-fn recurse_multiplier(string: String,
-                      rules: Vec<(String, String)>,
-                      number_of_iters: usize,
+fn multiply_recursively(mut string: String,
+                        rules: Vec<(String, String)>,
+                        number_of_iters: usize,
 ) -> PyResult<String> {
-    let mut string = String::from(string);
     for _ in 0..number_of_iters {
         for (key, value) in rules.iter() {
             string = string.replace(key, value);
@@ -128,10 +75,13 @@ fn recurse_multiplier(string: String,
 }
 
 #[pyfunction]
-fn generate_lines(_actions: Vec<(String, usize)>,
+fn generate_lines(_actions: Vec<(String, isize)>,
                   command_dict: HashMap<String, String>,
-                  angle_of_rotation: f64) -> PyResult<Vec<Vec<f64>>> {
-    let mut vector: Vec<Vec<f64>> = Vec::with_capacity(count_draw_commands(&_actions, &command_dict));
+                  angle_of_rotation: f64,
+) -> PyResult<Vec<(f64, f64, f64, f64)>> {
+    let mut vector: Vec<(f64, f64, f64, f64)> = Vec::with_capacity(
+        count_draw_commands(&_actions, &command_dict)
+    );
     let mut line = Line {
         start_point: Point { x_coordinate: 0.0, y_coordinate: 0.0 },
         length: 100.0,
@@ -144,19 +94,19 @@ fn generate_lines(_actions: Vec<(String, usize)>,
                     vector.push(line._move(quantity));
                 }
                 "DrawBack" => {
-                    vector.push(line._move(quantity * -1.));
+                    vector.push(line._move(quantity * -1));
                 }
                 "MoveForward" => {
                     line._move(quantity);
                 }
                 "MoveBack" => {
-                    line._move(quantity * -1.);
+                    line._move(quantity * -1);
                 }
                 "TurnRight" => {
-                    line.angle += angle_of_rotation * quantity;
+                    line.angle += angle_of_rotation * (quantity as f64);
                 }
                 "TurnLeft" => {
-                    line.angle -= angle_of_rotation * quantity;
+                    line.angle -= angle_of_rotation * (quantity as f64);
                 }
                 _ => {}
             }
@@ -165,11 +115,10 @@ fn generate_lines(_actions: Vec<(String, usize)>,
     Ok(vector)
 }
 
-
 /// A Python module implemented in Rust.
 #[pymodule]
 fn cpuboundfunctions(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(generate_lines, m)?)?;
-    m.add_function(wrap_pyfunction!(recurse_multiplier, m)?)?;
+    m.add_function(wrap_pyfunction!(multiply_recursively, m)?)?;
     Ok(())
 }
