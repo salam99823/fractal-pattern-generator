@@ -29,9 +29,9 @@ impl Line {
             self.end_point().y_coordinate,
         )
     }
-    fn _move(&mut self, quantity: isize) -> (f64, f64, f64, f64) {
+    fn _move(&mut self, quantity: f64) -> (f64, f64, f64, f64) {
         let save = self.length;
-        self.length *= quantity as f64;
+        self.length *= quantity;
         let result = self.to_tuple();
         self.start_point = self.end_point();
         self.length = save;
@@ -39,17 +39,63 @@ impl Line {
     }
 }
 
-fn is_draw_command(command: &String, command_dict: &HashMap<String, String>) -> bool {
+#[derive(Debug)]
+#[pyclass]
+enum Actions {
+    DrawForward,
+    DrawBack,
+    MoveForward,
+    MoveBack,
+    TurnLeft,
+    TurnRight,
+}
+
+impl<'a> FromPyObject<'a> for Actions {
+    fn extract(ob: &'a PyAny) -> PyResult<Self> {
+        let action: Actions = match ob.get_type().str() {
+            Ok(name) => match name.to_string() {
+                String::from("DrawForward") => {
+                    Actions::DrawForward
+                }
+                String::from("DrawBack") => {
+                    Actions::DrawBack
+                }
+                String::from("MoveForward") => {
+                    Actions::MoveForward
+                }
+                String::from("MoveBack") => {
+                    Actions::MoveBack
+                }
+                String::from("TurnLeft") => {
+                    Actions::TurnLeft
+                }
+                String::from("TurnRight") => {
+                    Actions::TurnRight
+                }
+                _ => Err(()),
+            },
+            Err(err) => Err(err)
+        };
+        println!("{:?}", action);
+        Ok(action)
+    }
+}
+
+fn is_draw_command(command: &String, command_dict: &HashMap<String, Actions>) -> bool {
     match command_dict.get(command) {
         None => false,
         Some(command) => {
-            command.starts_with("Draw")
+            match command {
+                Actions::DrawForward => true,
+                Actions::DrawBack => true,
+                _ => false,
+            }
         }
     }
 }
 
 fn count_draw_commands(commands: &Vec<(String, isize)>,
-                       command_dict: &HashMap<String, String>,
+                       command_dict: &HashMap<String, Actions>,
 ) -> usize {
     let mut count = 0;
     for (_, quantity) in commands.iter().filter(
@@ -76,7 +122,7 @@ fn multiply_recursively(mut string: String,
 
 #[pyfunction]
 fn generate_lines(_actions: Vec<(String, isize)>,
-                  command_dict: HashMap<String, String>,
+                  command_dict: HashMap<String, Actions>,
                   angle_of_rotation: f64,
 ) -> PyResult<Vec<(f64, f64, f64, f64)>> {
     let mut vector: Vec<(f64, f64, f64, f64)> = Vec::with_capacity(
@@ -89,26 +135,25 @@ fn generate_lines(_actions: Vec<(String, isize)>,
     };
     for (_action, quantity) in _actions {
         if let Some(act) = command_dict.get(&_action) {
-            match act.as_str() {
-                "DrawForward" => {
-                    vector.push(line._move(quantity));
+            match act {
+                Actions::DrawForward => {
+                    vector.push(line._move(quantity as f64));
                 }
-                "DrawBack" => {
-                    vector.push(line._move(quantity * -1));
+                Actions::DrawBack => {
+                    vector.push(line._move(quantity as f64 * -1.));
                 }
-                "MoveForward" => {
-                    line._move(quantity);
+                Actions::MoveForward => {
+                    line._move(quantity as f64);
                 }
-                "MoveBack" => {
-                    line._move(quantity * -1);
+                Actions::MoveBack => {
+                    line._move(quantity as f64 * -1.);
                 }
-                "TurnRight" => {
-                    line.angle += angle_of_rotation * (quantity as f64);
+                Actions::TurnRight => {
+                    line.angle += angle_of_rotation * quantity as f64;
                 }
-                "TurnLeft" => {
-                    line.angle -= angle_of_rotation * (quantity as f64);
+                Actions::TurnLeft => {
+                    line.angle -= angle_of_rotation * quantity as f64;
                 }
-                _ => {}
             }
         }
     }
@@ -120,5 +165,6 @@ fn generate_lines(_actions: Vec<(String, isize)>,
 fn cpuboundfunctions(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(generate_lines, m)?)?;
     m.add_function(wrap_pyfunction!(multiply_recursively, m)?)?;
+    m.add_class::<Actions>()?;
     Ok(())
 }
