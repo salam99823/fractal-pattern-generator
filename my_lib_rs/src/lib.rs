@@ -1,4 +1,5 @@
 use pyo3::prelude::*;
+use pyo3::PyErr;
 use std::collections::HashMap;
 
 struct Point {
@@ -51,32 +52,16 @@ enum Actions {
 }
 
 impl<'a> FromPyObject<'a> for Actions {
-    fn extract(ob: &'a PyAny) -> PyResult<Self> {
-        let action: Actions = match ob.get_type().str() {
-            Ok(name) => match name.to_string() {
-                String::from("DrawForward") => {
-                    Actions::DrawForward
-                }
-                String::from("DrawBack") => {
-                    Actions::DrawBack
-                }
-                String::from("MoveForward") => {
-                    Actions::MoveForward
-                }
-                String::from("MoveBack") => {
-                    Actions::MoveBack
-                }
-                String::from("TurnLeft") => {
-                    Actions::TurnLeft
-                }
-                String::from("TurnRight") => {
-                    Actions::TurnRight
-                }
-                _ => Err(()),
-            },
-            Err(err) => Err(err)
+    fn extract(obj: &'a PyAny) -> PyResult<Self> {
+        let action: Actions = match obj.to_string().as_str() {
+            "Actions.DrawForward" => Actions::DrawForward,
+            "Actions.DrawBack" => Actions::DrawBack,
+            "Actions.MoveForward" => Actions::MoveForward,
+            "Actions.MoveBack" => Actions::MoveBack,
+            "Actions.TurnLeft" => Actions::TurnLeft,
+            "Actions.TurnRight" => Actions::TurnRight,
+            _ => return Err(PyErr::fetch(obj.py())),
         };
-        println!("{:?}", action);
         Ok(action)
     }
 }

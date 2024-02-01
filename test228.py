@@ -7,7 +7,6 @@ from Lsystems.Lsystem import LSystem
 if __name__ == '__main__':
     lsys = LSystem((("F", "FLFRRFLF"),), ["F", "B", "Mf", "Mb", 'L', 'R'])
     num = 1
-    print(Actions.__dict__)
     
     start = time.monotonic()
     
@@ -23,7 +22,7 @@ if __name__ == '__main__':
                         "Mf": Actions.MoveForward,
                         "Mb": Actions.MoveBack,
                         "L": Actions.TurnLeft,
-                        "R": Actions.TurnRight,
+                        "R": Actions,
                     },
                     60
             )
