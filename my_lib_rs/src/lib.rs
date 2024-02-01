@@ -52,15 +52,22 @@ enum Actions {
 
 impl<'a> FromPyObject<'a> for Actions {
     fn extract(obj: &'a PyAny) -> PyResult<Self> {
-        let action: Actions = match obj.to_string().as_str() {
-            "Actions.DrawForward" => Actions::DrawForward,
-            "Actions.DrawBack" => Actions::DrawBack,
-            "Actions.MoveForward" => Actions::MoveForward,
-            "Actions.MoveBack" => Actions::MoveBack,
-            "Actions.TurnLeft" => Actions::TurnLeft,
-            "Actions.TurnRight" => Actions::TurnRight,
-            _ => return Err(PyTypeError::new_err(format!("Invalid action: {}", obj))),
-        };
+        if obj.is_instance_of::<Actions>() {
+            let action: &Actions = match obj.downcast::<Actions>() {
+                Ok(action) => Actions::from(action),
+                Err(_) => {
+                    return Err(PyTypeError::new_err(format!(
+                        "Cannot convert {} to Actions",
+                        obj.get_type().name().unwrap_or("Unknown")
+                    )))
+                }
+            };
+        } else {
+            return Err(PyTypeError::new_err(format!(
+                "Cannot convert {} to Actions",
+                obj.get_type().name().unwrap_or("Unknown")
+            )));
+        }
         Ok(action)
     }
 }

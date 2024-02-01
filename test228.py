@@ -22,7 +22,7 @@ if __name__ == '__main__':
                         "Mf": Actions.MoveForward,
                         "Mb": Actions.MoveBack,
                         "L": Actions.TurnLeft,
-                        "R": Actions,
+                        "R": Actions.TurnRight,
                     },
                     60
             )
