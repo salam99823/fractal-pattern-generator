@@ -53,22 +53,27 @@ enum Actions {
 impl<'a> FromPyObject<'a> for Actions {
     fn extract(obj: &'a PyAny) -> PyResult<Self> {
         if obj.is_instance_of::<Actions>() {
-            let action: &Actions = match obj.downcast::<Actions>() {
-                Ok(action) => Actions::from(action),
-                Err(_) => {
+            let action: Actions = match obj.to_string().as_str() {
+                "Actions.DrawForward" => Actions::DrawForward,
+                "Actions.DrawBack" => Actions::DrawBack,
+                "Actions.MoveForward" => Actions::MoveForward,
+                "Actions.MoveBack" => Actions::MoveBack,
+                "Actions.TurnLeft" => Actions::TurnLeft,
+                "Actions.TurnRight" => Actions::TurnRight,
+                _ => {
                     return Err(PyTypeError::new_err(format!(
                         "Cannot convert {} to Actions",
                         obj.get_type().name().unwrap_or("Unknown")
                     )))
                 }
             };
+            Ok(action)
         } else {
-            return Err(PyTypeError::new_err(format!(
+            Err(PyTypeError::new_err(format!(
                 "Cannot convert {} to Actions",
                 obj.get_type().name().unwrap_or("Unknown")
-            )));
+            )))
         }
-        Ok(action)
     }
 }
 
@@ -81,20 +86,6 @@ fn is_draw_command(command: &String, command_dict: &HashMap<String, Actions>) ->
             _ => false,
         },
     }
-}
-
-fn count_draw_commands(
-    commands: &Vec<(String, isize)>,
-    command_dict: &HashMap<String, Actions>,
-) -> usize {
-    let mut count = 0;
-    for (_, quantity) in commands
-        .iter()
-        .filter(|(command, _)| is_draw_command(command, command_dict))
-    {
-        count += quantity.abs() as usize;
-    }
-    count
 }
 
 #[pyfunction]
@@ -113,12 +104,15 @@ fn multiply_recursively(
 
 #[pyfunction]
 fn generate_lines(
-    _actions: Vec<(String, isize)>,
+    _actions: Vec<(String, f64)>,
     command_dict: HashMap<String, Actions>,
     angle_of_rotation: f64,
 ) -> PyResult<Vec<(f64, f64, f64, f64)>> {
     let mut vector: Vec<(f64, f64, f64, f64)> =
-        Vec::with_capacity(count_draw_commands(&_actions, &command_dict));
+        Vec::with_capacity(_actions.iter().filter(
+            |(command, _)|
+                is_draw_command(command, &command_dict)).count()
+        );
     let mut line = Line {
         start_point: Point {
             x_coordinate: 0.0,
@@ -131,22 +125,22 @@ fn generate_lines(
         if let Some(act) = command_dict.get(&_action) {
             match act {
                 Actions::DrawForward => {
-                    vector.push(line._move(quantity as f64));
+                    vector.push(line._move(quantity));
                 }
                 Actions::DrawBack => {
-                    vector.push(line._move(quantity as f64 * -1.));
+                    vector.push(line._move(quantity * -1.));
                 }
                 Actions::MoveForward => {
-                    line._move(quantity as f64);
+                    line._move(quantity);
                 }
                 Actions::MoveBack => {
-                    line._move(quantity as f64 * -1.);
+                    line._move(quantity * -1.);
                 }
                 Actions::TurnRight => {
-                    line.angle += angle_of_rotation * quantity as f64;
+                    line.angle += angle_of_rotation * quantity;
                 }
                 Actions::TurnLeft => {
-                    line.angle -= angle_of_rotation * quantity as f64;
+                    line.angle -= angle_of_rotation * quantity;
                 }
             }
         }
