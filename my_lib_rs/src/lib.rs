@@ -1,158 +1,66 @@
-use pyo3::exceptions::PyTypeError;
+mod turtle;
+
 use pyo3::prelude::*;
 use std::collections::HashMap;
+use turtle::Turtle;
 
-struct Point {
-    x_coordinate: f64,
-    y_coordinate: f64,
-}
-
-struct Line {
-    start_point: Point,
-    length: f64,
-    angle: f64,
-}
-
-impl Line {
-    fn end_point(&self) -> Point {
-        Point {
-            x_coordinate: self.start_point.x_coordinate
-                + self.length * self.angle.to_radians().cos(),
-            y_coordinate: self.start_point.y_coordinate
-                - self.length * self.angle.to_radians().sin(),
-        }
-    }
-    fn to_tuple(&self) -> (f64, f64, f64, f64) {
-        (
-            self.start_point.x_coordinate,
-            self.start_point.y_coordinate,
-            self.end_point().x_coordinate,
-            self.end_point().y_coordinate,
-        )
-    }
-    fn _move(&mut self, quantity: f64) -> (f64, f64, f64, f64) {
-        let save = self.length;
-        self.length *= quantity;
-        let result = self.to_tuple();
-        self.start_point = self.end_point();
-        self.length = save;
-        result
-    }
-}
-
-#[pyclass]
-enum Actions {
-    DrawForward,
-    DrawBack,
-    MoveForward,
-    MoveBack,
-    TurnLeft,
-    TurnRight,
-}
-
-impl<'a> FromPyObject<'a> for Actions {
-    fn extract(obj: &'a PyAny) -> PyResult<Self> {
-        if obj.is_instance_of::<Actions>() {
-            let action: Actions = match obj.to_string().as_str() {
-                "Actions.DrawForward" => Actions::DrawForward,
-                "Actions.DrawBack" => Actions::DrawBack,
-                "Actions.MoveForward" => Actions::MoveForward,
-                "Actions.MoveBack" => Actions::MoveBack,
-                "Actions.TurnLeft" => Actions::TurnLeft,
-                "Actions.TurnRight" => Actions::TurnRight,
-                _ => {
-                    return Err(PyTypeError::new_err(format!(
-                        "Cannot convert {} to Actions",
-                        obj.get_type().name().unwrap_or("Unknown")
-                    )))
-                }
-            };
-            Ok(action)
-        } else {
-            Err(PyTypeError::new_err(format!(
-                "Cannot convert {} to Actions",
-                obj.get_type().name().unwrap_or("Unknown")
-            )))
-        }
-    }
-}
-
-fn is_draw_command(command: &String, command_dict: &HashMap<String, Actions>) -> bool {
+fn is_draw_command(command: &String, command_dict: &HashMap<String, String>) -> bool {
     match command_dict.get(command) {
         None => false,
-        Some(command) => match command {
-            Actions::DrawForward => true,
-            Actions::DrawBack => true,
-            _ => false,
-        },
+        Some(command) => command.starts_with("Draw"),
     }
-}
-
-#[pyfunction]
-fn multiply_recursively(
-    mut string: String,
-    rules: Vec<(String, String)>,
-    number_of_iters: usize,
-) -> PyResult<String> {
-    for _ in 0..number_of_iters {
-        for (key, value) in rules.iter() {
-            string = string.replace(key, value);
-        }
-    }
-    Ok(string)
 }
 
 #[pyfunction]
 fn generate_lines(
-    _actions: Vec<(String, f64)>,
-    command_dict: HashMap<String, Actions>,
+    turtle_actions: Vec<(String, f64)>,
+    command_dict: HashMap<String, String>,
     angle_of_rotation: f64,
-) -> PyResult<Vec<(f64, f64, f64, f64)>> {
-    let mut vector: Vec<(f64, f64, f64, f64)> =
-        Vec::with_capacity(_actions.iter().filter(
-            |(command, _)|
-                is_draw_command(command, &command_dict)).count()
-        );
-    let mut line = Line {
-        start_point: Point {
-            x_coordinate: 0.0,
-            y_coordinate: 0.0,
-        },
-        length: 100.0,
-        angle: 0.0,
-    };
-    for (_action, quantity) in _actions {
-        if let Some(act) = command_dict.get(&_action) {
-            match act {
-                Actions::DrawForward => {
-                    vector.push(line._move(quantity));
+) -> PyResult<(Vec<((f64, f64), (f64, f64))>, Vec<usize>)> {
+    let mut turtle = Turtle::new(
+        turtle_actions
+            .iter()
+            .filter(|(command, _)| is_draw_command(command, &command_dict))
+            .count(),
+    );
+    let mut color_index: usize = 0;
+    let mut color_indexes = Vec::with_capacity(turtle.lines.capacity());
+    for (turtle_action, quantity) in turtle_actions {
+        if let Some(act) = command_dict.get(&turtle_action) {
+            match act.as_str() {
+                "DrawForward" => {
+                    turtle.forward(quantity);
+                    color_indexes.push(color_index);
                 }
-                Actions::DrawBack => {
-                    vector.push(line._move(quantity * -1.));
+                "DrawBack" => {
+                    turtle.backward(quantity);
+                    color_indexes.push(color_index);
                 }
-                Actions::MoveForward => {
-                    line._move(quantity);
+                "MoveForward" => {
+                    turtle.move_forward(quantity);
                 }
-                Actions::MoveBack => {
-                    line._move(quantity * -1.);
+                "MoveBack" => {
+                    turtle.move_backward(quantity);
                 }
-                Actions::TurnRight => {
-                    line.angle += angle_of_rotation * quantity;
+                "TurnRight" => {
+                    turtle.right(angle_of_rotation * quantity);
                 }
-                Actions::TurnLeft => {
-                    line.angle -= angle_of_rotation * quantity;
+                "TurnLeft" => {
+                    turtle.left(angle_of_rotation * quantity);
                 }
+                "ChangePenColor" => {
+                    color_index += quantity.round() as usize;
+                }
+                _ => {}
             }
         }
     }
-    Ok(vector)
+    Ok((turtle.lines, color_indexes))
 }
 
 /// A Python module implemented in Rust.
 #[pymodule]
 fn cpuboundfunctions(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(generate_lines, m)?)?;
-    m.add_function(wrap_pyfunction!(multiply_recursively, m)?)?;
-    m.add_class::<Actions>()?;
     Ok(())
 }

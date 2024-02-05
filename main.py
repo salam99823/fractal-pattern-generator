@@ -11,8 +11,8 @@ class MainWindow(QMainWindow):
     class Ui(Ui_MainWindow):
         def setupUi(self, main_window):
             super().setupUi(main_window)
-            self.action_about_Qt.triggered.connect(QApplication.aboutQt) # type: ignore
-            self.action_about_program.triggered.connect(main_window.tst) # type: ignore
+            self.action_about_Qt.triggered.connect(QApplication.aboutQt)  # type: ignore
+            self.action_about_program.triggered.connect(main_window.tst)  # type: ignore
             # self.start_button.clicked.connect(print)
     
     def __init__(self):
