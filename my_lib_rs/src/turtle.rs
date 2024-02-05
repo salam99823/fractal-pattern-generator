@@ -38,20 +38,24 @@ impl Turtle {
             self.end_point(length).to_tuple(),
         )
     }
-    pub fn forward(&mut self, quantity: f64) {
+    pub fn forward(&mut self, quantity: f64) -> &mut Self {
         self.lines.push(self.get_line(100. * quantity));
         self.move_forward(quantity);
+        self
     }
-    pub fn backward(&mut self, quantity: f64) {
+    pub fn backward(&mut self, quantity: f64) -> &mut Self {
         self.lines.push(self.get_line(-100. * quantity));
         self.move_backward(quantity);
+        self
     }
-    pub fn move_forward(&mut self, quantity: f64) {
+    pub fn move_forward(&mut self, quantity: f64) -> &mut Self {
         self.start_point = self.end_point(100. * quantity);
+        self
     }
 
-    pub fn move_backward(&mut self, quantity: f64) {
+    pub fn move_backward(&mut self, quantity: f64) -> &mut Self {
         self.start_point = self.end_point(-100. * quantity);
+        self
     }
 
     pub fn right(&mut self, degrees: f64) {

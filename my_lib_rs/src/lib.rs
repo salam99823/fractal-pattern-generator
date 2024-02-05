@@ -1,31 +1,23 @@
 mod turtle;
 
-use pyo3::prelude::*;
+use pyo3::exceptions::PyValueError;
+use pyo3::prelude::{pyfunction, pymodule, wrap_pyfunction, PyModule, PyResult, Python};
+use pyo3::types::PyIterator;
 use std::collections::HashMap;
 use turtle::Turtle;
 
-fn is_draw_command(command: &String, command_dict: &HashMap<String, String>) -> bool {
-    match command_dict.get(command) {
-        None => false,
-        Some(command) => command.starts_with("Draw"),
-    }
-}
-
 #[pyfunction]
 fn generate_lines(
-    turtle_actions: Vec<(String, f64)>,
+    turtle_actions: &PyIterator,
     command_dict: HashMap<String, String>,
     angle_of_rotation: f64,
+    lines_count: usize,
 ) -> PyResult<(Vec<((f64, f64), (f64, f64))>, Vec<usize>)> {
-    let mut turtle = Turtle::new(
-        turtle_actions
-            .iter()
-            .filter(|(command, _)| is_draw_command(command, &command_dict))
-            .count(),
-    );
+    let mut turtle = Turtle::new(lines_count);
     let mut color_index: usize = 0;
     let mut color_indexes = Vec::with_capacity(turtle.lines.capacity());
-    for (turtle_action, quantity) in turtle_actions {
+    for item in turtle_actions {
+        let (turtle_action, quantity) = item?.extract::<(String, f64)>()?;
         if let Some(act) = command_dict.get(&turtle_action) {
             match act.as_str() {
                 "DrawForward" => {
@@ -51,7 +43,7 @@ fn generate_lines(
                 "ChangePenColor" => {
                     color_index += quantity.round() as usize;
                 }
-                _ => {}
+                some => return Err(PyValueError::new_err(format!("Invalid Command: {some}"))),
             }
         }
     }
@@ -60,7 +52,7 @@ fn generate_lines(
 
 /// A Python module implemented in Rust.
 #[pymodule]
-fn cpuboundfunctions(_py: Python, m: &PyModule) -> PyResult<()> {
-    m.add_function(wrap_pyfunction!(generate_lines, m)?)?;
+fn cpuboundfunctions(_py: Python, module: &PyModule) -> PyResult<()> {
+    module.add_function(wrap_pyfunction!(generate_lines, module)?)?;
     Ok(())
 }

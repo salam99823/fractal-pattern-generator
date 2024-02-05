@@ -89,7 +89,7 @@ class LSystem(object):
             self,
             string: str,
             number_of_iterations: int,
-    ) -> tuple[tuple[str, int], ...]:
+    ) -> Iterator[tuple[str, int]]:
         """
         Generate the action string based on the L-System.
 
@@ -100,7 +100,7 @@ class LSystem(object):
         for _ in range(number_of_iterations):
             for _key, _value in self.rules:
                 string = string.replace(_key, _value)
-        action_string = tuple(self.formatting(string))
+        action_string = self.formatting(string)
         return action_string
     
     def formatting(self, string: str) -> Iterator[tuple[str, int]]:

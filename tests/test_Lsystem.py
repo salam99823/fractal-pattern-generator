@@ -40,7 +40,7 @@ class TestLSystem(unittest.TestCase):
         self.lsystem.rules = (("F", "FLFRRFLF"),)
         # Positive test case: generating action string with string input
         result = self.lsystem.generate_action_string("F", 1)
-        self.assertEqual((("F", 1), ("F", 1), ("F", 1), ("F", 1)), result)
+        self.assertEqual((("F", 1), ("F", 1), ("F", 1), ("F", 1)), tuple(result))
 
     def test_formatting(self):
         self.lsystem.keywords = ["F", "B", "L", "R"]

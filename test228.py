@@ -1,27 +1,30 @@
 """
 in this file I am testing some functions
 """
-from numpy import array
 
 from cpuboundfunctions import *
+from cpuboundfunctions.TurtleActions import TurtleActions
+from numpy import array
+
 from Lsystems.Lsystem import LSystem
 
 if __name__ == '__main__':
-    lsys = LSystem((("F", "CFLFRRFLF"),), ["F", "B", ("f",), ("b",), 'L', 'R', "C"])
+    lsys = LSystem((("F", "CFLFRRFLF"),), ("F", "B", ("f",), ("b",), 'L', 'R', "C"))
     
-    string = lsys.generate_action_string("F", 2)
+    string = lsys.generate_action_string("F", 1)
     
     lines, colors = generate_lines(
-            string,
+            (i for i in string),
             {
-                "F": "DrawForward",
-                "B": "DrawBack",
-                "f": "MoveForward",
-                "b": "MoveBack",
-                "R": "TurnRight",
-                "L": "TurnLeft",
-                "C": "ChangePenColor",
+                "F": TurtleActions.DrawBack,
+                "B": TurtleActions.DrawBack,
+                "f": TurtleActions.MoveForward,
+                "b": TurtleActions.MoveBack,
+                "R": TurtleActions.TurnRight,
+                "L": TurtleActions.TurnLeft,
+                "C": TurtleActions.ChangePenColor,
             },
-            60
+            60,
+            4
     )
-    print(array(lines), array(colors))
+    print(array(lines), "\n", array(colors))
