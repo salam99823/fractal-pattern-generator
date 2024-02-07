@@ -1,8 +1,7 @@
 from enum import Enum
-from math import cos, radians, sin
 from typing import Iterable, Iterator, NamedTuple
 
-from numpy import array
+from MTurtle._BaseMTurtle import BaseMTurtle, Line, MTurtlePoint
 
 
 class MTurtleCommands(NamedTuple):
@@ -23,99 +22,54 @@ class MTurtleActions(Enum):
     TurnRight: int = 5
 
 
-class MTurtlePoint(NamedTuple):
-    x_coordinate: float
-    y_coordinate: float
-
-
-class Line(NamedTuple):
-    point1: MTurtlePoint
-    point2: MTurtlePoint
-    
-    @staticmethod
-    def calculate_endpoint(
-            _point1: MTurtlePoint,
-            length: float,
-            angle_of_rotation: float
-    ) -> MTurtlePoint:
-        return MTurtlePoint(
-                _point1.x_coordinate + length * cos(radians(angle_of_rotation)),
-                _point1.y_coordinate - length * sin(radians(angle_of_rotation)),
-        )
-
-
-class MTurtle:
-    _turtle_commands: dict[str, MTurtleActions]
-    position: MTurtlePoint
-    rotation: float
-    
-    def __new__(cls, *args, **kwargs):
-        return super().__new__(cls)
+class MTurtle(BaseMTurtle):
+    _turtle_commands: dict[str, MTurtleActions] = {}
     
     def __init__(self, _turtle_commands: MTurtleCommands = None):
         super().__init__()
-        self.position: MTurtlePoint = MTurtlePoint(0, 0)
-        self.rotation: float = 0
         if _turtle_commands is not None:
             self.turtle_commands = _turtle_commands
     
-    def __call__(self, _turtle_actions: Iterable[tuple[str, int]]) -> Iterator[tuple[Line, str]]:
+    def __call__(
+            self,
+            _turtle_actions: Iterable[tuple[str, int]],
+            _length: float,
+            _angle_of_turn: float
+    ) -> Iterator[tuple[Line, str]]:
         for action, quantyti in _turtle_actions:
-            action = self.turtle_commands.get(action)
-            match action:
+            match self.turtle_commands.get(action):
                 case MTurtleActions.DrawForward:
-                    yield self.draw_forward(quantyti)
+                    yield self.draw_forward(quantyti * _length)
                 case MTurtleActions.DrawBackward:
-                    yield self.draw_backward(quantyti)
+                    yield self.draw_backward(quantyti * _length)
                 case MTurtleActions.MoveForward:
-                    self.move_forward(quantyti)
+                    self.move_forward(quantyti * _length)
                 case MTurtleActions.MoveBackward:
-                    self.move_backward(quantyti)
+                    self.move_backward(quantyti * _length)
                 case MTurtleActions.TurnLeft:
-                    self.turn_left(quantyti)
+                    self.turn_left(quantyti * _angle_of_turn)
                 case MTurtleActions.TurnRight:
-                    self.turn_right(quantyti)
-    
-    def __getattribute__(self, item):
-        return self.__dict__.get(item)
+                    self.turn_right(quantyti * _angle_of_turn)
     
     @property
-    def turtle_commands(self) -> dict[str, int]:
+    def turtle_commands(self) -> dict[str, MTurtleActions]:
         return self._turtle_commands
     
     @turtle_commands.setter
-    def turtle_commands(self, _turtle_commands: dict[str, int]) -> None:
+    def turtle_commands(
+            self,
+            _turtle_commands: MTurtleCommands
+    ) -> None:
+        if not isinstance(_turtle_commands, MTurtleCommands):
+            raise TypeError("turtle_commands must be an instance of MTurtleCommands")
         self._turtle_commands = {}
         for key, action in zip(_turtle_commands, MTurtleActions):
             self._turtle_commands[key] = action
-    
-    def draw_forward(self, _length: float) -> tuple[Line, str]:
-        _point1 = MTurtlePoint(self.position.x_coordinate, self.position.y_coordinate)
-        _point2 = Line.calculate_endpoint(_point1, _length, self.rotation)
-        self.position = _point2
-        return Line(_point1, _point2), ""
-    
-    def draw_backward(self, _length: float) -> tuple[Line, str]:
-        _point1 = MTurtlePoint(self.position.x_coordinate, self.position.y_coordinate)
-        _point2 = Line.calculate_endpoint(_point1, -_length, self.rotation)
-        self.position = _point2
-        return Line(_point1, _point2), ""
-    
-    def move_forward(self, _length: float) -> None:
-        self.position = Line.calculate_endpoint(self.position, _length, self.rotation)
-    
-    def move_backward(self, _length: float) -> None:
-        self.position = Line.calculate_endpoint(self.position, -_length, self.rotation)
-    
-    def turn_left(self, _angle: float) -> None:
-        self.rotation += _angle
-    
-    def turn_right(self, _angle: float) -> None:
-        self.rotation -= _angle
+
+
+def main():
+    pass
 
 
 if __name__ == '__main__':
-    turtle = MTurtle(MTurtleCommands("F", "B", "f", "b", "L", "R"))
-    some = turtle((("F", 1), ("B", 1)))
-    for line, color in some:
-        print(array(line), color, sep = "\n")
+    main()

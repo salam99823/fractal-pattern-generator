@@ -12,94 +12,56 @@ from MWidgets.MText_list_Widget import MText_list_Widget
 
 
 class Ui_MainWindow(object):
-    def __init__(self):
-        self.canvas_tools = None
-        self.file_tools = None
-        self.about_menu = None
-        self.menu_3 = None
-        self.file_menu = None
-        self.menuBar = None
-        self.clear_button = None
-        self.stop_button = None
-        self.start_button = None
-        self.colors_list = None
-        self._2 = None
-        self.groupBox_2 = None
-        self.rules_list = None
-        self._3 = None
-        self.groupBox = None
-        self.text_editing = None
-        self.axiom = None
-        self.horizontalLayout = None
-        self.label_6 = None
-        self.rotation_angle_deviation = None
-        self.label_5 = None
-        self.length_deviation = None
-        self.label_4 = None
-        self.rotation_angle = None
-        self.label_3 = None
-        self.line_length = None
-        self.label_2 = None
-        self.number_of_iter = None
-        self.label = None
-        self.line_width = None
-        self.label_line_width = None
-        self.form_layout = None
-        self.verticalLayout_2 = None
-        self.dock_Widget_Contents = None
-        self.dock_Widget = None
-        self.graphics_View = None
-        self.verticalLayout = None
-        self.central_widget = None
-        self.action_about_program = None
-        self.action_save_file_2 = None
-        self.action_open_file_2 = None
-        self.action_new_file_2 = None
-        self.action_new_file = None
-        self.action_about_Qt = None
-        self.action_escape = None
-        self.action_save_image = None
-        self.action_save_file_as = None
-        self.action_save_file = None
-        self.action_open_file = None
-        self.action_reset_zoom_to_actual_size = None
-        self.action_zoom_out = None
-        self.action_zoom_in = None
     
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        icon = QIcon()
-        icon.addFile(u":/FPGresources/icons240/icons8-python.png", QSize(), QIcon.Normal, QIcon.Off)
-        MainWindow.setWindowIcon(icon)
-        self.action_zoom_in = QAction(MainWindow)
+        MainWindow.setWindowIcon(QIcon(":/FPGresources/icons240/icons8-python.png"))
+        
+        self.action_zoom_in = QAction(
+                QIcon(":/FPGresources/icons48/icons8-zoom-in.png"),
+                "\u041f\u0440\u0438\u0431\u043b\u0438\u0437\u0438\u0442\u044c",
+                MainWindow
+        )
         self.action_zoom_in.setObjectName(u"action_zoom_in")
-        icon1 = QIcon()
-        icon1.addFile(u":/FPGresources/icons48/icons8-zoom-in.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.action_zoom_in.setIcon(icon1)
-        self.action_zoom_out = QAction(MainWindow)
+        
+        self.action_zoom_out = QAction(
+                QIcon(":/FPGresources/icons48/icons8-zoom-out.png"),
+                "\u041e\u0442\u0434\u0430\u043b\u0438\u0442\u044c",
+                MainWindow
+        )
         self.action_zoom_out.setObjectName(u"action_zoom_out")
-        icon2 = QIcon()
-        icon2.addFile(u":/FPGresources/icons48/icons8-zoom-out.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.action_zoom_out.setIcon(icon2)
-        self.action_reset_zoom_to_actual_size = QAction(MainWindow)
+        
+        self.action_reset_zoom_to_actual_size = QAction(
+                QIcon(":/FPGresources/icons48/icons8-zoom-to-actual-size.png"),
+                "\u041c\u0430\u0441\u0448\u0442\u0430\u0431\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435 "
+                "\u0434\u043e \u0444\u0430\u043a\u0442\u0438\u0447\u0435\u0441\u043a\u043e\u0433\u043e "
+                "\u0440\u0430\u0437\u043c\u0435\u0440\u0430",
+                MainWindow
+        )
         self.action_reset_zoom_to_actual_size.setObjectName(u"action_reset_zoom_to_actual_size")
-        icon3 = QIcon()
-        icon3.addFile(u":/FPGresources/icons48/icons8-zoom-to-actual-size.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.action_reset_zoom_to_actual_size.setIcon(icon3)
-        self.action_open_file = QAction(MainWindow)
+        
+        self.action_open_file = QAction(
+                QIcon(":/FPGresources/icons48/icons8-opened-folder.png"),
+                "\u041e\u0442\u043a\u0440\u044b\u0442\u044c",
+                MainWindow
+        )
         self.action_open_file.setObjectName(u"action_open_file")
-        icon4 = QIcon()
-        icon4.addFile(u":/FPGresources/icons48/icons8-opened-folder.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.action_open_file.setIcon(icon4)
-        self.action_save_file = QAction(MainWindow)
+        
+        self.action_save_file = QAction(
+                QIcon(":/FPGresources/icons48/icons8-save-as.png"),
+                "\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c",
+                MainWindow
+        )
         self.action_save_file.setObjectName(u"action_save_file")
-        icon5 = QIcon()
-        icon5.addFile(u":/FPGresources/icons48/icons8-save-as.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.action_save_file.setIcon(icon5)
-        self.action_save_file_as = QAction(MainWindow)
+        
+        self.action_save_file_as = QAction(
+                QIcon(":/FPGresources/icons48/icons8-save-as.png"),
+                "\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c \u043a\u0430\u043a...",
+                MainWindow
+        )
         self.action_save_file_as.setObjectName(u"action_save_file_as")
-        self.action_save_file_as.setIcon(icon5)
+        
         self.action_save_image = QAction(MainWindow)
         self.action_save_image.setObjectName(u"action_save_image")
         icon6 = QIcon()
@@ -350,37 +312,8 @@ class Ui_MainWindow(object):
     
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Fractal-Pattern-Generator", None))
-        self.action_zoom_in.setText(
-                QCoreApplication.translate(
-                        "MainWindow", u"\u041f\u0440\u0438\u0431\u043b\u0438\u0437\u0438\u0442\u044c", None
-                )
-        )
-        self.action_zoom_out.setText(
-                QCoreApplication.translate("MainWindow", u"\u041e\u0442\u0434\u0430\u043b\u0438\u0442\u044c", None)
-        )
-        self.action_reset_zoom_to_actual_size.setText(
-                QCoreApplication.translate(
-                        "MainWindow",
-                        u"\u041c\u0430\u0441\u0448\u0442\u0430\u0431\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435 "
-                        u"\u0434\u043e \u0444\u0430\u043a\u0442\u0438\u0447\u0435\u0441\u043a\u043e\u0433\u043e "
-                        u"\u0440\u0430\u0437\u043c\u0435\u0440\u0430",
-                        None
-                )
-        )
-        self.action_open_file.setText(
-                QCoreApplication.translate("MainWindow", u"\u041e\u0442\u043a\u0440\u044b\u0442\u044c", None)
-        )
-        self.action_save_file.setText(
-                QCoreApplication.translate(
-                        "MainWindow", u"\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c", None
-                )
-        )
-        self.action_save_file_as.setText(
-                QCoreApplication.translate(
-                        "MainWindow", u"\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c \u043a\u0430\u043a...",
-                        None
-                )
-        )
+        self.action_save_file.setText
+        self.action_save_file_as.setText
         self.action_save_image.setText(
                 QCoreApplication.translate(
                         "MainWindow",
@@ -487,4 +420,4 @@ class Ui_MainWindow(object):
         )
         self.file_tools.setWindowTitle(QCoreApplication.translate("MainWindow", u"file_tools", None))
         self.canvas_tools.setWindowTitle(QCoreApplication.translate("MainWindow", u"canvas_tools", None))
-    # retranslateUi
+        # retranslateUi
