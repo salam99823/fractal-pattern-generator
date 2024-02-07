@@ -8,7 +8,7 @@ class TestLSystem(unittest.TestCase):
     def setUp(self):
         self.lsystem = LSystem()
 
-    def test_rules_setter(self):
+    def test_rules_setter_and_getter(self):
         # Positive test case: setting rules as a dictionary
         self.lsystem.rules = (("F", "FLFRRFLF"),)
         self.assertEqual((("F", "FLFRRFLF"),), self.lsystem.rules)
@@ -17,7 +17,7 @@ class TestLSystem(unittest.TestCase):
         with self.assertRaises(TypeError):
             self.lsystem.rules = 123
 
-    def test_keywords_setter(self):
+    def test_keywords_setter_and_getter(self):
         self.lsystem.keywords = ("F", "B", "L", "R")
         self.assertEqual((("F",), ("B",), ("L",), ("R",)), self.lsystem.keywords)
 
@@ -35,12 +35,12 @@ class TestLSystem(unittest.TestCase):
         with self.assertRaises(TypeError):
             self.lsystem.keywords = 123
 
-    def test_generate_action_string(self):
+    def test_use_rules(self):
         self.lsystem.keywords = (("F", "forward"), ("B", "back"))
         self.lsystem.rules = (("F", "FLFRRFLF"),)
         # Positive test case: generating action string with string input
-        result = self.lsystem.generate_action_string("F", 1)
-        self.assertEqual((("F", 1), ("F", 1), ("F", 1), ("F", 1)), tuple(result))
+        result = self.lsystem.use_rules("F", 1)
+        self.assertEqual("FLFRRFLF", result)
 
     def test_formatting(self):
         self.lsystem.keywords = ["F", "B", "L", "R"]

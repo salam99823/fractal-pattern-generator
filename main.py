@@ -1,10 +1,24 @@
 import argparse
 import sys
+from typing import Iterable, Iterator
 
 from PySide6.QtWidgets import QApplication, QDialog, QMainWindow
 
+from Lsystems.Lsystem import LSystem
+from MTurtle import MTurtle, MTurtleCommands
 from MWidgets.resources.aboutFPG import Ui_Dialog
 from MWidgets.resources.mainwindow import Ui_MainWindow
+
+
+def generate_lines(
+        _turtle_actions: Iterable[tuple[str, int]],
+        _turtle_commands: MTurtleCommands,
+        _angle_of_turn: float,
+) -> Iterator[tuple[float, float, float, float]]:
+    _turtle = MTurtle(_turtle_commands)
+    for action, quantyti in _turtle_actions:
+        if action in _turtle_commands:
+            yield _turtle(action)
 
 
 class MainWindow(QMainWindow):
@@ -39,4 +53,15 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    #main()
+    lsystem = LSystem(
+            (("F", "ForwardLForwardRRForwardLForward"),),
+            (("F", "Forward"), ("B", "Back"), ("L", "Left"), ("R", "Right"))
+    )
+    for i in generate_lines(
+            lsystem.formatting(
+                    lsystem.use_rules("F", 1)
+            ),
+            lsystem
+    ):
+        print(i)

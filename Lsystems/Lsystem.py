@@ -85,11 +85,11 @@ class LSystem(object):
             raise TypeError("Invalid type for keywords. Must be an iterable of iterables of strings.")
         self.__keywords = tuple(tuple(sorted(keyword, key = len)) for keyword in keywords)
     
-    def generate_action_string(
+    def use_rules(
             self,
             string: str,
             number_of_iterations: int,
-    ) -> Iterator[tuple[str, int]]:
+    ) -> str:
         """
         Generate the action string based on the L-System.
 
@@ -100,8 +100,7 @@ class LSystem(object):
         for _ in range(number_of_iterations):
             for _key, _value in self.rules:
                 string = string.replace(_key, _value)
-        action_string = self.formatting(string)
-        return action_string
+        return string
     
     def formatting(self, string: str) -> Iterator[tuple[str, int]]:
         """
@@ -113,7 +112,7 @@ class LSystem(object):
         if not isinstance(string, str):
             raise TypeError("argument 'string' must be a string")
         for keywords in self.keywords:
-            for keyword in keywords:
+            for keyword in keywords[1:]:
                 string = string.replace(keyword, keywords[0])
             string = sub(
                     f"(?<! )(?P<keyword>{escape(keywords[0])})+",
