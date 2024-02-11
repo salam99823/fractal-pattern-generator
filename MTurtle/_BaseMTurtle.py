@@ -3,8 +3,8 @@ from typing import NamedTuple
 
 
 class MTurtlePoint(NamedTuple):
-    x_coordinate: float
-    y_coordinate: float
+    x: float
+    y: float
 
 
 class Line(NamedTuple):
@@ -18,8 +18,8 @@ class Line(NamedTuple):
             angle_of_rotation: float
     ) -> MTurtlePoint:
         return MTurtlePoint(
-                _point1.x_coordinate + length * cos(radians(angle_of_rotation)),
-                _point1.y_coordinate - length * sin(radians(angle_of_rotation)),
+                _point1.x + length * cos(radians(angle_of_rotation)),
+                _point1.y - length * sin(radians(angle_of_rotation)),
         )
 
 
@@ -37,13 +37,13 @@ class BaseMTurtle:
         self.rotation: float = 0
     
     def draw_forward(self, _length: float) -> tuple[Line, str]:
-        _point1 = MTurtlePoint(self.position.x_coordinate, self.position.y_coordinate)
+        _point1 = MTurtlePoint(self.position.x, self.position.y)
         _point2 = Line.calculate_endpoint(_point1, _length, self.rotation)
         self.position = _point2
         return Line(_point1, _point2), ""
     
     def draw_backward(self, _length: float) -> tuple[Line, str]:
-        _point1 = MTurtlePoint(self.position.x_coordinate, self.position.y_coordinate)
+        _point1 = MTurtlePoint(self.position.x, self.position.y)
         _point2 = Line.calculate_endpoint(_point1, -_length, self.rotation)
         self.position = _point2
         return Line(_point1, _point2), ""
