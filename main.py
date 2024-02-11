@@ -2,15 +2,13 @@ import argparse
 
 from PySide6.QtCore import Slot
 from PySide6.QtGui import QColor
-from PySide6.QtWidgets import QApplication, QDialog, QGraphicsScene, QGraphicsView, QInputDialog, QMainWindow
+from PySide6.QtWidgets import QApplication, QDialog, QFileDialog, QGraphicsScene, QGraphicsView, QMainWindow
 
-from MWidgets.MGraphicsView import MGraphicsView
 from MWidgets.resources.aboutFPG import Ui_Dialog
 from MWidgets.resources.mainwindow import Ui_MainWindow
 
 
 class MainWindow(QMainWindow):
-    graphics_View: MGraphicsView
     
     class Ui(Ui_MainWindow):
         def setupUi(self, main_window: "MainWindow"):
@@ -40,12 +38,13 @@ class MainWindow(QMainWindow):
             self.action_reset_zoom_to_actual_size.triggered.connect(self.graphics_View.reset_zoom)
             self.action_escape.triggered.connect(main_window.close)
             self.action_new_file.triggered.connect(main_window.open_new_file)
-            main_window.graphics_View = self.graphics_View
     
-    def __init__(self):
+    def __init__(self, _file = None):
         super().__init__()
-        Ui = self.Ui()
-        Ui.setupUi(self)
+        self.Ui = self.Ui()
+        self.Ui.setupUi(self)
+        if _file is not None:
+            self.Ui.graphics_View.load_file(_file)
     
     @Slot(name = 'about_program')
     def about_program(self):
@@ -55,17 +54,25 @@ class MainWindow(QMainWindow):
     
     @Slot(name = 'open_new_file')
     def open_new_file(self):
-        self.graphics_View.load_file(QInputDialog.getText(self, 'Открыть файл', 'Выберите фай'))
+        self.Ui.graphics_View.load_file(
+                *QFileDialog.getSaveFileName(
+                        self,
+                        'Открыть новый файл',
+                        filter = 'JSON (*.json);;CSV (*.csv);;XML (*.xml)'
+                )
+        )
 
 
 def main():
     _parser = argparse.ArgumentParser()
     _parser.add_argument('-f', '--file', type = argparse.FileType(encoding = 'utf-8'))
-    args = _parser.parse_args()
-    print(args)
+    file = _parser.parse_args().file
+    print(file)
     app = QApplication()
     app.setStyle('fusion')
-    win = MainWindow()
+    win = MainWindow(file)
+    size = app.primaryScreen().size()
+    win.resize(size.width() / 1.5, size.height() / 1.5)
     win.show()
     app.exec()
 
