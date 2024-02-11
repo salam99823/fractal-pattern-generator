@@ -11,7 +11,7 @@ This class provides methods for defining the rules and keywords of an L-System, 
 methods for generating the action string based on the L-System.
 """
 from re import escape, finditer, sub
-from typing import Iterable, Iterator, Sequence
+from typing import Iterable, Iterator, Mapping
 
 
 class LSystem(object):
@@ -26,7 +26,7 @@ class LSystem(object):
     
     def __init__(
             self,
-            rules: Iterable[tuple[str, str]] | None = None,
+            rules: Iterable[Mapping[str, str]] | Iterable[tuple[str, str]] | None = None,
             keywords: Iterable[Iterable[str]] | None = None,
     ):
         """
@@ -50,18 +50,14 @@ class LSystem(object):
         return self.__rules
     
     @rules.setter
-    def rules(self, rules: Iterable[tuple[str, str]]) -> None:
+    def rules(self, rules: Iterable[Mapping[str, str]] | Iterable[tuple[str, str]]) -> None:
         """
         Set the rules of the L-System.
 
         :param rules: The rules of the L-System.
         """
-        if not isinstance(rules, Iterable) or not all(
-                isinstance(_key, str) and isinstance(_value, str) for _key, _value in rules
-        ):
-            raise TypeError("Invalid type for rules. Must be an iterable of tuples of strings.")
-        for _key, _value in rules:
-            self.__rules += ((self.multiplication(_key), self.multiplication(_value)),)
+        rules = tuple((self.multiplication(_key), self.multiplication(_value)) for _key, _value in rules)
+        self.__rules = rules
     
     @property
     def keywords(self) -> tuple[tuple[str, ...], ...]:
@@ -73,17 +69,16 @@ class LSystem(object):
         return self.__keywords
     
     @keywords.setter
-    def keywords(self, keywords: Iterable[Sequence[str]]) -> None:
+    def keywords(self, keywords: Iterable[Iterable[str]]) -> None:
         """
         Set the keywords of the L-System.
 
         :param keywords: The keywords of the L-System.
         """
-        if not isinstance(keywords, Iterable) or not all(
-                isinstance(keyword, Iterable) and (isinstance(_, str) for _ in keyword) for keyword in keywords
-        ):
+        keywords = tuple(tuple(sorted(_keyword, key = len)) for _keyword in keywords)
+        if not all(all(isinstance(key, str) for key in _keyword) for _keyword in keywords):
             raise TypeError("Invalid type for keywords. Must be an iterable of iterables of strings.")
-        self.__keywords = tuple(tuple(sorted(keyword, key = len)) for keyword in keywords)
+        self.__keywords = keywords
     
     def use_rules(
             self,
@@ -119,13 +114,12 @@ class LSystem(object):
                     lambda match: f" {match.group(1)}({len(match.group(0)) // len(keywords[0])})",
                     string,
             )
-        result = (
+        return (
             (match.group("keyword"), int(match.group("quantity")))
             for match in finditer(
                 r"(?P<keyword>\S+)\((?P<quantity>\d+)\)",
                 string, )
         )
-        return result
     
     def multiplication(self, argument: str) -> str:
         """
@@ -138,15 +132,19 @@ class LSystem(object):
             for keyword in keywords:
                 argument = sub(
                         f"(?P<keyword>{escape(keyword)})" + r"\((?P<quantity>\d+)\)",
-                        lambda match: match.group(1) * int(match.group(2)),
+                        lambda match: match.group('keyword') * int(match.group('quantity')),
                         argument,
                 )
         argument = sub(
-                r"(?P<keyword>.)\((?P<quantity>\d+)\)",
-                lambda match: match.group(1) * int(match.group(2)),
+                r"(?P<keyword>\w)\((?P<quantity>\d+)\)",
+                lambda match: match.group('keyword') * int(match.group('quantity')),
                 argument,
         )
         return argument
     
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"{self.__class__.__module__}.{self.__class__.__name__}{self.rules, self.keywords}"
+
+
+if __name__ == '__main__':
+    pass

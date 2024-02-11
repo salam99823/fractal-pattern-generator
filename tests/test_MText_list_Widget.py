@@ -68,7 +68,7 @@ class MText_list_WidgetTests(unittest.TestCase):
     def test_get_texts(self):
         self.widget.addItem("Item 1")
         self.widget.addItem("Item 2")
-        texts = self.widget.get_texts()
+        texts = tuple(self.widget.get_texts())
         self.assertEqual(2, len(texts))
         self.assertEqual("Item 1", texts[0])
         self.assertEqual("Item 2", texts[1])

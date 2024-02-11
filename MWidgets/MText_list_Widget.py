@@ -1,9 +1,11 @@
+from typing import Iterator
+
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QDialog, QDialogButtonBox, QListWidgetItem, QWidget
 
 from MWidgets.resources.multilinedialog import Ui_multiline_dialog
-from .Modified_list_widget import Modified_list_widget
+from .Modified_list_Widget import Modified_list_widget
 
 
 class Multiline_text_InputDialog(QDialog, Ui_multiline_dialog):
@@ -101,6 +103,5 @@ class MText_list_Widget(Modified_list_widget):
             if accepted:
                 item.setText(item_text)
     
-    def get_texts(self) -> tuple[str, ...]:
-        # noinspection PyTypeChecker
-        return tuple(item.text() for item in self.getitems())
+    def get_texts(self) -> Iterator[str]:
+        return (item.text() for item in self.getitems())

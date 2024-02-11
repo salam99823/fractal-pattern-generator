@@ -1,14 +1,8 @@
 from PySide6.QtCore import (QCoreApplication, QMetaObject)
 from PySide6.QtGui import QPainter, QPixmap
-from PySide6.QtWidgets import (QDialogButtonBox, QGraphicsScene, QGraphicsView, QVBoxLayout)
+from PySide6.QtWidgets import (QDialogButtonBox, QGraphicsScene, QVBoxLayout)
 
-
-class MGraphicsView(QGraphicsView):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-    
-    def wheelEvent(self, event):
-        print(event)
+from MWidgets.MGraphicsView import MGraphicsView
 
 
 class Ui_Dialog(object):

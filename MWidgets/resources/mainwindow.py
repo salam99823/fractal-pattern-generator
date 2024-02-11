@@ -2,71 +2,19 @@ from PySide6.QtCore import (QCoreApplication, QMetaObject, QRect,
                             QSize, Qt)
 from PySide6.QtGui import (QAction, QIcon)
 from PySide6.QtWidgets import (QAbstractItemView, QDockWidget, QDoubleSpinBox,
-                               QFormLayout, QGraphicsView, QGroupBox, QHBoxLayout,
-                               QLabel, QLineEdit, QMenu, QMenuBar, QPushButton, QSpinBox, QToolBar, QToolButton,
+                               QFormLayout, QGroupBox, QHBoxLayout,
+                               QLabel, QLineEdit, QMainWindow, QMenu, QMenuBar, QPushButton, QSpinBox, QToolBar,
+                               QToolButton,
                                QVBoxLayout,
                                QWidget)
 
 from MWidgets.MColor_list_Widget import MColor_list_Widget
+from MWidgets.MGraphicsView import MGraphicsView
 from MWidgets.MText_list_Widget import MText_list_Widget
 
 
 class Ui_MainWindow(object):
-    def __init__(self):
-        self.canvas_tools = None
-        self.file_tools = None
-        self.about_menu = None
-        self.menu_3 = None
-        self.file_menu = None
-        self.menuBar = None
-        self.clear_button = None
-        self.stop_button = None
-        self.start_button = None
-        self.colors_list = None
-        self._2 = None
-        self.groupBox_2 = None
-        self.rules_list = None
-        self._3 = None
-        self.groupBox = None
-        self.text_editing = None
-        self.axiom = None
-        self.horizontalLayout = None
-        self.label_6 = None
-        self.rotation_angle_deviation = None
-        self.label_5 = None
-        self.length_deviation = None
-        self.label_4 = None
-        self.rotation_angle = None
-        self.label_3 = None
-        self.line_length = None
-        self.label_2 = None
-        self.number_of_iter = None
-        self.label = None
-        self.line_width = None
-        self.label_line_width = None
-        self.form_layout = None
-        self.verticalLayout_2 = None
-        self.dock_Widget_Contents = None
-        self.dock_Widget = None
-        self.graphics_View = None
-        self.verticalLayout = None
-        self.central_widget = None
-        self.action_about_program = None
-        self.action_save_file_2 = None
-        self.action_open_file_2 = None
-        self.action_new_file_2 = None
-        self.action_new_file = None
-        self.action_about_Qt = None
-        self.action_escape = None
-        self.action_save_image = None
-        self.action_save_file_as = None
-        self.action_save_file = None
-        self.action_open_file = None
-        self.action_reset_zoom_to_actual_size = None
-        self.action_zoom_out = None
-        self.action_zoom_in = None
-    
-    def setupUi(self, MainWindow):
+    def setupUi(self, MainWindow: QMainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         icon = QIcon()
@@ -145,7 +93,7 @@ class Ui_MainWindow(object):
         self.central_widget.setObjectName(u"central_widget")
         self.verticalLayout = QVBoxLayout(self.central_widget)
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.graphics_View = QGraphicsView(self.central_widget)
+        self.graphics_View = MGraphicsView(self.central_widget)
         self.graphics_View.setObjectName(u"graphics_View")
         
         self.verticalLayout.addWidget(self.graphics_View)
@@ -485,6 +433,6 @@ class Ui_MainWindow(object):
         self.about_menu.setTitle(
                 QCoreApplication.translate("MainWindow", u"\u0421\u043f\u0440\u0430\u0432\u043a\u0430", None)
         )
-        self.file_tools.setWindowTitle(QCoreApplication.translate("MainWindow", u"file_tools", None))
-        self.canvas_tools.setWindowTitle(QCoreApplication.translate("MainWindow", u"canvas_tools", None))
+        self.file_tools.setWindowTitle(QCoreApplication.translate("MainWindow", u"файловые инструменты", None))
+        self.canvas_tools.setWindowTitle(QCoreApplication.translate("MainWindow", u"инструменты холста", None))
     # retranslateUi

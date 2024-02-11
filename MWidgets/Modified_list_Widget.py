@@ -1,3 +1,5 @@
+from typing import Iterator
+
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import (
     QListWidget,
@@ -64,8 +66,8 @@ class Modified_list_widget(QListWidget):
             self.clear,
         )
     
-    def getitems(self) -> tuple[QListWidgetItem, ...]:
-        return tuple(self.item(index) for index in range(self.count()))
+    def getitems(self) -> Iterator[QListWidgetItem]:
+        return (self.item(index) for index in range(self.count()))
     
     def __repr__(self):
         return f'{self.__class__.__name__}{tuple(item.text() for item in self.getitems())}'

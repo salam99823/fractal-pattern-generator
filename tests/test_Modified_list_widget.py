@@ -2,7 +2,7 @@ import unittest
 
 from PySide6.QtWidgets import QApplication, QListWidgetItem
 
-from MWidgets.Modified_list_widget import Modified_list_widget
+from MWidgets.Modified_list_Widget import Modified_list_widget
 
 
 class TestModifiedListWidget(unittest.TestCase):
@@ -63,7 +63,7 @@ class TestModifiedListWidget(unittest.TestCase):
     def test_getitems(self):
         expected_items = ('item1', 'item2', 'item3')
         self.widget.addItems(expected_items)
-        items = self.widget.getitems()
+        items = tuple(self.widget.getitems())
         for item in items:
             self.assertIsInstance(item, QListWidgetItem)
         self.assertTupleEqual(expected_items, tuple(item.text() for item in items))
