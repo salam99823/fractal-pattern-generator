@@ -28,7 +28,7 @@
       "csp": null
     },
     "bundle": {
-      "active": true,
+      "active": false,
       "targets": "all",
       "identifier": "com.salam.fractal-pattern-generator",
       "icon": [
