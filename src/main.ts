@@ -3,9 +3,7 @@ import App from "./App.svelte";
 
 let target = document.getElementById("app");
 if (target === null) {
-  target = document.createElement("div");
-  target.id = "app";
-  document.body.appendChild(target);
+  throw new Error("Cannot find application target. Please Check your HTML.");
 }
 
 const app = new App({
