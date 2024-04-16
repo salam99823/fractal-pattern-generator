@@ -6,7 +6,7 @@
     "distDir": "../dist"
   },
   "package": {
-    "productName": "fpg",
+    "productName": "fractal-pattern-generator",
     "version": "0.0.0"
   },
   "tauri": {
@@ -19,7 +19,7 @@
     },
     "windows": [
       {
-        "title": "fpg",
+        "title": "fractal-pattern-generator",
         "width": 800,
         "height": 600
       }
@@ -30,7 +30,7 @@
     "bundle": {
       "active": true,
       "targets": "all",
-      "identifier": "com.tauri.fpg",
+      "identifier": "com.salam.fractal-pattern-generator",
       "icon": [
         "icons/32x32.png",
         "icons/128x128.png",

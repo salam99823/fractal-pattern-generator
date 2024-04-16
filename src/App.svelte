@@ -22,9 +22,6 @@
   <div class="row">
     <Greet />
   </div>
-  <div class="row">
-    <Greet />
-  </div>
 </main>
 
 <style>
