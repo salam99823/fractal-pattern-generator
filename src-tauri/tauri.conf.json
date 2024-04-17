@@ -10,18 +10,43 @@
     "version": "0.0.0"
   },
   "tauri": {
+    "systemTray": {
+      "iconPath": "icons/128x128.png",
+      "iconAsTemplate": true,
+      "title": "fractal-pattern-generator"
+    },
     "allowlist": {
       "all": false,
       "shell": {
         "all": false,
         "open": true
+      },
+      "dialog": {
+        "all": true
+      },
+      "fs": {
+        "all": false,
+        "copyFile": true,
+        "createDir": false,
+        "exists": true,
+        "readDir": false,
+        "readFile": true,
+        "removeDir": false,
+        "removeFile": false,
+        "renameFile": true,
+        "scope": [],
+        "writeFile": true
+      },
+      "app": {
+        "all": true
       }
     },
     "windows": [
       {
+        "label": "main",
         "title": "fractal-pattern-generator",
-        "width": 800,
-        "height": 600
+        "url": "index.html",
+        "theme": "Light"
       }
     ],
     "security": {
