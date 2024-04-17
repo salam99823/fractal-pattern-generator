@@ -1,10 +1,15 @@
 <script lang="ts">
+  function hello() {
+    document.getElementsByClassName("hello")[0].innerHTML =
+      "<p>Hello World!</p>";
+  }
 </script>
 
 <div class="menubar">
-  <div class="menubar-conteiner">Файл</div>
-  <div class="menubar-conteiner">Вид</div>
-  <div class="menubar-conteiner">Справка</div>
+  <button class="menubar-button">Файл</button>
+  <button class="menubar-button">Вид</button>
+  <button class="menubar-button" on:click={hello}>Справка</button>
+  <p class="hello"></p>
 </div>
 
 <style>
@@ -13,13 +18,15 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
+    width: 100%;
+    margin: 0;
+    padding: 0;
   }
 
-  .menubar-conteiner {
+  .menubar-button {
     display: flex;
-    padding: 3px;
-    border-radius: 0%;
-    cursor: default;
+    padding: 4px;
+    border-radius: 0;
     font-size: small;
   }
 </style>
