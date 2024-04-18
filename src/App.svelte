@@ -3,5 +3,6 @@
 </script>
 
 <MenuBar />
+<MenuBar />
 <main class="container">
 </main>
