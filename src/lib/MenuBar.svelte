@@ -1,15 +1,11 @@
 <script lang="ts">
-  function hello() {
-    document.getElementsByClassName("hello")[0].innerHTML =
-      "<p>Hello World!</p>";
-  }
+  import {} from "pug"
 </script>
 
 <div class="menubar">
-  <button class="menubar-button">Файл</button>
-  <button class="menubar-button">Вид</button>
-  <button class="menubar-button" on:click={hello}>Справка</button>
-  <p class="hello"></p>
+  <div class="menubar-conteiner">Файл</div>
+  <div class="menubar-conteiner">Вид</div>
+  <div class="menubar-conteiner">Справка</div>
 </div>
 
 <style>
@@ -18,15 +14,13 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    width: 100%;
-    margin: 0;
-    padding: 0;
   }
 
-  .menubar-button {
+  .menubar-conteiner {
     display: flex;
-    padding: 4px;
-    border-radius: 0;
+    padding: 3px;
+    border-radius: 0%;
+    cursor: default;
     font-size: small;
   }
 </style>
