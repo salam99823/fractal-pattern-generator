@@ -1,7 +1,4 @@
-<script lang="ts">
-  import { Menubar } from "bits-ui";
-  import {} from "bits-ui";
-</script>
+<script lang="ts"></script>
 
 <Menubar.Root>
   <Menubar.Menu>
