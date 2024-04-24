@@ -4,5 +4,7 @@
 
 <MenuBar />
 <main class="container">
-  <p>Peenis</p>
+  <p>
+    Pass
+  </p>
 </main>
