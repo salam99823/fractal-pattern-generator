@@ -1,10 +1,8 @@
 <script lang="ts">
-  import MenuBar from "./lib/MenuBar.svelte";
+    import MenuBar from "./lib/MenuBar.svelte";
 </script>
 
-<MenuBar />
 <main class="container">
-  <p>
-    Pass
-  </p>
+    <MenuBar />
+    <p>Pass</p>
 </main>

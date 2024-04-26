@@ -9,17 +9,21 @@
     };
 
     type SubMenu = {
+        icon?: string | undefined | null;
         type: "SubMenu";
         trigger: string;
         contents: Content[];
+        icon_class?: string | undefined | null;
         trigger_class?: string | undefined | null;
         contents_class?: string | undefined | null;
     };
 
     type Content = {
+        icon?: string | undefined | null;
         type: "Label" | "Item" | "Separator" | "Arrow";
         label: string;
         onClick?: () => void;
+        icon_class?: string | undefined | null;
         class?: string | undefined | null;
         href?: string | undefined | null;
     };
@@ -27,10 +31,12 @@
     let menus: Menu[] = [
         {
             trigger: "Файл",
-            contents_class: "menubar-content",
+            contents_class: "file-content menubar-content",
             trigger_class: "file-trigger menubar-trigger",
             contents: [
                 {
+                    icon: "/tauri.svg",
+                    icon_class: "new-file-btn",
                     label: "Новый файл",
                     type: "Item",
                     onClick: () => {
@@ -50,6 +56,7 @@
                     trigger: "Открыть последние",
                     type: "SubMenu",
                     contents: [],
+                    trigger_class: "menubar-subtrigger",
                 },
                 {
                     type: "Separator",
@@ -92,13 +99,13 @@
                         console.log("exit");
                     },
                     class: "menubar-item",
-                }
+                },
             ],
         },
         {
             trigger: "Настройки",
-            contents_class: "menubar-content",
-            trigger_class: "menubar-trigger",
+            contents_class: "settings-content menubar-content",
+            trigger_class: "settings-trigger menubar-trigger",
             contents: [
                 {
                     type: "Item",
@@ -115,13 +122,13 @@
                         console.log("keyboard shortcuts");
                     },
                     class: "menubar-item",
-                }
+                },
             ],
         },
         {
             trigger: "Справка",
-            contents_class: "menubar-content about-content",
-            trigger_class: "menubar-trigger about-trigger",
+            contents_class: "about-content menubar-content",
+            trigger_class: "about-trigger menubar-trigger",
             contents: [
                 {
                     type: "Item",
@@ -138,7 +145,7 @@
                         console.log("help");
                     },
                     class: "menubar-item",
-                }
+                },
             ],
         },
     ];
@@ -171,7 +178,12 @@
                     {:else if item.type === "SubMenu"}
                         <Menubar.Sub>
                             <Menubar.SubTrigger class={item.trigger_class}>
-                                {item.trigger}
+                                {#if item.icon}
+                                    <img
+                                        src={item.icon}
+                                        alt="icon"
+                                        class={item.icon_class}
+                                    />{/if}{item.trigger}
                             </Menubar.SubTrigger>
                             <Menubar.SubContent
                                 align="start"
@@ -195,15 +207,23 @@
                                         <Menubar.Item
                                             class={subitem.class}
                                             on:click={subitem.onClick}
-                                        >
-                                            {subitem.label}
+                                            >{#if subitem.icon}
+                                                <img
+                                                    src={subitem.icon}
+                                                    alt="icon"
+                                                    class={subitem.icon_class}
+                                                />{/if}{subitem.label}
                                         </Menubar.Item>
                                     {:else if subitem.type === "Label"}
                                         <Menubar.Label
                                             class={subitem.class}
                                             on:click={subitem.onClick}
-                                        >
-                                            {subitem.label}
+                                            >{#if item.icon}
+                                                <img
+                                                    src={subitem.icon}
+                                                    alt="icon"
+                                                    class={subitem.icon_class}
+                                                />{/if}{subitem.label}
                                         </Menubar.Label>
                                     {/if}
                                 {/each}
@@ -215,13 +235,23 @@
                             on:click={item.onClick}
                             href={item.href}
                             target="_blank"
-                            >{item.label}
+                            >{#if item.icon}
+                                <img
+                                    src={item.icon}
+                                    alt="icon"
+                                    class={item.icon_class}
+                                />{/if}{item.label}
                         </Menubar.Item>
                     {:else if item.type === "Label"}
                         <Menubar.Label
                             class={item.class}
                             on:click={item.onClick}
-                            >{item.label}
+                            >{#if item.icon}
+                                <img
+                                    src={item.icon}
+                                    alt="icon"
+                                    class={item.class}
+                                />{/if}{item.label}
                         </Menubar.Label>
                     {/if}
                 {/each}

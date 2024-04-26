@@ -34,37 +34,46 @@ body {
     margin: 0;
 }
 
-.menubar-separator {
-    border: 1px solid #bbbbbb;
-}
-
 .menubar-content {
     border: 1px solid #bbbbbb;
     border-radius: 5px;
-    padding: 10px;
-    display: table-column;
-    margin-left: -10px;
+    display: block;
+    padding: 10px 10px;
+}
+
+.menubar-content * {
+    padding: 5px 0px;
+}
+
+.menubar-separator {
+    background-color: #eeeeee;
+    padding: 0;
+    height: 2px;
+    margin: 0 -10px;
 }
 
 .menubar-root {
     border-bottom: 1px solid #bbbbbb;
     background-color: #eeeeee;
-    padding: 0 7px 0 7px;
     display: flex;
 }
 
 .menubar-trigger {
-    padding-top: 5px;
-    border: none;
-    border-left: 1px solid #bbbbbb;
+    padding: 5px 10px;
+    border: 0;
     border-right: 1px solid #bbbbbb;
+    text-align: center;
 }
 
-.file-trigger {
-    padding-top: 5px;
-    border: none;
-    border-left: none;
-    border-right: none;
+.file-content {
+    margin-left: -8px;
+}
+
+.new-file-btn {
+    display: inline;
+    height: 25px;
+    width: 25px;
+    padding: 3px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -91,6 +100,7 @@ body {
 
     .menubar-separator {
         border-color: #3c3c3c;
+        background-color: #3c3c3c;
     }
 
     .menubar-content {
@@ -98,7 +108,11 @@ body {
         background-color: #4c4c4c;
     }
 
-    .menubar-root button.menubar-trigger {
+    .menubar-trigger {
+        border-color: #3c3c3c;
+    }
+
+    .menubar-trigger {
         border-color: #3c3c3c;
     }
 }
