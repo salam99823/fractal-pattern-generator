@@ -1,0 +1,73 @@
+<svg width="1080" height="1080" viewBox="0 0 1080 1080" xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:bx="https://boxy-svg.com">
+  <defs>
+    <linearGradient id="color-0" bx:pinned="true">
+      <stop style="stop-color: #2193b0;" offset="0" />
+      <stop style="stop-color: #6dd5ed;" offset="1" />
+    </linearGradient>
+    <radialGradient id="color-0-0" gradientUnits="userSpaceOnUse" cx="539.385" cy="540.062" r="501.231"
+      gradientTransform="matrix(0.997543, 0, 0, 0.998646, 1.93948, 0.668509)" xlink:href="#color-0" />
+    <linearGradient id="color-1" bx:pinned="true">
+      <stop style="stop-color: #f12711;" offset="0" />
+      <stop style="stop-color: #f5af19;" offset="1" />
+    </linearGradient>
+    <radialGradient id="color-1-0" gradientUnits="userSpaceOnUse" cx="540" cy="540" r="500" xlink:href="#color-1" />
+    <path id="path-0"
+      d="M 399.876 1050.093 C 410.395 1054.798 419.249 1055.347 436.431 1058.954 C 448.224 1061.43 465.615 1063.576 477.416 1065.6 C 492.078 1068.115 514.101 1067.3 528.369 1067.813 C 540.434 1068.247 567.654 1066.707 577.107 1065.599 C 583.149 1064.371 607.029 1062.841 621.415 1060.063 C 632.451 1058.935 655.628 1054 665.723 1050"
+      style="fill: none;" />
+    <radialGradient id="color-1-1" gradientUnits="userSpaceOnUse" cx="532" cy="545.836" r="223"
+      gradientTransform="matrix(1, 0, 0, 1, 8.301034, -5.639425)" xlink:href="#color-1" />
+    <radialGradient id="color-0-1" gradientUnits="userSpaceOnUse" cx="539.385" cy="540.062" r="501.231"
+      gradientTransform="matrix(0.997543, 0, 0, 0.998646, 1.93948, 0.668509)" xlink:href="#color-0" />
+    <radialGradient id="color-1-2" gradientUnits="userSpaceOnUse" cx="532.174" cy="545.836" r="223"
+      gradientTransform="matrix(1, 0, 0, 1, 8.301034, -5.639425)" xlink:href="#color-1" />
+  </defs>
+  <g>
+    <circle cx="540" cy="540" r="540" class="background" />
+    <circle cx="540" cy="540" r="500" class="inner-background" />
+  </g>
+  <style>
+    * {
+      opacity: 1;
+      fill-rule: nonzero;
+      stroke-miterlimit: 4;
+      stroke-dashoffset: 0;
+      stroke-linecap: butt;
+      stroke-linejoin: miter;
+      stroke-width: 0.25px;
+      stroke-dasharray: none;
+      stroke: #000;
+      fill: #FFF;
+    }
+
+    circle.background {
+      fill: #FFF
+    }
+
+    circle.inner-background {
+      fill: url('#color-1-0')
+    }
+
+    path.star {
+      transform-origin: 540px 540px;
+    }
+  </style>
+  <g>
+    <path
+      d="M 540 40 L 626.104 332.127 L 893.553 186.447 L 747.873 453.896 L 1040 540 L 747.873 626.104 L 893.553 893.553 L 626.104 747.873 L 540 1040 L 453.896 747.873 L 186.447 893.553 L 332.127 626.104 L 40 540 L 332.127 453.896 L 186.447 186.447 L 453.896 332.127 Z"
+      style="fill: url('#color-0-0');" class="star" />
+    <path
+      d="M 540.475 317.197 L 578.877 447.486 L 698.16 382.512 L 633.186 501.795 L 763.475 540.197 L 633.186 578.599 L 698.16 697.882 L 578.877 632.908 L 540.475 763.197 L 502.073 632.908 L 382.79 697.882 L 447.764 578.599 L 317.475 540.197 L 447.764 501.795 L 382.79 382.512 L 502.073 447.486 L 540.475 317.197 Z"
+      style="fill: url('#color-1-1');" transform="matrix(0.92388, 0.382683, -0.382683, 0.92388, -0.000004, 0.000002)"
+      class="star" />
+  </g>
+  <g style="transform-origin: 540px 540px;" transform="matrix(0.2, 0, 0, 0.2, 0.000002, -0.000536)">
+    <path
+      d="M 540 40 L 626.104 332.127 L 893.553 186.447 L 747.873 453.896 L 1040 540 L 747.873 626.104 L 893.553 893.553 L 626.104 747.873 L 540 1040 L 453.896 747.873 L 186.447 893.553 L 332.127 626.104 L 40 540 L 332.127 453.896 L 186.447 186.447 L 453.896 332.127 Z"
+      style="fill: url('#color-0-1');" class="star" />
+    <path
+      d="M 540.475 317.197 L 578.877 447.486 L 698.16 382.512 L 633.186 501.795 L 763.475 540.197 L 633.186 578.599 L 698.16 697.882 L 578.877 632.908 L 540.475 763.197 L 502.073 632.908 L 382.79 697.882 L 447.764 578.599 L 317.475 540.197 L 447.764 501.795 L 382.79 382.512 L 502.073 447.486 L 540.475 317.197 Z"
+      style="fill: url('#color-1-2');" transform="matrix(0.92388, 0.382683, -0.382683, 0.92388, -0.000004, 0.000002)"
+      class="star" />
+  </g>
+</svg>
