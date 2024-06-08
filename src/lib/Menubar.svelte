@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Menu } from "./Menubar/menu.ts";
+  import { type Menu } from "./Menubar/menu.js";
   let classes = "";
   let id = "";
   let menus: Menu[] = [];
