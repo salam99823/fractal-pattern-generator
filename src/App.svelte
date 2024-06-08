@@ -9,5 +9,4 @@
   pass
 </main>
 
-<style>
-</style>
+<style></style>
