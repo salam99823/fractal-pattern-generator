@@ -1,5 +1,5 @@
 type BaseMenu = {
-  text: string,
+  name: string,
   icon?: string,
   shortcut?: string,
 }

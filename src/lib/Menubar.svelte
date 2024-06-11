@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { type Menu } from "./Menubar/menu.js";
+  import { type Menu } from "./Menubar/types.js";
   let classes = "";
   let id = "";
   let menus: Menu[] = [];
@@ -8,9 +8,15 @@
 
 <menu>
   {#each menus as menu}
-    <li>{menu}</li>
+    <li>{menu.name}</li>
   {/each}
 </menu>
 
 <style>
+  menu {
+    padding: 0px;
+  }
+  li {
+    list-style: none;
+  }
 </style>
