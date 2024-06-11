@@ -8,7 +8,7 @@
 
 <menu>
   {#each menus as menu}
-    
+    <li>{menu}</li>
   {/each}
 </menu>
 
