@@ -4,35 +4,23 @@
   export { menus };
 </script>
 
-<menu>
-  {#each menus as {name, children}}
-    <li>
-      <button
-        on:click={() => {
-          console.log("hello");
-        }}>{name}</button
-      >
-      <menu class="submenu">
-        {#each children as submenu}
-          <li>{submenu.name}</li>
-        {/each}
-      </menu>
-    </li>
+<div class="menu-bar">
+  {#each menus as { name }}
+    <button
+      on:click={() => {
+        console.log("hello");
+      }}
+      class="menu-btn">{name}</button
+    >
   {/each}
-</menu>
+</div>
 
 <style>
-  menu {
+  .menu-bar {
     height: 24px;
-    padding: 0px;
   }
-  li {
+  .menu-btn {
     display: inline-block;
-    list-style-type: none;
     padding: 2px 4px;
-  }
-  .submenu {
-    visibility: visible;
-    position: relative;
   }
 </style>
