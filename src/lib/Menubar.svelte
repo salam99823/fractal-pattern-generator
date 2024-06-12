@@ -1,22 +1,38 @@
 <script lang="ts">
   import { type Menu } from "./Menubar/types.js";
-  let classes = "";
-  let id = "";
   let menus: Menu[] = [];
-  export { menus, classes as class, id };
+  export { menus };
 </script>
 
 <menu>
-  {#each menus as menu}
-    <li>{menu.name}</li>
+  {#each menus as {name, children}}
+    <li>
+      <button
+        on:click={() => {
+          console.log("hello");
+        }}>{name}</button
+      >
+      <menu class="submenu">
+        {#each children as submenu}
+          <li>{submenu.name}</li>
+        {/each}
+      </menu>
+    </li>
   {/each}
 </menu>
 
 <style>
   menu {
+    height: 24px;
     padding: 0px;
   }
   li {
-    list-style: none;
+    display: inline-block;
+    list-style-type: none;
+    padding: 2px 4px;
+  }
+  .submenu {
+    visibility: visible;
+    position: relative;
   }
 </style>

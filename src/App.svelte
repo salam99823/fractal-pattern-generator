@@ -4,8 +4,13 @@
   import Canvas from "./lib/Canvas.svelte";
   let menus: Menu[] = [
     {
-      name: "1",
-      children: [],
+      name: "File",
+      children: [
+        {
+          name: "New",
+          action: () => {},
+        },
+      ],
     },
   ];
 </script>
