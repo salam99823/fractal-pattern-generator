@@ -3,7 +3,7 @@
   let classes = "";
   let id = "";
   let menus: Menu[] = [];
-  export { menus, classes as class, id }
+  export { menus, classes as class, id };
 </script>
 
 <menu>

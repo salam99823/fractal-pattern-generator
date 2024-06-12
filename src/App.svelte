@@ -6,14 +6,15 @@
     {
       name: "1",
       children: [],
-    }
-  ]
+    },
+  ];
 </script>
 
 <main>
-  <Menubar {menus}/>
+  <Menubar {menus} />
   <Canvas />
   pass
 </main>
 
-<style></style>
+<style>
+</style>
